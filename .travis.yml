@@ -3,8 +3,8 @@
 # - "5.18"
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq perl-tk xvfb xfonts-cyrillic defoma
- - env DISPLAY= Xvfb :123 &
+ - sudo apt-get install -qq perl-tk xvfb
+ - env DISPLAY= Xvfb :123 2>/dev/null &
 env:
  - DISPLAY=:123
 script:
