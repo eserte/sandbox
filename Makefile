@@ -1,3 +1,2 @@
 all:
-	echo "123eM456"
-	echo "123em456"
+	perl -MTk -e '$$mw = tkinit; $$mw->Label(-text => q{Hello, world!})->pack; $$mw->after(1000);'
