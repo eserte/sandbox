@@ -15,6 +15,9 @@ EOF
 my $wm = `$cmd`;
 diag $wm;
 
+my $dpkg_l = `dpkg -l`;
+diag $dpkg_l;
+
 pass "dummy...";
 
 __END__
