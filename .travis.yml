@@ -1,11 +1,12 @@
 language: perl
 perl:
-# - "5.18"
+ - "5.19"
+ - "5.18"
 # - "5.16"
 # - "5.14"
 # - "5.12"
 # - "5.10"
- - "5.8"
+# - "5.8"
 before_install:
 # - cpanm --quiet --notest PDF::Create~"!=1.07"
 # - cpanm --quiet --notest Glib~"!=1.303"
