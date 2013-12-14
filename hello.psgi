@@ -6,6 +6,7 @@ use warnings;
 use Plack::Builder;
 
 builder {
+    enable "Head";
 
     enable 'Rewrite', rules => sub {
 	if (m{^/$}) {
