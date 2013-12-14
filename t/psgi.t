@@ -10,8 +10,17 @@ use Test::More 'no_plan';
 use LWP::UserAgent;
 
 my $ua = LWP::UserAgent->new;
-my $resp = $ua->get("http://localhost");
-ok $resp->is_success;
-is $resp->decoded_content, 'Hello World';
+
+{
+    my $resp = $ua->get("http://localhost");
+    ok $resp->is_success;
+    is $resp->decoded_content, 'Hello World';
+}
+
+{
+    my $resp = $ua->head("http://localhost");
+    ok $resp->is_success;
+    is $resp->decoded_content, '';
+}
 
 __END__
