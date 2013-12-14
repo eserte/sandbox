@@ -13,7 +13,7 @@ before_install:
 ## Versions between 1.00..1.05 explicitely want Perl 5.10.0 as a minimum. Don't know what will be with later versions. See https://rt.cpan.org/Ticket/Display.html?id=88873
 # - '[ "$PERLBREW_PERL" = "5.8" ] && cpanm --quiet --notest File::Path DBD::XBase~"!=1.00, !=1.01, !=1.02, !=1.03, !=1.04, !=1.05" || true'
  - cpanm --quiet --notest Plack CGI::Emulate::PSGI CGI::Compile LWP::UserAgent
- - sudo -E plackup --port=80 hello.psgi &
+ - sudo -E `which plackup` --port=80 hello.psgi &
 ##env:
 ## - DISPLAY=:123 WINDOW_MANAGER=fvwm
 ## - DISPLAY=:123 WINDOW_MANAGER=metacity
