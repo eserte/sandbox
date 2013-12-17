@@ -18,7 +18,8 @@ before_install:
 ## - DISPLAY=:123 WINDOW_MANAGER=fvwm
 ## - DISPLAY=:123 WINDOW_MANAGER=metacity
 #before_install:
-# - sudo apt-get update -qq
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq rhino
 # - sudo apt-get install -qq xvfb $WINDOW_MANAGER
 # - sudo apt-get remove -qq libjpeg8-dev zlib1g-dev libpng12-dev
 # - env DISPLAY= Xvfb :123 2>/dev/null &
