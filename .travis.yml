@@ -1,25 +1,26 @@
 language: perl
 perl:
-# - "5.19"
+ - "5.19"
  - "5.18"
-# - "5.16"
-# - "5.14"
-# - "5.12"
-# - "5.10"
-# - "5.8"
-before_install:
+ - "5.16"
+ - "5.14"
+ - "5.12"
+ - "5.10"
+ - "5.8"
+#before_install:
 # - cpanm --quiet --notest PDF::Create~"!=1.07"
 # - cpanm --quiet --notest Glib~"!=1.303"
 ## Versions between 1.00..1.05 explicitely want Perl 5.10.0 as a minimum. Don't know what will be with later versions. See https://rt.cpan.org/Ticket/Display.html?id=88873
 # - '[ "$PERLBREW_PERL" = "5.8" ] && cpanm --quiet --notest File::Path DBD::XBase~"!=1.00, !=1.01, !=1.02, !=1.03, !=1.04, !=1.05" || true'
- - cpanm --quiet --notest Plack Plack::Middleware::Rewrite CGI::Emulate::PSGI CGI::Compile LWP::UserAgent Starman
- - sudo -E `which plackup` --server=Starman --port=80 hello.psgi &
+# - cpanm --notest Test::LectroTest Email::MIME HTML::TreeBuilder::XPath
+# - cpanm --quiet --notest Plack Plack::Middleware::Rewrite CGI::Emulate::PSGI CGI::Compile LWP::UserAgent Starman
+# - sudo -E `which plackup` --server=Starman --port=80 hello.psgi &
 ##env:
 ## - DISPLAY=:123 WINDOW_MANAGER=fvwm
 ## - DISPLAY=:123 WINDOW_MANAGER=metacity
 #before_install:
- - sudo apt-get update -qq
- - sudo apt-get install -qq rhino
+# - sudo apt-get update -qq
+# - sudo apt-get install -qq rhino
 # - sudo apt-get install -qq xvfb $WINDOW_MANAGER
 # - sudo apt-get remove -qq libjpeg8-dev zlib1g-dev libpng12-dev
 # - env DISPLAY= Xvfb :123 2>/dev/null &
