@@ -5,6 +5,11 @@
 # Author: Slaven Rezic
 #
 
+use Test::More;
+plan skip_all => "Test not active"; exit;
+
+__END__
+
 use strict;
 use Test::More 'no_plan';
 use HTTP::Response;
