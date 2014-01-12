@@ -21,7 +21,7 @@ before_install:
 ## - DISPLAY=:123 WINDOW_MANAGER=fvwm
 ## - DISPLAY=:123 WINDOW_MANAGER=metacity
 before_script:
- - sudo -E perl -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
+ - sudo -E `which perl` -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
 #before_install:
 # - sudo apt-get update -qq
 # - sudo apt-get install -qq rhino
