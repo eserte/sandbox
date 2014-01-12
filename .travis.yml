@@ -9,6 +9,7 @@ perl:
 # - "5.8"
 before_install:
  - cpanm --quiet --notest MIME::Lite
+ - cpanm git://github.com/eserte/test-fakesendmail.git@XXX-travis-ci
 # - cpanm --quiet --notest PDF::Create~"!=1.07"
 # - cpanm --quiet --notest Glib~"!=1.303"
 ## Versions between 1.00..1.05 explicitely want Perl 5.10.0 as a minimum. Don't know what will be with later versions. See https://rt.cpan.org/Ticket/Display.html?id=88873
@@ -19,6 +20,8 @@ before_install:
 ##env:
 ## - DISPLAY=:123 WINDOW_MANAGER=fvwm
 ## - DISPLAY=:123 WINDOW_MANAGER=metacity
+before_script:
+ - sudo perl -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
 #before_install:
 # - sudo apt-get update -qq
 # - sudo apt-get install -qq rhino
