@@ -15,7 +15,7 @@ perl:
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install apache2-prefork-dev
- - cpanm mod_perl2 || true
+ - cpanm --verbose mod_perl2 || true
  - (cd ~/.cpanm/latest-build/mod_perl-2.*/ && perl Makefile.PL MP_APXS=/usr/bin/apxs2 MP_AP_DESTDIR= /home/travis/perl5/perlbrew/perls/5.20/ && make && make install)
  - echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load
  - sudo service apache start
