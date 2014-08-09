@@ -6,8 +6,7 @@
 #
 
 use Test::More;
-plan skip_all => "Test not active"; exit;
-
+plan skip_all => "Not enabled";
 __END__
 
 use strict;
