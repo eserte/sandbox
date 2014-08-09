@@ -1,8 +1,21 @@
+## test-fakesendmail testing
+#language: perl
+#perl:
+# - "5.10"
+#before_install:
+# - cpanm --quiet --notest MIME::Lite
+# - cpanm git://github.com/eserte/test-fakesendmail.git@master
+#before_script:
+# - sudo -E `which perl` -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
+
+# modperl testing
 language: perl
 perl:
- - "5.10"
+ - "5.20-shrplib"
 before_install:
- - cpanm --quiet --notest MIME::Lite
- - cpanm git://github.com/eserte/test-fakesendmail.git@master
-before_script:
- - sudo -E `which perl` -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
+ - sudo apt-get update -qq
+ - sudo apt-get install apache2-prefork-dev
+ - cpanm mod_perl2 || true
+ - (cd ~/.cpanm/latest-build/mod_perl-2.*/ && perl Makefile.PL MP_APXS=/usr/bin/apxs2 MP_AP_DESTDIR= /home/travis/perl5/perlbrew/perls/5.20/ && make && make install)
+ - echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load
+ - sudo service apache start
