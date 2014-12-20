@@ -5,12 +5,10 @@
 # Author: Slaven Rezic
 #
 
-use Test::More;
-plan skip_all => "Not enabled";
-__END__
-
 use strict;
 use Test::More 'no_plan';
+
+use_ok 'XML::LibXML::Reader';
 
 #my $cmd = <<'EOF';
 #xprop -id $(xprop -root _NET_SUPPORTING_WM_CHECK | perl -nle 'm{#\s+(\S+)} and print $1') _NET_WM_NAME
@@ -21,7 +19,7 @@ use Test::More 'no_plan';
 #
 #my $dpkg_l = `dpkg -l`;
 #diag $dpkg_l;
-
-pass "dummy...";
+#
+#pass "dummy...";
 
 __END__
