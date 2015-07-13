@@ -37,3 +37,5 @@ addons:
     packages:
 # for DB_File
       - libdb-dev
+# for XML::LibXML::SAX
+      - libxml2-dev

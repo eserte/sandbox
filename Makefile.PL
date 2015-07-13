@@ -3,6 +3,7 @@ WriteMakefile(NAME => "Sandbox",
 	      PREREQ_PM => {
 		'Test::NoWarnings' => 0,
 		'LWP::UserAgent' => 0,
+		'XML::LibXML::SAX' => 0, # for UAProf tests
 		'XML::Parser' => 0, # for UAProf tests
 		'DB_File' => 0, # for UAProf tests
 	      },
