@@ -8,16 +8,16 @@
 #before_script:
 # - sudo -E `which perl` -MTest::FakeSendmail -e 'Test::FakeSendmail->install(maildirectory => "/tmp/tfsm")'
 
-# modperl testing
-language: perl
-perl:
- - "5.20-shrplib"
-before_install:
- - sudo apt-get update -qq
- - sudo apt-get install apache2-mpm-prefork apache2-prefork-dev
- - cpanm --quiet --notest mod_perl2 --configure-args="MP_APXS=/usr/bin/apxs2 MP_AP_DESTDIR=/home/travis/perl5/perlbrew/perls/5.20-shrplib/" || (echo "Contents of Apache2/BuildConfig.pm:"; cat /home/travis/.cpanm/work/*/mod_perl-2*/lib/Apache2/BuildConfig.pm; false)
- - sudo sh -c 'echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20-shrplib/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load'
- - sudo service apache2 start
+## modperl testing
+#language: perl
+#perl:
+# - "5.20-shrplib"
+#before_install:
+# - sudo apt-get update -qq
+# - sudo apt-get install apache2-mpm-prefork apache2-prefork-dev
+# - cpanm --quiet --notest mod_perl2 --configure-args="MP_APXS=/usr/bin/apxs2 MP_AP_DESTDIR=/home/travis/perl5/perlbrew/perls/5.20-shrplib/" || (echo "Contents of Apache2/BuildConfig.pm:"; cat /home/travis/.cpanm/work/*/mod_perl-2*/lib/Apache2/BuildConfig.pm; false)
+# - sudo sh -c 'echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20-shrplib/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load'
+# - sudo service apache2 start
 
 #language: perl
 #matrix:
@@ -26,3 +26,8 @@ before_install:
 #      env: WITH_XML_LIBXML_READER=1
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
+
+language: perl
+matrix:
+  include:
+    - perl: 5.18
