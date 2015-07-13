@@ -32,3 +32,8 @@ matrix:
   include:
     - perl: 5.18
 sudo: true
+addons:
+  apt:
+    packages:
+# for DB_File
+      - libdb-dev
