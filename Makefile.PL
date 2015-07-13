@@ -9,7 +9,7 @@ WriteMakefile(NAME => "Sandbox",
 sub MY::postamble {
     <<EOF;
 test:
-\t\$(INSTALLSCRIPT)/prove -lr t/
+\t\$(INSTALLSCRIPT)/prove -j4 -lr t/
 
 EOF
 }
