@@ -4,6 +4,7 @@ WriteMakefile(NAME => "Sandbox",
 		'Test::NoWarnings' => 0,
 		'LWP::UserAgent' => 0,
 		'XML::Parser' => 0, # for UAProf tests
+		'DB_File' => 0, # for UAProf tests
 	      },
 	      SKIP => [qw(test)],
              );
