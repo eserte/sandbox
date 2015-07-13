@@ -1,6 +1,10 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(NAME => "Sandbox",
-	      PREREQ_PM => { 'Test::NoWarnings' => 0, 'LWP::UserAgent' => 0 },
+	      PREREQ_PM => {
+		'Test::NoWarnings' => 0,
+		'LWP::UserAgent' => 0,
+		'XML::Parser' => 0, # for UAProf tests
+	      },
 	      SKIP => [qw(test)],
              );
 
