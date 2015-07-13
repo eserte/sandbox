@@ -7,6 +7,7 @@
 
 use strict;
 use FindBin;
+use File::Temp qw(tempdir);
 use Getopt::Long;
 
 BEGIN {
@@ -30,7 +31,7 @@ GetOptions("dbcache!"  => \$db_cache,
 	  )
     or die "usage: $0 [-nodbcache] [-nowwwcache] [-debug]";
 
-my $uaprof_cache_dir = "$FindBin::RealBin/../tmp/uaprof";
+my $uaprof_cache_dir = tempdir(CLEANUP => 1);
 my $uaprof_cache_file = "$uaprof_cache_dir/nds.nokia.com/uaprof/N6100r100.xml";
 if (!$www_cache) {
     rename $uaprof_cache_file, "$uaprof_cache_file~"
