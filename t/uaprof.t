@@ -20,6 +20,8 @@ BEGIN {
     }
 }
 
+plan skip_all => 'Not enabled';
+
 plan tests => 1;
 
 my $www_cache = 1;
