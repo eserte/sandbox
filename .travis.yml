@@ -13,6 +13,7 @@
 #perl:
 # - "5.20-shrplib"
 before_install:
+ - echo "deb http://de.archive.ubuntu.com/ubuntu/ precise multiverse" | sudo tee -a /etc/apt/sources.list
  - sudo apt-get update
 # - sudo apt-get install agrep
  - sudo apt-cache search agrep
