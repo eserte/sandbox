@@ -13,16 +13,17 @@
 #perl:
 # - "5.20-shrplib"
 before_install:
- - echo "deb http://de.archive.ubuntu.com/ubuntu/ precise multiverse" | sudo tee -a /etc/apt/sources.list
- - sudo apt-get update
+# - echo "deb http://de.archive.ubuntu.com/ubuntu/ precise multiverse" | sudo tee -a /etc/apt/sources.list
+# - sudo apt-get update
 # - sudo apt-get install agrep
- - sudo apt-cache search agrep
- - sudo apt-cache policy agrep
- - sudo apt-cache show agrep
+# - sudo apt-cache search agrep
+# - sudo apt-cache policy agrep
+# - sudo apt-cache show agrep
 # - sudo apt-get install apache2-mpm-prefork apache2-prefork-dev
 # - cpanm --quiet --notest mod_perl2 --configure-args="MP_APXS=/usr/bin/apxs2 MP_AP_DESTDIR=/home/travis/perl5/perlbrew/perls/5.20-shrplib/" || (echo "Contents of Apache2/BuildConfig.pm:"; cat /home/travis/.cpanm/work/*/mod_perl-2*/lib/Apache2/BuildConfig.pm; false)
 # - sudo sh -c 'echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20-shrplib/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load'
 # - sudo service apache2 start
+  - cpanm --quiet --notest DBD::XBase~"!=1.00, !=1.01, !=1.02, !=1.03, !=1.04, !=1.05"
 
 #language: perl
 #matrix:
@@ -35,12 +36,12 @@ before_install:
 language: perl
 matrix:
   include:
-    - perl: 5.18
-sudo: true
-addons:
-  apt:
-    packages:
-# for DB_File
-      - libdb-dev
-# for XML::LibXML::SAX
-      - libxml2-dev
+    - perl: 5.8
+sudo: false
+#addons:
+#  apt:
+#    packages:
+## for DB_File
+#      - libdb-dev
+## for XML::LibXML::SAX
+#      - libxml2-dev
