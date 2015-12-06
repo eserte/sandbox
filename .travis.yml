@@ -24,7 +24,7 @@ before_install:
 # - sudo sh -c 'echo "LoadModule perl_module /home/travis/perl5/perlbrew/perls/5.20-shrplib/usr/lib/apache2/modules/mod_perl.so" > /etc/apache2/mods-enabled/perl.load'
 # - sudo service apache2 start
 #  - cpanm --notest DBD::XBase~"!=1.00, !=1.01, !=1.02, !=1.03, !=1.04, !=1.05"
-  - cpanm --notest DBD::XBase~"==0.234"
+#  - cpanm --notest DBD::XBase~"==0.234"
 
 #language: perl
 #matrix:
@@ -37,8 +37,8 @@ before_install:
 language: perl
 matrix:
   include:
-    - perl: 5.8
-sudo: true
+    - perl: 5.14
+sudo: false
 #addons:
 #  apt:
 #    packages:
