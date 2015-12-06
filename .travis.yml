@@ -37,7 +37,7 @@ language: perl
 matrix:
   include:
     - perl: 5.8
-sudo: false
+sudo: true
 #addons:
 #  apt:
 #    packages:
