@@ -41,7 +41,9 @@ language: perl
 matrix:
   include:
     - perl: 5.14
-sudo: false
+
+#sudo: false
+
 #addons:
 #  apt:
 #    packages:
