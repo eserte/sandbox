@@ -1,3 +1,7 @@
+branches:
+  except:
+    - /appveyor/
+
 ## test-fakesendmail testing
 #language: perl
 #perl:
