@@ -17,4 +17,5 @@ install:
 
 build_script:
   - perl Makefile.PL
+  - dmake dmake-test SOMETHING=nesto
   - dmake test

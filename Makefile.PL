@@ -18,5 +18,9 @@ sub MY::postamble {
 test:
 \t\$(INSTALLSCRIPT)/prove -j4 -lr t/
 
+dmake-test:
+	echo \$(SOMETHING)
+	cd t && prove .
+
 EOF
 }
