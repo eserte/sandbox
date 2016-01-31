@@ -16,6 +16,8 @@ install:
 #  - cd C:\strawberry\cpan\prefs
 #  - git pull
 #  - cpan DB_File::Lock
+  - cpanm Tk
+  - cpanm --verbose Tk::Pod
   - cd C:\projects\%APPVEYOR_PROJECT_NAME%
   - cpanm --installdeps .
 
