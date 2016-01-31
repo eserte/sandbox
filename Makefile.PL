@@ -20,7 +20,7 @@ test:
 
 dmake-test:
 	echo \$(SOMETHING)
-	cd subdir && \${PERL} Makefile.PL && \${MAKE} \${.MAKEFLAGS}
+	-cd subdir && \${PERL} Makefile.PL && \${MAKE} \${.MAKEFLAGS}
 
 EOF
 }
