@@ -1,3 +1,7 @@
+os:
+  - linux
+  - osx
+
 branches:
   except:
     - /appveyor/
