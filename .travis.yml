@@ -6,14 +6,17 @@ branches:
   except:
     - /appveyor/
 
+#before_install:
+#  - mkdir -p $HOME/.cpan/CPAN
+#  - ln -s $(pwd)/.cpan/CPAN/MyConfig.pm $HOME/.cpan/CPAN/MyConfig.pm
+#  - git clone https://github.com/eserte/srezic-cpan-distroprefs $HOME/.cpan/prefs
+#  - mkdir -p $HOME/src
+#  - git clone https://github.com/eserte/cpan-plugin-sysdeps $HOME/src/cpan-plugin-sysdeps
+#  - (cd $HOME/src/cpan-plugin-sysdeps && perl Makefile.PL && make all test && sudo make install)
+#  - cpan CPAN YAML::Syck
 before_install:
-  - mkdir -p $HOME/.cpan/CPAN
-  - ln -s $(pwd)/.cpan/CPAN/MyConfig.pm $HOME/.cpan/CPAN/MyConfig.pm
-  - git clone https://github.com/eserte/srezic-cpan-distroprefs $HOME/.cpan/prefs
-  - mkdir -p $HOME/src
-  - git clone https://github.com/eserte/cpan-plugin-sysdeps $HOME/src/cpan-plugin-sysdeps
-  - (cd $HOME/src/cpan-plugin-sysdeps && perl Makefile.PL && make all test && sudo make install)
-  - cpan CPAN YAML::Syck
+  - git clone https://github.com/eserte/travis-helper-cpan-pm.git -b XXX-travis-ci
+  - ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
 install:
   - cpan GD File::Rdiff
 
