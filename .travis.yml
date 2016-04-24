@@ -17,8 +17,10 @@ branches:
 before_install:
   - git clone https://github.com/eserte/travis-helper-cpan-pm.git -b XXX-travis-ci
   - ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
+  - which cpan
 install:
-  - cpan GD File::Rdiff
+#  - cpan GD File::Rdiff
+  - cpan File::Rdiff
 
 ## test-fakesendmail testing
 #language: perl
