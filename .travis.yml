@@ -15,7 +15,7 @@ branches:
 #  - (cd $HOME/src/cpan-plugin-sysdeps && perl Makefile.PL && make all test && sudo make install)
 #  - cpan CPAN YAML::Syck
 before_install:
-  - git clone https://github.com/eserte/travis-helper-cpan-pm.git -b XXX-travis-ci
+  - git clone https://github.com/eserte/travis-helper-cpan-pm.git
   - ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
   - which cpan
 install:
