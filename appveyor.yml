@@ -29,6 +29,6 @@ install:
 
 build_script:
   - perl Makefile.PL
-  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
-  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
+#  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
+#  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
   - "%USE_MAKE% test"
