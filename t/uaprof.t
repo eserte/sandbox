@@ -5,6 +5,10 @@
 # Author: Slaven Rezic
 #
 
+use Test::More;
+plan skip_all => "Not enabled";
+__END__
+
 use strict;
 use FindBin;
 use File::Temp qw(tempdir);
