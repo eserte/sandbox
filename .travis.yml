@@ -1,10 +1,10 @@
-#os:
-#  - linux
-#  - osx
-
 branches:
   except:
     - /appveyor/
+
+#os:
+#  - linux
+#  - osx
 
 #before_install:
 #  - mkdir -p $HOME/.cpan/CPAN
