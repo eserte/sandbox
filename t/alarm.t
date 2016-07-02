@@ -14,7 +14,9 @@ my $t0;
 
 $t0 = time;
 diag "set alarm";
-alarm(1);
+my $ret = alarm(1);
+ok defined $ret;
+is $ret, 0;
 diag "sleep for 2 seconds";
 eval {
     sleep 2;
@@ -31,5 +33,9 @@ eval {
 };
 like $@, qr/Timeout/;
 diag "Delta " . (time - $t0);
+
+alarm(1000);
+my $got = alarm(1000);
+cmp_ok $got, ">", 900;
 
 __END__
