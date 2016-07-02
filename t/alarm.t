@@ -24,15 +24,19 @@ eval {
 like $@, qr/Timeout/;
 diag "Delta " . (time - $t0);
 
-$t0 = time;
-diag "set floating point alarm";
-Time::HiRes::alarm(1.3);
-diag "sleep for 2 seconds";
-eval {
-    sleep 2;
-};
-like $@, qr/Timeout/;
-diag "Delta " . (time - $t0);
+SKIP: {
+    skip "unimplemented", 1
+	if $^O eq 'MSWin32';
+    $t0 = time;
+    diag "set floating point alarm";
+    Time::HiRes::alarm(1.3);
+    diag "sleep for 2 seconds";
+    eval {
+	sleep 2;
+    };
+    like $@, qr/Timeout/;
+    diag "Delta " . (time - $t0);
+}
 
 alarm(1000);
 my $got = alarm(1000);
