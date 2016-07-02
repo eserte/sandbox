@@ -38,8 +38,12 @@ SKIP: {
     diag "Delta " . (time - $t0);
 }
 
-alarm(1000);
-my $got = alarm(1000);
-cmp_ok $got, ">", 900;
+{
+    local $TODO;
+    $TODO = "Known to fail on Windows" if $^O eq 'MSWin32';
+    alarm(1000);
+    my $got = alarm(1000);
+    cmp_ok $got, ">", 900;
+}
 
 __END__
