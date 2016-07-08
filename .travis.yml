@@ -14,13 +14,13 @@ branches:
 #  - git clone https://github.com/eserte/cpan-plugin-sysdeps $HOME/src/cpan-plugin-sysdeps
 #  - (cd $HOME/src/cpan-plugin-sysdeps && perl Makefile.PL && make all test && sudo make install)
 #  - cpan CPAN YAML::Syck
-before_install:
-  - git clone https://github.com/eserte/travis-helper-cpan-pm.git
-  - ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
-  - which cpan
-install:
-#  - cpan GD File::Rdiff
-  - cpan File::Rdiff
+#before_install:
+#  - git clone https://github.com/eserte/travis-helper-cpan-pm.git
+#  - ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
+#  - which cpan
+#install:
+##  - cpan GD File::Rdiff
+#  - cpan File::Rdiff
 
 ## test-fakesendmail testing
 #language: perl
@@ -50,9 +50,6 @@ install:
 #  - cpanm --notest DBD::XBase~"!=1.00, !=1.01, !=1.02, !=1.03, !=1.04, !=1.05"
 #  - cpanm --notest DBD::XBase~"==0.234"
 
-script:
- - perl Makefile.PL && make test HARNESS_OPTIONS=j4
-
 #language: perl
 #matrix:
 #  include:
@@ -60,11 +57,6 @@ script:
 #      env: WITH_XML_LIBXML_READER=1
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
-
-language: perl
-matrix:
-  include:
-    - perl: 5.14
 
 #sudo: false
 
@@ -75,3 +67,21 @@ matrix:
 #      - libdb-dev
 ## for XML::LibXML::SAX
 #      - libxml2-dev
+
+language: perl
+matrix:
+  include:
+    - perl: "5.14"
+    - perl: "5.20"
+    - perl: "5.18"
+    - perl: "5.14"
+    - perl: "5.22"
+    - perl: "5.10"
+    - perl: "5.8"
+    - perl: "5.20-shrplib"
+
+before_install:
+ - cpanm --verbose DBD::mysql
+
+script:
+ - perl Makefile.PL && make test HARNESS_OPTIONS=j4
