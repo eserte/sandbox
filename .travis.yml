@@ -81,6 +81,9 @@ matrix:
     - perl: "5.20-shrplib"
 
 before_install:
+ # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
+ # https://rt.cpan.org/Ticket/Display.html?id=115167
+ - cpanm --quiet --notest DBI::DBD
  - cpanm --verbose DBD::mysql
 
 script:
