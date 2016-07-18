@@ -6,8 +6,12 @@
 #
 
 use strict;
-use Test::More 'no_plan';
+use Test::More;
 use Time::HiRes 'time';
+
+plan skip_all => 'NOT ACTIVE';
+
+plan 'no_plan';
 
 $SIG{ALRM} = sub { die "Timeout" };
 my $t0;
