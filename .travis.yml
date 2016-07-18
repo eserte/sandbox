@@ -71,20 +71,20 @@ branches:
 language: perl
 matrix:
   include:
-    - perl: "5.14"
-    - perl: "5.20"
-    - perl: "5.18"
-    - perl: "5.14"
     - perl: "5.22"
-    - perl: "5.10"
+#    - perl: "5.14"
+#    - perl: "5.20"
+#    - perl: "5.18"
+#    - perl: "5.14"
+#    - perl: "5.10"
+#    - perl: "5.20-shrplib"
     - perl: "5.8"
-    - perl: "5.20-shrplib"
 
-before_install:
- # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
- # https://rt.cpan.org/Ticket/Display.html?id=115167
- - cpanm --quiet --notest DBI::DBD
- - cpanm --verbose DBD::mysql
+#before_install:
+# # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
+# # https://rt.cpan.org/Ticket/Display.html?id=115167
+# - cpanm --quiet --notest DBI::DBD
+# - cpanm --verbose DBD::mysql
 
 script:
  - perl Makefile.PL && make test HARNESS_OPTIONS=j4
