@@ -5,7 +5,7 @@ skip_tags: true
 shallow_clone: true
 
 cache:
-#  - C:\strawberry
+  - C:\strawberry
   - C:\Perl
 
 install:
