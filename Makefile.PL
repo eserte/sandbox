@@ -8,14 +8,16 @@ WriteMakefile(NAME => "Sandbox",
 		#'XML::Parser' => 0, # for UAProf tests
 		#'DB_File' => 0, # for UAProf tests
 	      },
-	      SKIP => [qw(test)],
+	      #SKIP => [qw(test)],
              );
 
 #system("env | sort");
 
 sub MY::postamble {
     <<EOF;
-test:
+#test: parallel-test:
+
+parallel-test:
 \t\$(INSTALLSCRIPT)/prove -j4 -lr t/
 
 dmake-test:
