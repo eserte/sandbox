@@ -58,7 +58,8 @@ branches:
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
-sudo: false
+#sudo: false
+sudo: true
 
 #addons:
 #  apt:
