@@ -96,7 +96,7 @@ install:
  - cpanm --quiet --notest App::cpm
  - perl Makefile.PL
  - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
- - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
+# - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
  - cpm install -g -v
 
 #install:
