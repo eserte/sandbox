@@ -93,9 +93,16 @@ matrix:
 # - cpanm --verbose DBD::mysql
 
 install:
- # cpanm is not available on MacOSX, so don't do anything here...
- # see https://github.com/travis-ci/travis-ci/issues/2314
- - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cpanm --quiet --installdeps --notest .; fi
+ - cpanm --quiet --notest App::cpm
+ - perl Makefile.PL
+ - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
+ - cpm install -g -v
+
+#install:
+# # cpanm is not available on MacOSX, so don't do anything here...
+# # see https://github.com/travis-ci/travis-ci/issues/2314
+# - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cpanm --quiet --installdeps --notest .; fi
 
 script:
- - perl Makefile.PL && make test HARNESS_OPTIONS=j4
+# - perl Makefile.PL && make test HARNESS_OPTIONS=j4
+ - make test HARNESS_OPTIONS=j4
