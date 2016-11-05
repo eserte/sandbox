@@ -107,5 +107,5 @@ matrix:
 # - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cpanm --quiet --installdeps --notest .; fi
 
 script:
-# - perl Makefile.PL && make test HARNESS_OPTIONS=j4
- - make test HARNESS_OPTIONS=j4
+ - perl Makefile.PL && make test HARNESS_OPTIONS=j4
+# - make test HARNESS_OPTIONS=j4
