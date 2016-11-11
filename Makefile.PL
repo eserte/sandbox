@@ -8,6 +8,7 @@ WriteMakefile(NAME => "Sandbox",
 		'XML::LibXML::SAX' => 0, # for UAProf tests
 		'XML::Parser' => 0, # for UAProf tests
 		'DB_File' => 0, # for UAProf tests
+		'File::Share' => 0, # may fail with cpm?
 	      },
 	      #SKIP => [qw(test)],
              );
