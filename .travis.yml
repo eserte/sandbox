@@ -94,7 +94,7 @@ install:
  - perl Makefile.PL
  - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
 # - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
- - if ! cpm install -g -v; then cat `ls -t $HOME/.perl-cpm/build.* | head -1`; fi
+ - if ! cpm install -g -v; then cat `ls -t $HOME/.perl-cpm/build.* | head -1`; false; fi
 
 #install:
 # # cpanm is not available on MacOSX, so don't do anything here...
