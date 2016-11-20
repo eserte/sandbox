@@ -1,6 +1,7 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(NAME => "Sandbox",
 	      PREREQ_PM => {
+		'Devel::Fail::MakefilePL' => 0, # fails!
 		'Cwd' => 3.62,
 		'Test::NoWarnings' => 0,
 		'LWP::UserAgent' => 0,
