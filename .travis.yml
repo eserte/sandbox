@@ -94,6 +94,8 @@ install:
  - perl Makefile.PL
  - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
 # - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
+# XXX cpm seems to fail if this directory does not exist
+ - mkdir ~/.perl-cpm
  - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
 
 #install:
