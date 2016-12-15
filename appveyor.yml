@@ -25,10 +25,14 @@ install:
 #  - set USE_MAKE=nmake
   - set USE_MAKE=dmake
   - cd C:\projects\%APPVEYOR_PROJECT_NAME%
-  - cpanm --installdeps .
+#  - cpanm --installdeps .
+  - cpanm --quiet --notest "App::cpm~>=0.293" LWP::Protocol::https
+  - perl Makefile.PL
+  - mymeta-cpanfile > cpanfile
+  - cpm install -g -v
 
 build_script:
-  - perl Makefile.PL
+#  - perl Makefile.PL
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
   - "%USE_MAKE% test"
