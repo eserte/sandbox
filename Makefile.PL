@@ -2,7 +2,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(NAME => "Sandbox",
 	      PREREQ_PM => {
 		#'Devel::Fail::MakefilePL' => 0, # fails! not!
-		'Acme::CPAN::Testers::UNKNOWN' => 0, # fails! (?)
+		#'Acme::CPAN::Testers::UNKNOWN' => 0, # fails! (?) --- enable to force failures
 		'Cwd' => 3.62,
 		'Test::NoWarnings' => 0,
 		'LWP::UserAgent' => 0,
