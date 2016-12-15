@@ -29,7 +29,9 @@ install:
   - cpanm --quiet --notest "App::cpm~>=0.293" LWP::Protocol::https
   - perl Makefile.PL
   - mymeta-cpanfile > cpanfile
-  - cpm install -g -v
+# currently cpm always fails, so it's safe to output the fail log always
+  - cpm install -g -v & type \.perl-cpm\build.log
+  - how to fail on windows?
 
 build_script:
 #  - perl Makefile.PL
