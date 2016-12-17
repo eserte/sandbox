@@ -30,7 +30,8 @@ install:
   - perl Makefile.PL
   - mymeta-cpanfile > cpanfile
 # currently cpm always fails, so it's safe to output the fail log always
-  - cpm install -g -v & type \.perl-cpm\build.log
+  - set HOME=%HOMEDRIVE%%HOMEPATH%
+  - cpm install -g -v & type %HOME%\.perl-cpm\build.log
   - how to fail on windows?
 
 build_script:
