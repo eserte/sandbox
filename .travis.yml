@@ -83,20 +83,22 @@ matrix:
 #    - perl: "5.20-shrplib"
     - perl: "5.8"
 
+install:
+  - cpanm http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz
 #before_install:
 # # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
 # # https://rt.cpan.org/Ticket/Display.html?id=115167
 # - cpanm --quiet --notest DBI::DBD
 # - cpanm --verbose DBD::mysql
 
-install:
- - cpanm --quiet --notest 'App::cpm~>=0.292'
- - perl Makefile.PL
- - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
-# - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
-# XXX cpm seems to fail if this directory does not exist -> https://github.com/skaji/cpm/issues/60
-# - mkdir ~/.perl-cpm
- - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
+#install:
+# - cpanm --quiet --notest 'App::cpm~>=0.292'
+# - perl Makefile.PL
+# - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
+## - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
+## XXX cpm seems to fail if this directory does not exist -> https://github.com/skaji/cpm/issues/60
+## - mkdir ~/.perl-cpm
+# - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
 
 #install:
 # # cpanm is not available on MacOSX, so don't do anything here...
