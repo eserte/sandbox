@@ -84,7 +84,7 @@ matrix:
     - perl: "5.8"
 
 install:
-  - cpanm http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz
+  - cpanm http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz || cat /home/travis/.cpanm/work/*/build.log
 #before_install:
 # # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
 # # https://rt.cpan.org/Ticket/Display.html?id=115167
