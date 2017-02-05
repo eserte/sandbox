@@ -81,10 +81,21 @@ matrix:
 #    - perl: "5.18"
 #    - perl: "5.14"
 #    - perl: "5.20-shrplib"
-    - perl: "5.8"
+#    - perl: "5.8"
+    - perl: "5.6.2"
+
+before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init
+  - build-perl
+  - perl -V
+  - build-dist
+  - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 
 install:
-  - cpanm DBI http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz
+  - cpan-install --deps       # installs prereqs, including recommends
+#install:
+#  - cpanm DBI http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz
 # || cat /home/travis/.cpanm/work/*/build.log
 #before_install:
 # # XXX DBD-mysql-4.034 fails to specify DBI::DBD as a prereq
