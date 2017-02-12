@@ -70,7 +70,7 @@ addons:
 language: perl
 matrix:
   include:
-    - perl: "5.10"
+#    - perl: "5.10"
 #    - perl: "5.24"
 #    - perl: "5.24"
 #      dist: trusty
@@ -78,7 +78,7 @@ matrix:
 #      os: osx
 ##    - perl: "5.14"
 ##      sudo: false
-#    - perl: "5.20"
+    - perl: "5.20"
 #    - perl: "5.18"
 #    - perl: "5.14"
 #    - perl: "5.20-shrplib"
@@ -125,6 +125,9 @@ script:
  - apt-file update
  - grep --with-filename . /etc/apt/sources.list /etc/apt/sources.list.d/*
  - apt-file search /Moose.pm
+ - git clone https://github.com/eserte/srezic-misc.git
+ - ./srezic-misc/scripts/pm-to-deb -v Moose
+ - ./srezic-misc/scripts/pm-to-deb -v --ignore-installed Moose
 
 branches:
   except:
