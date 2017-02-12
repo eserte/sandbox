@@ -58,9 +58,10 @@
 sudo: false
 #sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+      - apt-file
 ## for DB_File
 #      - libdb-dev
 ## for XML::LibXML::SAX
@@ -82,18 +83,19 @@ matrix:
 #    - perl: "5.14"
 #    - perl: "5.20-shrplib"
 #    - perl: "5.8"
-    - perl: "5.6.2"
+#    - perl: "5.6.2"
 
-before_install:
-  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
-  - source ~/travis-perl-helpers/init
-  - build-perl
-  - perl -V
-  - build-dist
-  - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
+#before_install:
+#  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+#  - source ~/travis-perl-helpers/init
+#  - build-perl
+#  - perl -V
+#  - build-dist
+#  - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 
-install:
-  - cpan-install --deps       # installs prereqs, including recommends
+#install:
+#  - cpan-install --deps       # installs prereqs, including recommends
+
 #install:
 #  - cpanm DBI http://backpan.cpantesters.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz
 # || cat /home/travis/.cpanm/work/*/build.log
@@ -118,8 +120,11 @@ install:
 # - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cpanm --quiet --installdeps --notest .; fi
 
 script:
- - perl Makefile.PL && make test HARNESS_OPTIONS=j4
+# - perl Makefile.PL && make test HARNESS_OPTIONS=j4
 # - make test HARNESS_OPTIONS=j4
+ - apt-file update
+ - grep --with-filename . /etc/apt/sources.list /etc/apt/sources.list.d/*
+ - apt-file search /Moose.pm
 
 branches:
   except:
