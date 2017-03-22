@@ -6,6 +6,10 @@
 #
 
 use strict;
+use Test::More;
+plan skip_all => 'deactivated';
+__END__
+
 use Test::More 'no_plan';
 
 diag `which wget`;
