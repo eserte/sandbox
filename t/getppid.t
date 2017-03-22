@@ -61,6 +61,7 @@ sub fork_and_retrieve {
 	    close $r2 or die "close: $!\n";
 	    close $w3 or die "close: $!\n";
 	    my $ppid1 = getppid();
+system('ps -ejH 1>&2');
 	    # kill 0 isn't portable:
 	    my $can_kill0 = eval {
 		kill 0, $ppid1;
@@ -90,6 +91,7 @@ sub fork_and_retrieve {
 		sleep 2;
 	    }
 	    my $ppid2 = getppid();
+system('ps -ejH 1>&2');
 	    print $w "$how,$ppid1,$ppid2\n";
 	}
 	exit 0;
