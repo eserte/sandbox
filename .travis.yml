@@ -59,9 +59,11 @@
 sudo: false
 #sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+      - apache2-mpm-prefork
+      - libapache2-mod-perl2
 #      - apt-file
 ### for DB_File
 ##      - libdb-dev
@@ -143,7 +145,9 @@ matrix:
 # - ./srezic-misc/scripts/pm-to-deb -v --ignore-installed Moose
 
 script:
- - ls -ald ~
+# - ls -ald ~
+ - ls -al /etc/apache2/mods-enabled/
+ - ls -al /etc/apache2/mods-available/
 
 branches:
   except:
