@@ -22,23 +22,25 @@ install:
 #  - cpan DB_File::Lock
 #  - cpanm Tk
 #  - cpanm --verbose Tk::Pod
+  - cpanm --verbose Inline::C
 #  - set USE_MAKE=nmake
-  - set USE_MAKE=dmake
-  - cd C:\projects\%APPVEYOR_PROJECT_NAME%
-#  - cpanm --installdeps .
-  - cpanm --quiet --notest "App::cpm~>=0.293" LWP::Protocol::https
-  - perl Makefile.PL
-  - mymeta-cpanfile > cpanfile
-# currently cpm always fails, so it's safe to output the fail log always
-  - set HOME=%HOMEDRIVE%%HOMEPATH%
-  - cpm install -g -v & type %HOME%\.perl-cpm\build.log
-  - how to fail on windows?
+#  - set USE_MAKE=dmake
+#  - cd C:\projects\%APPVEYOR_PROJECT_NAME%
+##  - cpanm --installdeps .
+#  - cpanm --quiet --notest "App::cpm~>=0.293" LWP::Protocol::https
+#  - perl Makefile.PL
+#  - mymeta-cpanfile > cpanfile
+## currently cpm always fails, so it's safe to output the fail log always
+#  - set HOME=%HOMEDRIVE%%HOMEPATH%
+#  - cpm install -g -v & type %HOME%\.perl-cpm\build.log
+#  - how to fail on windows?
 
 build_script:
 #  - perl Makefile.PL
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
-  - "%USE_MAKE% test"
+#  - "%USE_MAKE% test"
+  - echo "hurra"
 
 on_failure:
   - type C:\ProgramData\chocolatey\logs\chocolatey.log
