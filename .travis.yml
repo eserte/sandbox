@@ -56,14 +56,15 @@
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
-sudo: false
-#sudo: true
+#sudo: false
+sudo: true
 
 addons:
   apt:
     packages:
-      - apache2-mpm-prefork
-      - libapache2-mod-perl2
+     - strace
+#      - apache2-mpm-prefork
+#      - libapache2-mod-perl2
 #      - apt-file
 ### for DB_File
 ##      - libdb-dev
@@ -146,8 +147,10 @@ matrix:
 
 script:
 # - ls -ald ~
- - ls -al /etc/apache2/mods-enabled/
- - ls -al /etc/apache2/mods-available/
+# - ls -al /etc/apache2/mods-enabled/
+# - ls -al /etc/apache2/mods-available/
+ - strace -o /tmp/strace.log perl -e1
+ - cat /tmp/strace.log
 
 branches:
   except:
