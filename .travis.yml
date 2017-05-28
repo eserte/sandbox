@@ -56,13 +56,16 @@
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
-#sudo: false
-sudo: true
+sudo: false
+#sudo: true
 
 addons:
   apt:
     packages:
-     - strace
+      - libx11-dev
+      - libfreetype6-dev
+      - libxft-dev
+#     - strace
 #      - apache2-mpm-prefork
 #      - libapache2-mod-perl2
 #      - apt-file
@@ -87,11 +90,11 @@ matrix:
 #    - perl: "5.20"
 #    - perl: "5.18"
 #    - perl: "5.14"
-#    - perl: "5.20-shrplib"
+    - perl: "5.20-shrplib"
 #    - perl: "5.8"
 #    - perl: "5.6.2"
-    - perl: "5.20"
-      dist: trusty
+#    - perl: "5.20"
+#      dist: trusty
 
 #before_install:
 #  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
@@ -113,14 +116,14 @@ matrix:
 # - cpanm --quiet --notest DBI::DBD
 # - cpanm --verbose DBD::mysql
 
-#install:
-# - cpanm --quiet --notest 'App::cpm~>=0.292'
-# - perl Makefile.PL
-# - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
+install:
+ - cpanm --quiet --notest 'App::cpm~>=0.292'
+ - perl Makefile.PL
+ - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
 ## - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
 ## XXX cpm seems to fail if this directory does not exist -> https://github.com/skaji/cpm/issues/60
 ## - mkdir ~/.perl-cpm
-# - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
+ - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
 
 #install:
 # # cpanm is not available on MacOSX, so don't do anything here...
@@ -135,8 +138,8 @@ matrix:
 ## Should fail!
 # - cpan Devel::Fail::MakeTest
 
-#script:
-# - perl Makefile.PL && make test HARNESS_OPTIONS=j4
+script:
+ - perl Makefile.PL && make test HARNESS_OPTIONS=j4
 # - make test HARNESS_OPTIONS=j4
 # - apt-file update
 # - grep --with-filename . /etc/apt/sources.list /etc/apt/sources.list.d/*
@@ -145,12 +148,12 @@ matrix:
 # - ./srezic-misc/scripts/pm-to-deb -v Moose
 # - ./srezic-misc/scripts/pm-to-deb -v --ignore-installed Moose
 
-script:
+#script:
 # - ls -ald ~
 # - ls -al /etc/apache2/mods-enabled/
 # - ls -al /etc/apache2/mods-available/
- - strace -o /tmp/strace.log perl -e1
- - cat /tmp/strace.log
+# - strace -o /tmp/strace.log perl -e1
+# - cat /tmp/strace.log
 
 branches:
   except:
