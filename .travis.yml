@@ -59,12 +59,12 @@
 sudo: false
 #sudo: true
 
-addons:
-  apt:
-    packages:
-      - libx11-dev
-      - libfreetype6-dev
-      - libxft-dev
+#addons:
+#  apt:
+#    packages:
+#      - libx11-dev
+#      - libfreetype6-dev
+#      - libxft-dev
 #     - strace
 #      - apache2-mpm-prefork
 #      - libapache2-mod-perl2
@@ -116,14 +116,14 @@ matrix:
 # - cpanm --quiet --notest DBI::DBD
 # - cpanm --verbose DBD::mysql
 
-install:
- - cpanm --quiet --notest 'App::cpm~>=0.292'
- - perl Makefile.PL
- - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
-## - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
-## XXX cpm seems to fail if this directory does not exist -> https://github.com/skaji/cpm/issues/60
-## - mkdir ~/.perl-cpm
- - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
+#install:
+# - cpanm --quiet --notest 'App::cpm~>=0.292'
+# - perl Makefile.PL
+# - mymeta-cpanfile > cpanfile~ && mv cpanfile~ cpanfile
+### - cpm install -g -v DBD::XBase~"==0.234" File::Path DB_File~"!=1.833"
+### XXX cpm seems to fail if this directory does not exist -> https://github.com/skaji/cpm/issues/60
+### - mkdir ~/.perl-cpm
+# - if ! cpm install -g -v; then cat ~/.perl-cpm/build.log; false; fi
 
 #install:
 # # cpanm is not available on MacOSX, so don't do anything here...
