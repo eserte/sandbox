@@ -78,8 +78,8 @@ language: perl
 matrix:
   include:
 #    - perl: "5.24"
-#    - perl: "5.24"
-#      dist: trusty
+    - perl: "5.24"
+      dist: trusty
 #    - perl: "5.24"
 #      sudo: true
 #    - perl: "5.10"
