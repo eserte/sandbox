@@ -22,7 +22,8 @@ install:
 #  - cpan DB_File::Lock
 #  - cpanm Tk
 #  - cpanm --verbose Tk::Pod
-  - cpanm --verbose Inline::C
+#  - cpanm --verbose Inline::C
+  - cpanm --verbose Test::Trap
 #  - set USE_MAKE=nmake
 #  - set USE_MAKE=dmake
 #  - cd C:\projects\%APPVEYOR_PROJECT_NAME%
