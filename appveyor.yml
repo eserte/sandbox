@@ -23,6 +23,7 @@ install:
 #  - cpanm Tk
 #  - cpanm --verbose Tk::Pod
 #  - cpanm --verbose Inline::C
+  - set HARNESS_IS_VERBOSE=0
   - cpanm --verbose Test::Trap
 #  - set USE_MAKE=nmake
 #  - set USE_MAKE=dmake
