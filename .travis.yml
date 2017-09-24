@@ -16,9 +16,9 @@ before_install:
 # * cairo               for Cairo
 # * pango               for Pango
 # * glib                for Glib
-# * libpng jpeg giflib  for Imager
+# * libpng jpeg         for Imager (giflib is already installed, it seems)
 # * bsdmake             e.g. for building data-test
-  - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg giflib bsdmake
+  - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg bsdmake
   - git clone --depth=1 https://github.com/eserte/bbbike.git
   - cd bbbike
 
