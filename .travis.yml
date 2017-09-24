@@ -23,6 +23,8 @@ before_install:
   - cd bbbike
 
 install:
+# re ARCHFLAGS see https://github.com/Homebrew/homebrew-core/issues/5404
+  - ARCHFLAGS="-arch x86_64" cpanm --sudo --verbose Glib
   - cpanm --sudo --quiet --installdeps --notest . || true
 
 script:
