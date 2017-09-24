@@ -162,6 +162,7 @@ matrix:
 script:
  - cpanm --quiet --notest 'PDF::Create~==1.42'
  - git clone --depth=1 https://github.com/eserte/bbbike.git
+ - cd bbbike
  - prove -v t/bbbikedraw.t :: -only PDF
 
 branches:
