@@ -18,7 +18,10 @@ before_install:
 # * glib                for Glib
 # * libpng jpeg         for Imager (giflib is already installed, it seems)
 # * bsdmake             e.g. for building data-test
+# * font-dejavu-sans    for BBBikeDraw::PDFCairo
   - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg bsdmake
+  - brew tap caskroom/fonts
+  - brew cask install font-dejavu-sans
   - git clone --depth=1 https://github.com/eserte/bbbike.git
   - cd bbbike
 
