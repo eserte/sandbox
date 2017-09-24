@@ -15,7 +15,7 @@ before_install:
   - brew install libpng jpeg giflib || true
 
 install:
-  - cpanm --sudo --verbose Imager
+  - ARCHFLAGS="-arch x86_64" cpanm --sudo --verbose Imager
 
 script:
   - |
