@@ -10,13 +10,15 @@ branches:
 
 before_install:
 # Required system dependencies
-# * cpanminus         for installing CPAN modules
-# * mysql-connector-c for DBD::mysql
-# * gd                for GD
-# * cairo             for Cairo
-# * pango             for Pango
-# * glib              for Glib
-  - brew update; brew install cpanminus mysql-connector-c gd cairo pango glib
+# * cpanminus           for installing CPAN modules
+# * mysql-connector-c   for DBD::mysql
+# * gd                  for GD
+# * cairo               for Cairo
+# * pango               for Pango
+# * glib                for Glib
+# * libpng jpeg giflib  for Imager
+# * bsdmake             e.g. for building data-test
+  - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg giflib bsdmake
   - git clone --depth=1 https://github.com/eserte/bbbike.git
   - cd bbbike
 
@@ -24,4 +26,4 @@ install:
   - cpanm --sudo --quiet --installdeps --notest . || true
 
 script:
-  - cd t && make test-no-cgi
+  - cd t && make ext test-no-cgi
