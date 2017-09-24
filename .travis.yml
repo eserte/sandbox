@@ -12,11 +12,12 @@ before_install:
 # * cpanminus           for installing CPAN modules
   - brew install cpanminus
 # Special deps
-  - brew install glib
+  - brew install glib pango
 
 install:
 # re ARCHFLAGS see https://github.com/Homebrew/homebrew-core/issues/5404
-  - ARCHFLAGS="-arch x86_64" cpanm --sudo --verbose Glib
+  - ARCHFLAGS="-arch x86_64" cpanm --sudo --quiet --notest Glib
+  - cpanm --sudo --verbose Pango
 
 script:
   - true
