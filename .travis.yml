@@ -1,7 +1,7 @@
 # don't specify: language: perl
 os:
   - osx
-env: BBBIKE_TEST_SKIP_MODPERL=1 BBBIKE_TEST_GUI=1
+env: BBBIKE_TEST_SKIP_MODPERL=1 BBBIKE_TEST_SKIP_MAPSERVER=1 BBBIKE_TEST_GUI=1
 sudo: true
 
 branches:
@@ -23,6 +23,10 @@ before_install:
   - cd bbbike
 
 install:
+# XXX Tk::ExecuteCommand does not specify Tk as a prereq,
+# so make sure to install Tk early. See
+# https://rt.cpan.org/Ticket/Display.html?id=102434
+  - cpanm --sudo --quiet --notest Tk
 # re ARCHFLAGS see https://github.com/Homebrew/homebrew-core/issues/5404
   - ARCHFLAGS="-arch x86_64" cpanm --sudo --quiet --notest Pango Imager
   - cpanm --sudo --quiet --installdeps --notest . || true
