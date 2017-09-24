@@ -24,7 +24,7 @@ before_install:
 
 install:
 # re ARCHFLAGS see https://github.com/Homebrew/homebrew-core/issues/5404
-  - ARCHFLAGS="-arch x86_64" cpanm --sudo --quiet --notest Glib
+  - ARCHFLAGS="-arch x86_64" cpanm --sudo --quiet --notest Pango
   - cpanm --sudo --quiet --installdeps --notest . || true
 
 script:
