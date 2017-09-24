@@ -1,7 +1,6 @@
 # don't specify: language: perl
 os:
   - osx
-env: BBBIKE_TEST_SKIP_MODPERL=1 BBBIKE_TEST_GUI=1
 sudo: true
 
 branches:
@@ -11,19 +10,12 @@ branches:
 before_install:
 # Required system dependencies
 # * cpanminus           for installing CPAN modules
-# * mysql-connector-c   for DBD::mysql
-# * gd                  for GD
-# * cairo               for Cairo
-# * pango               for Pango
-# * glib                for Glib
-# * libpng jpeg giflib  for Imager
-# * bsdmake             e.g. for building data-test
-  - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg giflib bsdmake
-  - git clone --depth=1 https://github.com/eserte/bbbike.git
-  - cd bbbike
+  - brew install cpanminus
+# Special deps
+  - brew install glib
 
 install:
-  - cpanm --sudo --quiet --installdeps --notest . || true
+  - cpanm --sudo --verbose Glib
 
 script:
-  - cd t && make ext test-no-cgi
+  - true
