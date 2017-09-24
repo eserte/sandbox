@@ -11,7 +11,7 @@ WriteMakefile(NAME => "Sandbox",
 		#'XML::Parser' => 0, # for UAProf tests
 		#'DB_File' => 0, # for UAProf tests
 		#'File::Share' => 0, # may fail with cpm?
-		'Tk::Pod' => 0,
+		#'Tk::Pod' => 0,
 	      },
 	      #SKIP => [qw(test)],
              );
