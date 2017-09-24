@@ -28,4 +28,5 @@ install:
   - cpanm --sudo --quiet --installdeps --notest . || true
 
 script:
-  - cd t && make ext test-no-cgi
+  - make ext
+  - cd t && make test-no-cgi
