@@ -9,12 +9,19 @@ branches:
     - /appveyor/
 
 before_install:
-  - brew update; brew install cpanminus
+# Required system dependencies
+# * cpanminus         for installing CPAN modules
+# * mysql-connector-c for DBD::mysql
+# * gd                for GD
+# * cairo             for Cairo
+# * pango             for Pango
+# * glib              for Glib
+  - brew update; brew install cpanminus mysql-connector-c gd cairo pango glib
   - git clone --depth=1 https://github.com/eserte/bbbike.git
   - cd bbbike
 
 install:
-  - cpanm --sudo --quiet --installdeps --notest .
+  - cpanm --sudo --quiet --installdeps --notest . || true
 
 script:
   - cd t && make test-no-cgi
