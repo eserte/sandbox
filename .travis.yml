@@ -19,6 +19,7 @@ before_install:
 # * libpng jpeg         for Imager (giflib is already installed, it seems)
 # * bsdmake             e.g. for building data-test
 # * font-dejavu-sans    for BBBikeDraw::PDFCairo
+  - brew update
   - brew install cpanminus mysql-connector-c gd cairo pango glib libpng jpeg bsdmake
   - brew tap caskroom/fonts
   - brew cask install font-dejavu-sans
