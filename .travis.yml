@@ -10,8 +10,7 @@ install:
 
 script:
   - git clone git://github.com/eserte/Doit.git
-  - cd Doit
-  - perl -Ilib t/file.t
+  - perl -IDoit/lib -IDoit/t t/file-debug.t
 
 branches:
   except:
