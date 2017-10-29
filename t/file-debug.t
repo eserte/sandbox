@@ -95,6 +95,7 @@ for my $opt_def (
 
 SKIP: {
 diag -w '/dev/full';
+$doit->system(qw(ls -al /dev/full));
     skip "No /dev/full available", 1 if !-w '/dev/full';
 diag "Will slurp now";
     my $old_content = slurp("$tempdir/1st");
