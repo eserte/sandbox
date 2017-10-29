@@ -10,6 +10,7 @@ install:
 
 script:
   - git clone git://github.com/eserte/Doit.git
+  - cp -v Doit-File.pm Doit/lib/Doit/File.pm
   - perl -IDoit/lib -IDoit/t t/file-debug.t
 
 branches:

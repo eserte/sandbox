@@ -175,8 +175,7 @@ diag "Will slurp now";
     my $old_content = slurp("$tempdir/1st");
 diag "Slurped, length is " . length($old_content);
     eval { 
-	my $strace_keeper = strace_begin(qw(-f -tt -T -s1024));
-	sleep 1; # for strace to start
+	#my $strace_keeper = strace_begin(qw(-f -tt -T -s1024)); sleep 1;
 	$doit->file_atomic_write_fh("$tempdir/1st",
 				    sub {
 					my $fh = shift;
