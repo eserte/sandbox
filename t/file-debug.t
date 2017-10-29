@@ -19,6 +19,80 @@ require FindBin;
 { no warnings 'once'; push @INC, $FindBin::RealBin; }
 require TestUtil;
 
+# REPO BEGIN
+# REPO NAME strace_begin /home/eserte/src/srezic-repository 
+# REPO MD5 67d59559401a50c9c92bfc059d24ba54
+
+=head2 strace_begin(@strace_args)
+
+Run L<strace(1)> on the current process, until the returned object
+goes out of scope. Usually used like this:
+
+    {
+        my $strace_keeper = strace_begin(qw(-o /tmp/strace.log -f -tt -T -s1024));
+        ... hot code ...
+    }
+    # strace not active anymore
+
+There's a block-like alternative:
+
+    my $result = strace {
+        ... hot code ...
+    } qw(-o /tmp/strace.log -f -tt -T -s1024));
+    # strace not active anymore
+
+Additionally to the options L<strace(1)> accepts, there's also the
+option C<--strace-cmd>, which can be used for another command than
+C<strace>, but which behaves like C<strace> (i.e. takes the option
+C<-p I<pid>>).
+
+=cut
+
+BEGIN {
+    my $DESTROY = sub { 
+	my $self = shift;
+	my $strace_pid = $self->{strace_pid};
+	die "Should never happen: no strace_pid in " . ref($self) if !$strace_pid;
+	kill INT => $strace_pid;
+	waitpid $strace_pid, 0;
+    };
+    no strict 'refs';
+    *{__PACKAGE__.'::Strace_Myself::DESTROY'} = $DESTROY;
+}
+
+sub strace_begin (@) {
+    my(@strace_args) = @_;
+    my $strace_cmd = 'strace';
+    {
+	require Getopt::Long;
+	Getopt::Long::Configure('pass_through');
+	local @ARGV = @strace_args;
+	Getopt::Long::GetOptions('strace-cmd=s' => \$strace_cmd);
+	Getopt::Long::Configure('no_pass_through');
+	@strace_args = @ARGV;
+    }
+
+    my $pid = $$;
+    my $strace_pid = fork;
+    if (!defined $strace_pid) {
+	warn "Can't run strace: $!";
+    } elsif ($strace_pid == 0) {
+	my @cmd = (ref $strace_cmd eq 'ARRAY' ? @$strace_cmd : $strace_cmd, '-p', $pid, @strace_args);
+	exec @cmd;
+	die "@cmd failed: $!";
+    }
+
+    bless { strace_pid => $strace_pid }, __PACKAGE__.'::Strace_Myself';
+}
+
+sub strace (&;@) {
+    my($code, @strace_args) = @_;
+
+    my $strace_keeper = strace_begin(@strace_args);
+    $code->();
+}
+# REPO END
+
 plan 'no_plan';
 
 my $doit = Doit->init;
@@ -101,6 +175,8 @@ diag "Will slurp now";
     my $old_content = slurp("$tempdir/1st");
 diag "Slurped, length is " . length($old_content);
     eval { 
+	my $strace_keeper = strace_begin(qw(-f -tt -T -s1024));
+	sleep 1; # for strace to start
 	$doit->file_atomic_write_fh("$tempdir/1st",
 				    sub {
 					my $fh = shift;
@@ -152,3 +228,4 @@ SKIP: {
 
     $sudo->system(qw(umount), $mnt_point);
 }
+
