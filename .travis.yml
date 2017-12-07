@@ -168,8 +168,8 @@ script:
 ## - prove -v t/bbbikedraw.t :: -only PDF
 # - perl t/bbbikedraw.t -only PDF
  - perl -e 'sleep(rand(30))'
-# - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
- - true
+ - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
+# - true
 
 branches:
   except:
