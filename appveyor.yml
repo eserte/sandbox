@@ -8,7 +8,8 @@ shallow_clone: true
 #  - C:\strawberry
 #  - C:\Perl
 
-#install:
+install:
+  - perl -V
 #  - if not exist "C:\strawberry" cinst strawberryperl
 ###  - ps: Start-FileDownload http://strawberryperl.com/download/5.22.1.2/strawberry-perl-5.22.1.2-64bit.msi
 ###  - msiexec /i "C:\projects\sources\strawberry-perl-5.22.1.2-64bit.msi" /qn INSTALLDIR="C:\projects\perl"
@@ -40,6 +41,7 @@ shallow_clone: true
 build_script:
   - git clone git://github.com/eserte/Doit.git
   - cd Doit
+  - set HARNESS_OPTIONS=j4:c
   - perl Build.PL && perl Build && perl Build test
 #  - perl Makefile.PL
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
