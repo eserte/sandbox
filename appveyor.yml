@@ -8,8 +8,22 @@ shallow_clone: true
 #  - C:\strawberry
 #  - C:\Perl
 
+environment:
+  matrix:
+    - perl: activeperl
+    - perl: strawberryperl
+#    - perl: cygwinperl
+
 install:
+  - ps: >-
+      If ($env:perl -eq "strawberryperl") {
+        If (!(test-path -path "C:\strawberry")) {
+          cinst strawberryperl
+        }
+        refreshenv
+      }
   - perl -V
+# $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
 #  - if not exist "C:\strawberry" cinst strawberryperl
 ###  - ps: Start-FileDownload http://strawberryperl.com/download/5.22.1.2/strawberry-perl-5.22.1.2-64bit.msi
 ###  - msiexec /i "C:\projects\sources\strawberry-perl-5.22.1.2-64bit.msi" /qn INSTALLDIR="C:\projects\perl"
