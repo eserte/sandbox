@@ -10,9 +10,9 @@ shallow_clone: true
 
 environment:
   matrix:
+    - perl: cygwinperl
     - perl: activeperl
     - perl: strawberryperl
-#    - perl: cygwinperl
 
 install:
   - ps: >-
@@ -53,10 +53,17 @@ install:
 ##  - how to fail on windows?
 
 build_script:
-  - git clone git://github.com/eserte/Doit.git
-  - cd Doit
-  - set HARNESS_OPTIONS=j4:c
-  - perl Build.PL && perl Build && perl Build test
+  - ps: >-
+      If ($env:perl -eq "cygwinperl") {
+        c:\cygwin\bin\sh -c 'git clone git://github.com/eserte/Doit.git && cd Doit && perl Build.PL && perl Build && perl Build test' 2>&1 | %{ "$_" }
+      } Else {
+        git clone git://github.com/eserte/Doit.git
+        cd Doit
+        $env:HARNESS_OPTIONS="j4:c"
+        perl Build.PL
+        perl Build
+        perl Build test
+      }
 #  - perl Makefile.PL
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
