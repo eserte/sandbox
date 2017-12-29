@@ -71,5 +71,5 @@ build_script:
 #  - "%USE_MAKE% test"
 #  - echo "hurra"
 
-on_failure:
-  - type C:\ProgramData\chocolatey\logs\chocolatey.log
+#on_failure:
+#  - type C:\ProgramData\chocolatey\logs\chocolatey.log
