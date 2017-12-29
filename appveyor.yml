@@ -15,13 +15,12 @@ environment:
     - perl: strawberryperl
 
 install:
-  - ps: >-
-      If ($env:perl -eq "strawberryperl") {
-        If (!(test-path -path "C:\strawberry")) {
-          cinst strawberryperl
-        }
-        refreshenv
-      }
+  - |-
+    if not %perl%==strawberryperl goto :cont
+    if not exist "C:\strawberry" goto :cont
+    cinst strawberryperl
+    refreshenv
+    :cont
   - perl -V
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
 #  - if not exist "C:\strawberry" cinst strawberryperl
@@ -53,9 +52,19 @@ install:
 ##  - how to fail on windows?
 
 build_script:
+  - set HARNESS_OPTIONS=j4:c
   - git clone git://github.com/eserte/Doit.git
-  - if     %perl%==cygwinperl perl build.pl cygwin
-  - if not %perl%==cygwinperl perl build.pl native
+  - |-
+    if not %perl%==cygwinperl goto :nativeperl
+    c:\cygwin\bin\sh -c "perl Build.PL && perl Build && perl Build test"
+    goto :end
+    :nativeperl
+    perl Build.PL
+    perl Build
+    perl Build test
+    :end
+#  - if     %perl%==cygwinperl perl build.pl cygwin
+#  - if not %perl%==cygwinperl perl build.pl native
 #  - perl Makefile.PL
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
