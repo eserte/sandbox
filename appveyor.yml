@@ -15,12 +15,8 @@ environment:
     - perl: strawberryperl
 
 install:
-  - if %perl%==cygwinperl     ( set ONLY_STRAWBERRY=REM && set ONLY_ACTIVEPERL=REM && set ONLY_NATIVE=REM )
-  - if %perl%==activeperl     ( set ONLY_STRAWBERRY=REM && set ONLY_CYGWIN=REM )
-  - if %perl%==strawberryperl ( set ONLY_CYGWIN=REM     && set ONLY_ACTIVEPERL=REM )
-  - |-
-    %ONLY_STRAWBERRY% if not exist "C:\strawberry" cinst strawberryperl
-    %ONLY_STRAWBERRY% set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
+  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
+  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
   - perl -V
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
 #  - if not exist "C:\strawberry" cinst strawberryperl
@@ -55,11 +51,8 @@ build_script:
   - set HARNESS_OPTIONS=j4:c
   - git clone git://github.com/eserte/Doit.git
   - cd Doit
-  - |-
-    %ONLY_CYGWIN% c:\cygwin\bin\sh -c "perl Build.PL && perl Build && perl Build test"
-    %ONLY_NATIVE% perl Build.PL
-    %ONLY_NATIVE% perl Build
-    %ONLY_NATIVE% perl Build test
+  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "perl Build.PL && perl Build && perl Build test"
+  - if not %perl%==cygwinperl ( perl Build.PL && perl Build && perl Build test )
 #  - if     %perl%==cygwinperl perl build.pl cygwin
 #  - if not %perl%==cygwinperl perl build.pl native
 #  - perl Makefile.PL
