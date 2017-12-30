@@ -10,8 +10,8 @@ shallow_clone: true
 
 environment:
   matrix:
-    - perl: cygwinperl
-#    - perl: activeperl
+#    - perl: cygwinperl
+    - perl: activeperl
 #    - perl: strawberryperl
 
 install:
@@ -25,7 +25,8 @@ install:
 #  - set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
 ##  - if not exist "C:\Perl" cinst activeperl
 ##  - set PATH=C:\Perl\bin;%PATH%
-##  - ppm install App-cpanminus MinGW
+#  - ppm install App-cpanminus MinGW
+  - ppm install Tk IPC-Run dmake
 ##  - if not exist "C:\strawberry\cpan\prefs\.git" git clone git://github.com/eserte/srezic-cpan-distroprefs C:\strawberry\cpan\prefs
 ##  - cd C:\strawberry\cpan\prefs
 ##  - git pull
@@ -38,7 +39,6 @@ install:
 ##  - set USE_MAKE=nmake
 ##  - set USE_MAKE=dmake
 ##  - cd C:\projects\%APPVEYOR_PROJECT_NAME%
-###  - cpanm --installdeps .
 ##  - cpanm --quiet --notest "App::cpm~>=0.293" LWP::Protocol::https
 ##  - perl Makefile.PL
 ##  - mymeta-cpanfile > cpanfile
@@ -49,14 +49,18 @@ install:
 
 build_script:
   - set HARNESS_OPTIONS=j4:c
-  - git clone git://github.com/eserte/Doit.git
-  - cd Doit
+#  - git clone git://github.com/eserte/Doit.git
+#  - cd Doit
+  - git clone git://github.com/eserte/org-daemon.git
+  - cd org-daemon
+#  - cpanm --installdeps .
 #  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "echo $PATH; which perl; ls -al /usr/bin"
-  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl Build.PL && perl Build && perl Build test"
-  - if not %perl%==cygwinperl ( perl Build.PL && perl Build && perl Build test )
+#  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl Build.PL && perl Build && perl Build test"
+#  - if not %perl%==cygwinperl ( perl Build.PL && perl Build && perl Build test )
 #  - if     %perl%==cygwinperl perl build.pl cygwin
 #  - if not %perl%==cygwinperl perl build.pl native
-#  - perl Makefile.PL
+  - perl Makefile.PL
+  - dmake all test
 #  - perl -MDB_File::Lock -e "warn $DB_File::Lock::VERSION"
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
 #  - "%USE_MAKE% test"
