@@ -6,7 +6,7 @@ use strict;
 use File::Temp qw(tempdir);
 use Test::More;
 
-plan skip_all => "Only for cygwin" if $^O ne 'cygwin';
+#plan skip_all => "Only for cygwin" if $^O ne 'cygwin';
 
 my $tmp = tempdir(CLEANUP => 1);
 unless(mkdir("$tmp/testdir") && chdir("$tmp/testdir") && rmdir("$tmp/testdir")){
@@ -17,7 +17,10 @@ if (-e "$tmp/testdir") {
     fail "$tmp/testdir still exists?";
 }
 
-diag `pwd`;
+diag "pwd=" . `pwd`;
+diag "\$PWD=$ENV{PWD}";
+delete $ENV{PWD};
+diag "pwd after deleting \$PWD=" . `pwd`;
 
 pass "...";
 
