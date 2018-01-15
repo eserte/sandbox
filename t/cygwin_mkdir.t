@@ -17,6 +17,8 @@ if (-e "$tmp/testdir") {
     fail "$tmp/testdir still exists?";
 }
 
+diag `pwd`;
+
 pass "...";
 
 chdir "/";
