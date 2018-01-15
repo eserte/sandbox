@@ -19,8 +19,9 @@ install:
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
   - if not %perl%==cygwinperl perl -v
   - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
-  - if %perl%==cygwinperl       C:\cygwin\setup-x86.exe -q --packages=libcrypt-devel,openssl-devel
-  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
+#  - if %perl%==cygwinperl       C:\cygwin\setup-x86.exe -q --packages=libcrypt-devel,openssl-devel
+#  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
+
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
 #  - if not exist "C:\strawberry" cinst strawberryperl
 ###  - ps: Start-FileDownload http://strawberryperl.com/download/5.22.1.2/strawberry-perl-5.22.1.2-64bit.msi
@@ -53,8 +54,8 @@ install:
 
 build_script:
   - set HARNESS_OPTIONS=j4:c
-  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; cpan LWP::Protocol::https && lwp-download https://raw.github.com/Perl/perl5/blead/dist/PathTools/t/cwd_enoent.t cwd_enoent.t"
-  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl cwd_enoent.t"
+#  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; cpan LWP::Protocol::https && lwp-download https://raw.github.com/Perl/perl5/blead/dist/PathTools/t/cwd_enoent.t cwd_enoent.t"
+  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl t/cygwin_mkdir.t"
 #  - git clone git://github.com/eserte/org-daemon.git
 #  - cd org-daemon
 #  - cpanm --installdeps .
