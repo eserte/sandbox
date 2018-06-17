@@ -59,11 +59,11 @@
 sudo: false
 #sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+      - pdftk
 #      - poppler-utils
-#      - pdftk
 #      - libgd-dev
 ##      - libx11-dev
 ##      - libfreetype6-dev
@@ -81,10 +81,13 @@ language: perl
 matrix:
   include:
     - perl: "5.26"
-    - perl: "5.24"
-    - perl: "5.18"
-    - perl: "5.10"
-    - perl: "5.8"
+      dist: trusty
+    - perl: "5.26"
+      dist: precise
+#    - perl: "5.24"
+#    - perl: "5.18"
+#    - perl: "5.10"
+#    - perl: "5.8"
 ##    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
