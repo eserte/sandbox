@@ -84,8 +84,8 @@ sudo: true
 language: perl
 matrix:
   include:
-    - perl: "5.28"
-      dist: trusty
+#    - perl: "5.28"
+#      dist: trusty
 #    - perl: "5.26"
 #      dist: trusty
 #    - perl: "5.14"
@@ -93,7 +93,7 @@ matrix:
 #    - perl: "5.24"
 #    - perl: "5.18"
 #    - perl: "5.10"
-#    - perl: "5.8"
+    - perl: "5.8"
 ##    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
@@ -150,6 +150,9 @@ matrix:
 #install:
 ## Should fail!
 # - cpan Devel::Fail::MakeTest
+
+install:
+ - cpanm --notest http://backpan.perl.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz 
 
 #script:
 # - perl Makefile.PL && make test HARNESS_OPTIONS=j4
