@@ -184,6 +184,9 @@ matrix:
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 # - true
 
+script:
+  - prove -v t/cgi-download.t
+
 before_script:
   - perlbrew off
 
