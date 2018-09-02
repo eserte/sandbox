@@ -56,12 +56,13 @@
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
-#sudo: false
-sudo: true
+sudo: false
+#sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+      - libwww-perl
 #      - pdftk
 #      - poppler-utils
 #      - libgd-dev
@@ -88,12 +89,12 @@ matrix:
 #      dist: trusty
 #    - perl: "5.26"
 #      dist: trusty
-#    - perl: "5.14"
-#      dist: precise
+    - perl: "5.14"
+      dist: precise
 #    - perl: "5.24"
 #    - perl: "5.18"
 #    - perl: "5.10"
-    - perl: "5.8"
+#    - perl: "5.8"
 ##    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
@@ -151,8 +152,8 @@ matrix:
 ## Should fail!
 # - cpan Devel::Fail::MakeTest
 
-install:
- - cpanm --notest http://backpan.perl.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz 
+#install:
+# - cpanm --notest http://backpan.perl.org/authors/id/J/JA/JANPAZ/DBD-XBase-0.234.tar.gz 
 
 #script:
 # - perl Makefile.PL && make test HARNESS_OPTIONS=j4
@@ -172,16 +173,19 @@ install:
 # - cat /tmp/strace.log
 
 ## specific BBBike-Testing
-script:
+#script:
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
 # - git clone --depth=1 https://github.com/eserte/bbbike.git
 # - cd bbbike
 ### travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
 ## - prove -v t/bbbikedraw.t :: -only PDF
 # - perl t/bbbikedraw.t -only PDF
- - perl -e 'sleep(rand(30))'
+# - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
- - true
+# - true
+
+before_script:
+  - perlbrew off
 
 branches:
   except:
