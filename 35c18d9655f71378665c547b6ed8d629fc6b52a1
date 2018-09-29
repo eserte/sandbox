@@ -7,3 +7,5 @@ PASS appveyor 2018-12-31T12:00:00Z (just testing notes!)
 FAIL docker debian:jessie BBBIKE_TEST_GUI=1 2018-12-31T12:00:00Z (just testing notes!)
 
 PASS host freebsd9 2018-12-31T12:00:00Z (just testing notes!)
+
+PASS host debian:jessie 2018-12-31T12:00:00Z (just testing notes!)
