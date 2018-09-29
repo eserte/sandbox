@@ -1,3 +1,5 @@
 test note
 
 FAIL travis-ci 2018-12-31T12:00:00Z (just testing notes!)
+
+PASS appveyor 2018-12-31T12:00:00Z (just testing notes!)
