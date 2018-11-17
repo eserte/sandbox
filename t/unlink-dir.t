@@ -17,5 +17,6 @@ use Errno 'EISDIR';
 my $t = tempdir( CLEANUP => 1 );
 unlink $t;
 is $!+0, EISDIR;
+diag "Perl $]";
 
 __END__
