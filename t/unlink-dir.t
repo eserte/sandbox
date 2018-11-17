@@ -12,9 +12,10 @@ use strict;
 use Test::More 'no_plan';
 
 use File::Temp 'tempdir';
+use Errno 'EISDIR';
 
 my $t = tempdir( CLEANUP => 1 );
 unlink $t;
-ok $!{EISDIR};
+is $!+0, EISDIR;
 
 __END__
