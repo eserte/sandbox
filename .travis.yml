@@ -1,6 +1,6 @@
-#os:
-#  - linux
-#  - osx
+os:
+  - linux
+  - osx
 
 #before_install:
 #  - mkdir -p $HOME/.cpan/CPAN
@@ -59,10 +59,10 @@
 sudo: false
 #sudo: true
 
-addons:
-  apt:
-    packages:
-      - libwww-perl
+#addons:
+#  apt:
+#    packages:
+#      - libwww-perl
 #      - pdftk
 #      - poppler-utils
 #      - libgd-dev
@@ -82,15 +82,15 @@ addons:
 #  - sudo apt-get update
 #  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
-language: perl
-matrix:
-  include:
+#language: perl
+#matrix:
+#  include:
 #    - perl: "5.28"
 #      dist: trusty
 #    - perl: "5.26"
 #      dist: trusty
-    - perl: "5.14"
-      dist: precise
+#    - perl: "5.14"
+#      dist: precise
 #    - perl: "5.24"
 #    - perl: "5.18"
 #    - perl: "5.10"
@@ -185,10 +185,10 @@ matrix:
 # - true
 
 script:
-  - prove -v t/cgi-download.t
+  - prove -v t/unlink-dir.t
 
-before_script:
-  - perlbrew off
+#before_script:
+#  - perlbrew off
 
 branches:
   except:
