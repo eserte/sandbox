@@ -1,0 +1,7 @@
+=head1 sandbox
+
+=for markdown [![Travis CI](https://travis-ci.org/eserte/sandbox.svg?branch=master)](https://travis-ci.org/eserte/sandbox)
+
+A project just for testing ci systems like travis-ci or appveyor
+
+=cut
