@@ -1,6 +1,7 @@
 =head1 sandbox
 
-=for markdown [![Travis CI](https://travis-ci.org/eserte/sandbox.svg?branch=master)](https://travis-ci.org/eserte/sandbox)
+=for html
+<a href="https://travis-ci.org/eserte/sandbox"><img src="https://travis-ci.org/eserte/sandbox.svg" alt="Travis CI"></a>
 
 A project just for testing ci systems like travis-ci or appveyor
 
