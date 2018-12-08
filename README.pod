@@ -3,6 +3,7 @@
 =for html
 <a href="https://travis-ci.org/eserte/sandbox"><img src="https://travis-ci.org/eserte/sandbox.svg" alt="Travis CI"></a>
 <a href="https://ci.appveyor.com/project/eserte/sandbox"><img src="https://ci.appveyor.com/api/projects/status/github/eserte/sandbox?svg=true" alt="Appveyor"></a>
+<a href="https://metacpan.org/release/Acme-PM-Berlin-Meetings"><img src="https://badge.fury.io/pl/Acme-PM-Berlin-Meetings.svg"></a>
 
 A project just for testing ci systems like travis-ci or appveyor
 
