@@ -188,6 +188,7 @@ before_install:
  - init_travis
 
 install:
+ - cpanm --quiet --notest App::cpanminus
  - wrapper install_perl_dependencies
 
 script:
