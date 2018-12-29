@@ -129,6 +129,12 @@ matrix:
 # - cpanm --quiet --notest DBI::DBD
 # - cpanm --verbose DBD::mysql
 
+before_install:
+ - set -e
+
+install:
+ - false
+
 #install:
 # - cpanm --quiet --notest 'App::cpm~>=0.292'
 # - perl Makefile.PL
