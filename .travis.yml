@@ -85,8 +85,8 @@ sudo: false
 language: perl
 matrix:
   include:
-    - perl: blead
-    - perl: 5.28
+#    - perl: blead
+#    - perl: 5.28
     - perl: 5.26
 #    - perl: "5.14"
 #      dist: precise
@@ -128,12 +128,6 @@ matrix:
 # # https://rt.cpan.org/Ticket/Display.html?id=115167
 # - cpanm --quiet --notest DBI::DBD
 # - cpanm --verbose DBD::mysql
-
-before_install:
- - set -e
-
-install:
- - false
 
 #install:
 # - cpanm --quiet --notest 'App::cpm~>=0.292'
@@ -188,6 +182,13 @@ install:
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 # - true
+
+before_install:
+ - . travis-functions.sh
+ - init_travis
+
+install:
+ - wrapper install_perl_dependencies
 
 script:
   - perl -e 'print $], "\n"'
