@@ -1,3 +1,9 @@
+language: perl
+dist: trusty
+matrix:
+  include:
+    - perl: "5.14"
+
 addons:
   apt:
     packages:
