@@ -10,4 +10,5 @@ addons:
       - apt-file
 
 script:
+  - grep -r . /etc/apt/apt.conf.d/
   - apt-file update
