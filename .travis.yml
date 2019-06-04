@@ -88,6 +88,8 @@ matrix:
 #    - perl: blead
 #    - perl: 5.28
     - perl: 5.26
+    - perl: 5.28
+    - perl: 5.30
 #    - perl: "5.14"
 #      dist: precise
 #    - perl: "5.24"
