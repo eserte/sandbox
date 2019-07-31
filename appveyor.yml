@@ -14,6 +14,9 @@ environment:
 #    - perl: activeperl
 #    - perl: strawberryperl
 
+init:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 install:
   - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
