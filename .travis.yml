@@ -79,6 +79,7 @@ sudo: true
 ###      - libxml2-dev
 
 before_install:
+  - sudo ls -al /etc/apt/sources.list.d
   - sudo apt-get update
 #  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
