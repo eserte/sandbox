@@ -56,8 +56,8 @@
 #before_install:
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
-sudo: false
-#sudo: true
+#sudo: false
+sudo: true
 
 addons:
   apt:
@@ -200,7 +200,8 @@ matrix:
 before_script:
   - grep -r . /etc/apt/apt.conf.d/
   - grep    . /etc/apt/apt-file.conf
-  - apt-file update
+  - sudo rm -f /etc/apt/apt.conf.d/99-travis-apt-proxy
+  - sudo apt-file update
 
 script:
   - perl -e 'print $], "\n"'
