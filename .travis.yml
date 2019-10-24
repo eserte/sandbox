@@ -57,7 +57,7 @@
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
 #sudo: false
-sudo: true
+#sudo: true
 
 #addons:
 #  apt:
@@ -78,15 +78,17 @@ sudo: true
 #### for XML::LibXML::SAX
 ###      - libxml2-dev
 
-before_install:
-  - sudo ls -al /etc/apt/sources.list.d
-  - sudo rm -f /etc/apt/sources.list.d/mongodb.list
-  - sudo apt-get update
-##  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
+#before_install:
+#  - sudo ls -al /etc/apt/sources.list.d
+#  - sudo rm -f /etc/apt/sources.list.d/mongodb.list
+#  - sudo apt-get update
+###  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
 language: perl
 matrix:
   include:
+    - perl: 5.30
+      dist: bionic
 #    - perl: 5.30
 #      dist: xenial
 #    - perl: blead
@@ -107,10 +109,10 @@ matrix:
 ##      os: osx
 ###    - perl: "5.14"
 ###      sudo: false
-    - perl: "5.20"
-      dist: precise
-    - perl: "5.12"
-      dist: precise
+#    - perl: "5.20"
+#      dist: precise
+#    - perl: "5.12"
+#      dist: precise
 ##    - perl: "5.18"
 ##    - perl: "5.14"
 #    - perl: "5.20-shrplib"
