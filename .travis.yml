@@ -62,9 +62,9 @@
 addons:
   apt:
     packages:
-     - strace
+      - libwww-perl
+#     - strace
 #      - apt-file
-#      - libwww-perl
 #      - pdftk
 #      - poppler-utils
 #      - libgd-dev
@@ -182,18 +182,25 @@ matrix:
 # - strace -o /tmp/strace.log perl -e1
 # - cat /tmp/strace.log
 
-# specific BBBike-Testing
+## specific BBBike-Testing
+#script:
+## - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
+# - cpanm --quiet --notest XML::LibXML LWP::UserAgent
+# - git clone --depth=1 https://github.com/eserte/bbbike.git
+# - cd bbbike
+### travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
+## - prove -v t/bbbikedraw.t :: -only PDF
+# - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
+## - perl -e 'sleep(rand(30))'
+## - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
+## - true
+
+# Just download something
 script:
-# - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
- - cpanm --quiet --notest XML::LibXML LWP::UserAgent
- - git clone --depth=1 https://github.com/eserte/bbbike.git
- - cd bbbike
-## travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
-# - prove -v t/bbbikedraw.t :: -only PDF
- - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
-# - perl -e 'sleep(rand(30))'
-# - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
-# - true
+ - lwp-request -t 10 -mHEAD -eS http://download.bbbike.org
+ - lwp-request -t 10 -mHEAD -eS https://download.bbbike.org
+ - lwp-request -t 10 -mHEAD -eS http://extract.bbbike.org
+ - lwp-request -t 10 -mHEAD -eS https://extract.bbbike.org
 
 #before_install:
 # - . travis-functions.sh
