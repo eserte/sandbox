@@ -59,9 +59,10 @@
 #sudo: false
 #sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+     - strace
 #      - apt-file
 #      - libwww-perl
 #      - pdftk
@@ -70,7 +71,6 @@
 ##      - libx11-dev
 ##      - libfreetype6-dev
 ##      - libxft-dev
-##     - strace
 ##      - apache2-mpm-prefork
 ##      - libapache2-mod-perl2
 #### for DB_File
@@ -87,12 +87,12 @@
 language: perl
 matrix:
   include:
-    - perl: 5.30
-      dist: bionic
-#    - perl: 5.30
-#      dist: xenial
+#    - perl: '5.30'
+#      dist: bionic
+    - perl: '5.30'
+      dist: xenial
 #    - perl: blead
-#    - perl: 5.28
+#    - perl: '5.28'
 #    - perl: '5.26'
 #    - perl: '5.28'
 #    - perl: '5.30'
@@ -182,14 +182,15 @@ matrix:
 # - strace -o /tmp/strace.log perl -e1
 # - cat /tmp/strace.log
 
-## specific BBBike-Testing
-#script:
+# specific BBBike-Testing
+script:
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
-# - git clone --depth=1 https://github.com/eserte/bbbike.git
-# - cd bbbike
-### travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
-## - prove -v t/bbbikedraw.t :: -only PDF
-# - perl t/bbbikedraw.t -only PDF
+ - cpanm --quiet --notest XML::LibXML LWP::UserAgent
+ - git clone --depth=1 https://github.com/eserte/bbbike.git
+ - cd bbbike
+## travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
+# - prove -v t/bbbikedraw.t :: -only PDF
+ - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 # - true
@@ -208,8 +209,8 @@ matrix:
 #  - sudo rm -f /etc/apt/apt.conf.d/99-travis-apt-proxy
 #  - sudo apt-file update
 
-script:
-  - perl -e 'print $], "\n"'
+#script:
+#  - perl -e 'print $], "\n"'
 
 #before_script:
 #  - perlbrew off
