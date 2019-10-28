@@ -62,7 +62,8 @@
 addons:
   apt:
     packages:
-      - libwww-perl
+      - traceroute
+#      - libwww-perl
 #     - strace
 #      - apt-file
 #      - pdftk
@@ -201,10 +202,12 @@ script:
 # - lwp-request -t 10 -mHEAD -eS https://download.bbbike.org
 # - lwp-request -t 10 -mHEAD -eS http://extract.bbbike.org
 # - lwp-request -t 10 -mHEAD -eS https://extract.bbbike.org
- - curl --connect-timeout 10 --head http://download.bbbike.org
- - curl --connect-timeout 10 --head https://download.bbbike.org
- - curl --connect-timeout 10 --head http://extract.bbbike.org
- - curl --connect-timeout 10 --head https://extract.bbbike.org
+# - curl --connect-timeout 10 --head http://download.bbbike.org
+# - curl --connect-timeout 10 --head https://download.bbbike.org
+# - curl --connect-timeout 10 --head http://extract.bbbike.org
+# - curl --connect-timeout 10 --head https://extract.bbbike.org
+ - traceroute download.bbbike.org
+ - ping -c 1 download.bbbike.org
 
 #before_install:
 # - . travis-functions.sh
