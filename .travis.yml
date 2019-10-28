@@ -197,10 +197,14 @@ matrix:
 
 # Just download something
 script:
- - lwp-request -t 10 -mHEAD -eS http://download.bbbike.org
- - lwp-request -t 10 -mHEAD -eS https://download.bbbike.org
- - lwp-request -t 10 -mHEAD -eS http://extract.bbbike.org
- - lwp-request -t 10 -mHEAD -eS https://extract.bbbike.org
+# - lwp-request -t 10 -mHEAD -eS http://download.bbbike.org
+# - lwp-request -t 10 -mHEAD -eS https://download.bbbike.org
+# - lwp-request -t 10 -mHEAD -eS http://extract.bbbike.org
+# - lwp-request -t 10 -mHEAD -eS https://extract.bbbike.org
+ - curl --connect-timeout 10 --head http://download.bbbike.org
+ - curl --connect-timeout 10 --head https://download.bbbike.org
+ - curl --connect-timeout 10 --head http://extract.bbbike.org
+ - curl --connect-timeout 10 --head https://extract.bbbike.org
 
 #before_install:
 # - . travis-functions.sh
