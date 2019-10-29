@@ -59,10 +59,10 @@
 #sudo: false
 #sudo: true
 
-addons:
-  apt:
-    packages:
-      - traceroute
+#addons:
+#  apt:
+#    packages:
+#      - traceroute
 #      - libwww-perl
 #     - strace
 #      - apt-file
@@ -183,21 +183,22 @@ matrix:
 # - strace -o /tmp/strace.log perl -e1
 # - cat /tmp/strace.log
 
-## specific BBBike-Testing
-#script:
-## - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
-# - cpanm --quiet --notest XML::LibXML LWP::UserAgent
-# - git clone --depth=1 https://github.com/eserte/bbbike.git
-# - cd bbbike
-### travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
-## - prove -v t/bbbikedraw.t :: -only PDF
-# - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
-## - perl -e 'sleep(rand(30))'
-## - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
-## - true
-
-# Just download something
+# specific BBBike-Testing
 script:
+# - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
+ - cpanm --quiet --notest XML::LibXML LWP::UserAgent
+ - git clone --depth=1 https://github.com/eserte/bbbike.git
+ - cd bbbike
+## travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
+# - prove -v t/bbbikedraw.t :: -only PDF
+# - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
+ - perl t/bbbike-org-download.t
+# - perl -e 'sleep(rand(30))'
+# - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
+# - true
+
+## Just download something
+#script:
 # - lwp-request -t 10 -mHEAD -eS http://download.bbbike.org
 # - lwp-request -t 10 -mHEAD -eS https://download.bbbike.org
 # - lwp-request -t 10 -mHEAD -eS http://extract.bbbike.org
@@ -206,8 +207,8 @@ script:
 # - curl --connect-timeout 10 --head https://download.bbbike.org
 # - curl --connect-timeout 10 --head http://extract.bbbike.org
 # - curl --connect-timeout 10 --head https://extract.bbbike.org
- - traceroute download.bbbike.org
- - ping -c 1 download.bbbike.org
+# - traceroute download.bbbike.org
+# - ping -c 1 download.bbbike.org
 
 #before_install:
 # - . travis-functions.sh
