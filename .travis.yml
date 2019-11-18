@@ -57,7 +57,7 @@
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
 #sudo: false
-#sudo: true
+sudo: true
 
 #addons:
 #  apt:
@@ -79,10 +79,10 @@
 #### for XML::LibXML::SAX
 ###      - libxml2-dev
 
-#before_install:
+before_install:
 #  - sudo ls -al /etc/apt/sources.list.d
-#  - sudo rm -f /etc/apt/sources.list.d/mongodb.list
-#  - sudo apt-get update
+  - sudo rm -f /etc/apt/sources.list.d/mongodb.list
+  - sudo apt-get update
 ###  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
 language: perl
@@ -90,8 +90,8 @@ matrix:
   include:
 #    - perl: '5.30'
 #      dist: bionic
-    - perl: '5.30'
-      dist: xenial
+#    - perl: '5.30'
+#      dist: xenial
 #    - perl: blead
 #    - perl: '5.28'
 #    - perl: '5.26'
@@ -101,7 +101,8 @@ matrix:
 #      dist: precise
 #    - perl: "5.24"
 #    - perl: "5.18"
-#    - perl: "5.10"
+    - perl: "5.10"
+      dist: precise
 #    - perl: "5.8"
 ##    - perl: "5.24"
 #      dist: trusty
@@ -186,16 +187,16 @@ matrix:
 # specific BBBike-Testing
 script:
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
- - cpanm --quiet --notest XML::LibXML LWP::UserAgent
- - git clone --depth=1 https://github.com/eserte/bbbike.git
- - cd bbbike
+# - cpanm --quiet --notest XML::LibXML LWP::UserAgent
+# - git clone --depth=1 https://github.com/eserte/bbbike.git
+# - cd bbbike
 ## travis does not like this -> translated to {:"prove -v t/bbbikedraw.t :"=>"-only PDF"}
 # - prove -v t/bbbikedraw.t :: -only PDF
 # - strace -f -e recvfrom,sendto,write,writev,read,connect,accept -s128 -tt -T perl t/bbbike-org-download.t
- - perl t/bbbike-org-download.t
+# - perl t/bbbike-org-download.t
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
-# - true
+ - true
 
 ## Just download something
 #script:
