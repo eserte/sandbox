@@ -8,7 +8,10 @@
 # the same. (and not ours)
 
 use strict;
-use Test::More tests => 8;
+use Test::More;
+
+plan skip_all => "No getppid on Windows" if $^O eq 'MSWin32';
+plan tests => 8;
 
 # No, we don't want any zombies. kill 0, $ppid spots zombies :-(
 $SIG{CHLD} = 'IGNORE';
