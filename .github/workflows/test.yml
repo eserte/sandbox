@@ -16,6 +16,7 @@ jobs:
       run: |
         cpan -T Date::Parse
         cpan LWP
+        cpan LWP::Protocol::https
       if: "startsWith(matrix.os, 'macos-')"
     - name: Build and test
       run: |
