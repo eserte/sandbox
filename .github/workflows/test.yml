@@ -16,3 +16,9 @@ jobs:
       run: |
         perl Makefile.PL
         make all test
+      if: '!startsWith(matrix.os,"windows-")'
+    - name: Build and test on Windows
+      run: |
+        c:\strawberry\bin\perl Makefile.PL
+        gmake all test
+      if: startsWith(matrix.os, 'windows-')
