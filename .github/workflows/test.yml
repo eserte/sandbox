@@ -12,6 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Install deps on Mac
+      run: |
+        cpan LWP
+      if: "startsWith(matrix.os, 'macos-')"
     - name: Build and test
       run: |
         perl Makefile.PL
@@ -19,6 +23,7 @@ jobs:
       if: "!startsWith(matrix.os,'windows-')"
     - name: Build and test on Windows
       run: |
+        cinst strawberryperl
         c:\strawberry\bin\perl Makefile.PL
         gmake all test
       if: "startsWith(matrix.os, 'windows-')"
