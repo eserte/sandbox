@@ -80,7 +80,7 @@ sudo: true
 ###      - libxml2-dev
 
 before_install:
-#  - sudo ls -al /etc/apt/sources.list.d
+  - sudo ls -al /etc/apt/sources.list.d
   - date
   - which sudo
   - sudo rm -f /etc/apt/sources.list.d/mongodb.list
