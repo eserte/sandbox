@@ -2,8 +2,8 @@
   "targets": {
     "xenial-amd64": {
       "buildenv": "xenial-amd64",
-      "builddeps": ["perl"],
-      "buildcmd": ["perl Makefile.PL", "make", "make test"]
+      "builddeps": ["perl", "make", "cpanminus"],
+      "buildcmd": ["cpanm --quiet --installdeps --notest .", "perl Makefile.PL", "make", "make test"]
     }
   }
 }
