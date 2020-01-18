@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "xenial-amd64": {
+      "buildenv": "xenial-amd64",
+      "builddeps": ["perl"],
+      "buildcmd": ["perl Makefile.PL", "make", "make test"]
+    }
+  }
+}
