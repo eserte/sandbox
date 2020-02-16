@@ -83,7 +83,7 @@ before_install:
   - sudo ls -al /etc/apt/sources.list.d
   - date
   - which sudo
-  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list git-ppa.list)
+  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
   - sudo apt-get update
 ###  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
