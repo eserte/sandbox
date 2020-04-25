@@ -57,7 +57,7 @@
 #  - '[ "$WITH_XML_LIBXML_READER" = 1 ] && cpanm XML::LibXML::Reader || true'
 
 #sudo: false
-sudo: true
+#sudo: true
 
 #addons:
 #  apt:
@@ -79,15 +79,15 @@ sudo: true
 #### for XML::LibXML::SAX
 ###      - libxml2-dev
 
-before_install:
-#  - date
-#  - which sudo
-#  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
-  - sudo ls -al /etc/apt/sources.list.d
-  - sudo rm -f /etc/apt/sources.list.d/*.list
-  - sudo ls -al /etc/apt/sources.list.d
-  - sudo apt-get update
-###  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
+#before_install:
+##  - date
+##  - which sudo
+##  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
+#  - sudo ls -al /etc/apt/sources.list.d
+#  - sudo rm -f /etc/apt/sources.list.d/*.list
+#  - sudo ls -al /etc/apt/sources.list.d
+#  - sudo apt-get update
+####  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
 language: perl
 matrix:
@@ -101,8 +101,8 @@ matrix:
 #    - perl: '5.26'
 #    - perl: '5.28'
 #    - perl: '5.30'
-#    - perl: "5.14"
-#      dist: precise
+    - perl: "5.14"
+      dist: precise
 #    - perl: "5.24"
 #    - perl: "5.18"
 #    - perl: "5.10"
@@ -191,6 +191,7 @@ matrix:
 
 # specific BBBike-Testing
 script:
+ - true
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
 # - cpanm --quiet --notest XML::LibXML LWP::UserAgent
 # - git clone --depth=1 https://github.com/eserte/bbbike.git
@@ -201,7 +202,6 @@ script:
 # - perl t/bbbike-org-download.t
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
- - true
 
 ## Just download something
 #script:
