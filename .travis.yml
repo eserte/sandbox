@@ -203,6 +203,9 @@ script:
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 
+after_script:
+ - true
+
 ## Just download something
 #script:
 # - lwp-request -t 10 -mHEAD -eS http://download.bbbike.org
