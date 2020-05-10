@@ -20,7 +20,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: List sources.list.d
       run: |
-        cd /etc/apt/sources.list.d && ls -al
+        cat /etc/apt/sources.list
+        cd /etc/apt/sources.list.d && grep . *.list
 #    steps:
 #    - uses: actions/checkout@v1
 #    - name: Install deps on Mac
