@@ -13,23 +13,29 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
      matrix:
-       os: [ubuntu-latest, windows-latest, macos-latest]
+#       os: [ubuntu-latest, windows-latest, macos-latest]
+       os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install deps on Mac
+    - name: List sources.list.d
       run: |
-        cpan -T Date::Parse
-        cpan LWP
-        cpan LWP::Protocol::https
-      if: "startsWith(matrix.os, 'macos-')"
-    - name: Build and test
-      run: |
-        perl Makefile.PL
-        make all test
-      if: "!startsWith(matrix.os,'windows-')"
-    - name: Build and test on Windows
-      run: |
-        c:\strawberry\perl\bin\perl Makefile.PL
-        gmake all test
-      if: "startsWith(matrix.os, 'windows-')"
+        cd /etc/apt/sources.list.d && ls -al
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Install deps on Mac
+#      run: |
+#        cpan -T Date::Parse
+#        cpan LWP
+#        cpan LWP::Protocol::https
+#      if: "startsWith(matrix.os, 'macos-')"
+#    - name: Build and test
+#      run: |
+#        perl Makefile.PL
+#        make all test
+#      if: "!startsWith(matrix.os,'windows-')"
+#    - name: Build and test on Windows
+#      run: |
+#        c:\strawberry\perl\bin\perl Makefile.PL
+#        gmake all test
+#      if: "startsWith(matrix.os, 'windows-')"
