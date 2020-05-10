@@ -18,10 +18,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: List sources.list.d
+    - name: Try to install libgd-dev
       run: |
         cat /etc/apt/sources.list
-        cd /etc/apt/sources.list.d && grep . *.list
+        sudo rm -f /etc/apt/sources.list.d/*.list
+        sudo apt-get update -qq
+        apt-cache policy libgd3
+        sudo apt-get remove libgd3
+        sudo apt-get install libgd-dev
 #    steps:
 #    - uses: actions/checkout@v1
 #    - name: Install deps on Mac
