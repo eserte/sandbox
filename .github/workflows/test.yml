@@ -17,15 +17,35 @@ jobs:
        os: [ubuntu-latest]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Try to install libgd-dev
+    - name: apt hacks
+      # the already installed libgd3 conflicts with libgd-dev to be installed
+      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
       run: |
-        cat /etc/apt/sources.list
+        sudo apt-get remove -y libgd3
         sudo rm -f /etc/apt/sources.list.d/*.list
         sudo apt-get update -qq
-        apt-cache policy libgd3
-        sudo apt-get remove libgd3
-        sudo apt-get install libgd-dev
+      if: "startsWith(matrix.os, 'ubuntu-')"
+
+    - name: enable travis-helper-cpan-pm
+      run: |
+        git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
+
+    - name: install Net::SSLeay
+      run: cpan Net::SSLeay
+    - name: check Net::SSLeay
+      run: perl -MNet::SSLeay -e1
+
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Try to install libgd-dev
+#      run: |
+#        cat /etc/apt/sources.list
+#        sudo rm -f /etc/apt/sources.list.d/*.list
+#        sudo apt-get update -qq
+#        apt-cache policy libgd3
+#        sudo apt-get remove libgd3
+#        sudo apt-get install libgd-dev
+
 #    steps:
 #    - uses: actions/checkout@v1
 #    - name: Install deps on Mac
