@@ -99,8 +99,8 @@
 language: perl
 matrix:
   include:
-    - perl: '5.32'
-      dist: bionic
+#    - perl: '5.32'
+#      dist: bionic
 #    - perl: '5.30'
 #      dist: xenial
 #    - perl: blead
@@ -115,7 +115,8 @@ matrix:
 #    - perl: "5.10"
 #      dist: precise
 #      sudo: true
-#    - perl: "5.8"
+    - perl: "5.8"
+      dist: trusty
 #    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
@@ -201,7 +202,8 @@ matrix:
 
 # specific BBBike-Testing
 script:
- - perl -V
+ - cpanm --verbose DBD::XBase~"==0.234"
+# - perl -V
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
 # - cpanm --quiet --notest XML::LibXML LWP::UserAgent
 # - git clone --depth=1 https://github.com/eserte/bbbike.git
