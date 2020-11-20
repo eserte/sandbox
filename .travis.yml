@@ -59,9 +59,10 @@
 #sudo: false
 #sudo: true
 
-#addons:
-#  apt:
-#    packages:
+addons:
+  apt:
+    packages:
+     - strace
 #      - libx11-dev
 #      - libxcursor-dev
 #      - libxpm-dev
@@ -71,7 +72,6 @@
 #      - pkg-config
 #      - traceroute
 #      - libwww-perl
-#     - strace
 #      - apt-file
 #      - pdftk
 #      - poppler-utils
@@ -202,7 +202,8 @@ matrix:
 
 # specific BBBike-Testing
 script:
- - cpanm --verbose DBD::XBase~"==0.234"
+ - strace -f -s2048 -tt -T -o/tmp/strace.log cpanm --verbose DBD::XBase~"==0.234" || true
+ - grep "GET /" /tmp/strace.log
 # - perl -V
 # - cpanm --quiet --notest 'PDF::Create~==1.43' 'Image::Info' 'GD'
 # - cpanm --quiet --notest XML::LibXML LWP::UserAgent
