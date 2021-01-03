@@ -17,8 +17,9 @@ plan 'no_plan';
 #for my $lc_all ("English_United States.65001", "German_Germany.65001") {
 for my $lc_all ("English_United States.1252", "German_Germany.1252") {
     $ENV{LC_ALL} = $lc_all;
+    $ENV{LC_MESSAGES} = $lc_all;
     diag "try LC_ALL=$ENV{LC_ALL}";
-    system($^X, "-MPOSIX=setlocale,LC_ALL", "-E", 'say setlocale(LC_ALL)');
+    system($^X, "-MPOSIX=setlocale,LC_ALL,LC_MESSAGES", "-E", 'say q{LC_ALL=}.setlocale(LC_ALL); say q{LC_MESSAGES=}.setlocale(LC_MESSAGES);');
 }
 
 pass "all run!";
