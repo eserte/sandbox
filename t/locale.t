@@ -52,6 +52,16 @@ sub get_lang {
 		    };
 		    warn "get_lang: got value $lang";
 		    if (defined $lang && $lang ne '') {
+			last;
+		    }
+		}
+	    }
+	}	
+    }
+    if (!defined $lang) {
+	$lang = "";
+    } else {
+	# normalize language
 			if ($^O eq 'MSWin32') {
 			    # normalize
 			    if ($lang =~ m{^English_}) {
@@ -66,16 +76,6 @@ sub get_lang {
 				$lang = 'hr';
 			    } # XXX more?
 			}
-			last;
-		    }
-		}
-	    }
-	}	
-    }
-    if (!defined $lang) {
-	$lang = "";
-    } else {
-	# normalize language
 	$lang =~ s/^([^_.-]+).*/$1/; # XXX better use I18N::LangTags
     }
     if ($DEBUG) {
