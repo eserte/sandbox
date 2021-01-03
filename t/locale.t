@@ -33,8 +33,10 @@ sub get_lang {
     my $lang;
     my %ignore = (C => 1, POSIX => 1);
     for my $env (qw(LC_ALL LC_MESSAGES LANG)) {
+	warn "get_lang: try env=$lang";
 	if (exists $ENV{$env} && !$ignore{$ENV{$env}}) {
 	    $lang = $ENV{$env};
+	    warn "get_lang: I am happy with $lang from $env";
 	    last;
 	}
     }
@@ -42,11 +44,13 @@ sub get_lang {
 	# Windows does not know LC_ALL et al, but POSIX::setlocale works
 	if (eval { require POSIX; defined &POSIX::setlocale }) {
 	    for my $category ('LC_MESSAGES', 'LC_ALL') {
+		warn "get_lang: try POSIX::$category";
 		if (defined &{"POSIX::$category"}) {
 		    $lang = do {
 			no strict 'refs';
 			POSIX::setlocale(&{"POSIX::$category"});
 		    };
+		    warn "get_lang: got value $lang";
 		    if (defined $lang && $lang ne '') {
 			if ($^O eq 'MSWin32') {
 			    # normalize
