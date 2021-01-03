@@ -14,7 +14,8 @@ plan 'no_plan';
 #for my $lc_all (qw(en-US en-US.UTF-8 en_US en_US.UTF-8 de-DE de-DE.UTF-8 de_DE de_DE.UTF-8)) {
 #for my $lc_all ("English - United States", "English.United States", "English", "German") {
 #for my $lc_all ("English_US", "English_UK", "English_UnitedStates", "German_Germany") {
-for my $lc_all ("English_United States.65001", "German_Germany.65001") {
+#for my $lc_all ("English_United States.65001", "German_Germany.65001") {
+for my $lc_all ("English_United States.1252", "German_Germany.1252") {
     $ENV{LC_ALL} = $lc_all;
     diag "try LC_ALL=$ENV{LC_ALL}";
     system($^X, "-MPOSIX=setlocale,LC_ALL", "-E", 'say setlocale(LC_ALL)');
