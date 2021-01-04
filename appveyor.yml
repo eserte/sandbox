@@ -76,7 +76,12 @@ build_script:
 #  - "%USE_MAKE% dmake-test SOMETHING=nesto PERL=perl"
 #  - "%USE_MAKE% test"
 #  - echo "hurra"
-  - prove -v t\locale.t
+#  - prove -v t\locale.t
+  - lwp-download http://eserte.bbbike.de/tmp/Msg-1.13.tar.gz
+  - tar xfvz Msg-1.13.tar.gz
+  - cd Msg-1.13
+  - perl Makefile.PL
+  - gmake all test
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
