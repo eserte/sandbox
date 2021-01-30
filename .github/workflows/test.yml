@@ -8,7 +8,7 @@ on:
       - '*doozer*'
 
 jobs:
-  test:
+  test_on_host:
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -64,3 +64,30 @@ jobs:
 #        c:\strawberry\perl\bin\perl Makefile.PL
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
+
+  test_in_container:
+    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
+    runs-on: ubuntu-16.04
+    container: ${{ matrix.dist }}:${{ matrix.distver }}
+    strategy:
+      matrix:
+        include:
+          - dist:    ubuntu
+            distver: 14.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install deps
+      run: |
+        set -e
+        apt-get update -qq
+        apt-get install -q --no-install-recommends -y \
+            wget \
+            libimage-info-perl libplack-perl libcgi-emulate-psgi-perl libcgi-compile-perl \
+            libsereal-encoder-perl libsereal-decoder-perl \
+            libcpan-distnameinfo-perl libgravatar-url-perl libhtml-table-perl libwww-perl liburi-query-perl libjson-xs-perl libyaml-syck-perl
+      if: "matrix.dist == 'debian' || matrix.dist == 'ubuntu'"
+    - name: Build and test
+      run: |
+        set -e
+        true
+      if: "!startsWith(matrix.os,'windows-')"
