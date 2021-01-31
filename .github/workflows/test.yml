@@ -16,24 +16,50 @@ jobs:
 #       os: [ubuntu-latest, windows-latest, macos-latest]
        os: [ubuntu-latest]
 
+#    steps:
+#    - name: apt hacks
+#      # the already installed libgd3 conflicts with libgd-dev to be installed
+#      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
+#      run: |
+#        sudo apt-get remove -y libgd3
+#        sudo rm -f /etc/apt/sources.list.d/*.list
+#        sudo apt-get update -qq
+#      if: "startsWith(matrix.os, 'ubuntu-')"
+#
+#    - name: enable travis-helper-cpan-pm
+#      run: |
+#        git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
+#
+#    - name: install Net::SSLeay
+#      run: cpan Net::SSLeay
+#    - name: check Net::SSLeay
+#      run: perl -MNet::SSLeay -e1
+
     steps:
-    - name: apt hacks
-      # the already installed libgd3 conflicts with libgd-dev to be installed
-      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
+    - uses: actions/checkout@v1
+    - name: test git-short-status
       run: |
-        sudo apt-get remove -y libgd3
-        sudo rm -f /etc/apt/sources.list.d/*.list
-        sudo apt-get update -qq
-      if: "startsWith(matrix.os, 'ubuntu-')"
+        set -x
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
 
-    - name: enable travis-helper-cpan-pm
-      run: |
-        git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps
+        git clone https://github.com/eserte/Doit.git
+        cd Doit
 
-    - name: install Net::SSLeay
-      run: cpan Net::SSLeay
-    - name: check Net::SSLeay
-      run: perl -MNet::SSLeay -e1
+        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+        git status --untracked-files=no --porcelain
+
+        touch new_file
+        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+        git status --untracked-files=no --porcelain
+
+        git add new_file
+        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+        git status --untracked-files=no --porcelain
+
+        git commit -m "test" new_file
+        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+        git status --untracked-files=no --porcelain
 
 #    steps:
 #    - uses: actions/checkout@v1
@@ -65,29 +91,29 @@ jobs:
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
 
-  test_in_container:
-    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
-    runs-on: ubuntu-16.04
-    container: ${{ matrix.dist }}:${{ matrix.distver }}
-    strategy:
-      matrix:
-        include:
-          - dist:    ubuntu
-            distver: 14.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install deps
-      run: |
-        set -e
-        apt-get update -qq
-        apt-get install -q --no-install-recommends -y \
-            wget \
-            libimage-info-perl libplack-perl libcgi-emulate-psgi-perl libcgi-compile-perl \
-            libsereal-encoder-perl libsereal-decoder-perl \
-            libcpan-distnameinfo-perl libgravatar-url-perl libhtml-table-perl libwww-perl liburi-query-perl libjson-xs-perl libyaml-syck-perl
-      if: "matrix.dist == 'debian' || matrix.dist == 'ubuntu'"
-    - name: Build and test
-      run: |
-        set -e
-        true
-      if: "!startsWith(matrix.os,'windows-')"
+#  test_in_container:
+#    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
+#    runs-on: ubuntu-16.04
+#    container: ${{ matrix.dist }}:${{ matrix.distver }}
+#    strategy:
+#      matrix:
+#        include:
+#          - dist:    ubuntu
+#            distver: 14.04
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Install deps
+#      run: |
+#        set -e
+#        apt-get update -qq
+#        apt-get install -q --no-install-recommends -y \
+#            wget \
+#            libimage-info-perl libplack-perl libcgi-emulate-psgi-perl libcgi-compile-perl \
+#            libsereal-encoder-perl libsereal-decoder-perl \
+#            libcpan-distnameinfo-perl libgravatar-url-perl libhtml-table-perl libwww-perl liburi-query-perl libjson-xs-perl libyaml-syck-perl
+#      if: "matrix.dist == 'debian' || matrix.dist == 'ubuntu'"
+#    - name: Build and test
+#      run: |
+#        set -e
+#        true
+#      if: "!startsWith(matrix.os,'windows-')"
