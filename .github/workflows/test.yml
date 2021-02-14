@@ -13,8 +13,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
      matrix:
-#       os: [ubuntu-latest, windows-latest, macos-latest]
-       os: [ubuntu-latest]
+       os: [ubuntu-latest, windows-latest, macos-latest]
+#       os: [ubuntu-latest]
+
+    steps:
+    - name: sleep
+      run: |
+        sleep 10
+        echo hello
+        sleep 10
+        echo world
 
 #    steps:
 #    - name: apt hacks
@@ -35,31 +43,31 @@ jobs:
 #    - name: check Net::SSLeay
 #      run: perl -MNet::SSLeay -e1
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: test git-short-status
-      run: |
-        set -x
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-
-        git clone https://github.com/eserte/Doit.git
-        cd Doit
-
-        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
-        git status --untracked-files=no --porcelain
-
-        touch new_file
-        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
-        git status --untracked-files=no --porcelain
-
-        git add new_file
-        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
-        git status --untracked-files=no --porcelain
-
-        git commit -m "test" new_file
-        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
-        git status --untracked-files=no --porcelain
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: test git-short-status
+#      run: |
+#        set -x
+#        git config --global user.email "you@example.com"
+#        git config --global user.name "Your Name"
+#
+#        git clone https://github.com/eserte/Doit.git
+#        cd Doit
+#
+#        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+#        git status --untracked-files=no --porcelain
+#
+#        touch new_file
+#        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+#        git status --untracked-files=no --porcelain
+#
+#        git add new_file
+#        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+#        git status --untracked-files=no --porcelain
+#
+#        git commit -m "test" new_file
+#        perl -Ilib -MDoit -e 'my $d=Doit->init; $d->add_component(qw(git)); warn $d->git_short_status'
+#        git status --untracked-files=no --porcelain
 
 #    steps:
 #    - uses: actions/checkout@v1
@@ -91,15 +99,24 @@ jobs:
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
 
-#  test_in_container:
-#    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
-#    runs-on: ubuntu-16.04
-#    container: ${{ matrix.dist }}:${{ matrix.distver }}
-#    strategy:
-#      matrix:
-#        include:
-#          - dist:    ubuntu
-#            distver: 14.04
+  test_in_container:
+    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
+    runs-on: ubuntu-16.04
+    container: ${{ matrix.dist }}:${{ matrix.distver }}
+    strategy:
+      matrix:
+        include:
+          - dist:    ubuntu
+            distver: 14.04
+
+    steps:
+    - name: sleep
+      run: |
+        sleep 10
+        echo hello
+        sleep 10
+        echo world
+
 #    steps:
 #    - uses: actions/checkout@v2
 #    - name: Install deps
