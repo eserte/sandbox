@@ -108,6 +108,8 @@ jobs:
         include:
           - dist:    ubuntu
             distver: 14.04
+          - dist:    debian
+            distver: jessie
 
     steps:
     - name: sleep
