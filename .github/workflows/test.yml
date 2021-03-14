@@ -20,10 +20,11 @@ jobs:
     steps:
     - name: sleep
       run: |
-        sleep 10
-        echo hello
-        sleep 10
-        echo world
+        true
+#        sleep 10
+#        echo hello
+#        sleep 10
+#        echo world
 
 #    steps:
 #    - name: apt hacks
@@ -115,10 +116,11 @@ jobs:
     steps:
     - name: sleep
       run: |
-        sleep 10
-        echo hello
-        sleep 10
-        echo world
+        true
+#        sleep 10
+#        echo hello
+#        sleep 10
+#        echo world
 
 #    steps:
 #    - uses: actions/checkout@v2
