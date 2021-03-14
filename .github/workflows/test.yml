@@ -102,16 +102,15 @@ jobs:
 #      if: "startsWith(matrix.os, 'windows-')"
 
   test_in_container:
-    name: Container tests with ${{ matrix.dist }}:${{ matrix.distver }}
+    name: Container tests with ${{ matrix.container }}
     runs-on: ubuntu-16.04
-    container: ${{ matrix.dist }}:${{ matrix.distver }}
+    container: ${{ matrix.container }}
     strategy:
       matrix:
         include:
-          - dist:    ubuntu
-            distver: 14.04
-          - dist:    debian
-            distver: jessie
+          - container:    ubuntu:14.04
+          - container:    debian:jessie
+          - container:    ~
 
     steps:
     - name: sleep
