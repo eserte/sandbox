@@ -118,7 +118,8 @@ matrix:
     - perl: "5.8"
       dist: trusty
     - os: osx
-      language: ~
+      osx_image: xcode12.2
+      language: ruby
 #    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
