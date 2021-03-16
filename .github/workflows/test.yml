@@ -34,7 +34,9 @@ jobs:
 
     - name: "perl installation (windows)"
       run: |
-        if not exist "C:\strawberry" cinst strawberryperl
+        if (!(Test-Path -Path "C:\strawberry")) {
+          cinst strawberryperl
+        }
       if: "startsWith(matrix.os, 'windows-')"
 
     - name: "perl installation (ubuntu)"
