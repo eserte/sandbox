@@ -146,6 +146,7 @@ matrix:
 #  - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 
 install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew uninstall --cask --force java || true; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install cpanminus; fi
   - cpanm --quiet --notest Kwalify
 
