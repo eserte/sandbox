@@ -18,9 +18,10 @@ jobs:
 #       os: [ubuntu-latest]
 
     steps:
-    - name: sleep
+    - name: perl test
       run: |
-        true
+        perl -V
+        which cpanm
 #        sleep 10
 #        echo hello
 #        sleep 10
@@ -101,21 +102,21 @@ jobs:
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
 
-  test_in_container:
-    name: Container tests with ${{ matrix.container }}
-    runs-on: ubuntu-16.04
-    container: ${{ matrix.container }}
-    strategy:
-      matrix:
-        include:
-          - container:    ubuntu:14.04
-          - container:    debian:jessie
-          - container:    ~
-
-    steps:
-    - name: sleep
-      run: |
-        true
+#  test_in_container:
+#    name: Container tests with ${{ matrix.container }}
+#    runs-on: ubuntu-16.04
+#    container: ${{ matrix.container }}
+#    strategy:
+#      matrix:
+#        include:
+#          - container:    ubuntu:14.04
+#          - container:    debian:jessie
+#          - container:    ~
+#
+#    steps:
+#    - name: sleep
+#      run: |
+#        true
 #        sleep 10
 #        echo hello
 #        sleep 10
