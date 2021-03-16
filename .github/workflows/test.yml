@@ -18,6 +18,16 @@ jobs:
 #       os: [ubuntu-latest]
 
     steps:
+    - name: "perl installation (macos)"
+      run: |
+        brew install cpanminus
+      if: "startsWith(matrix.os, 'macos-')"
+
+    - name: "perl installation (windows)"
+      run: |
+        cinst strawberryperl
+      if: "startsWith(matrix.os, 'windows-')"
+
     - name: perl test
       run: |
         perl -V
