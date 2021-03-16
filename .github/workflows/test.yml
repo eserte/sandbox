@@ -41,7 +41,7 @@ jobs:
 
     - name: "perl installation (ubuntu)"
       run: |
-        apt-get install -q --no-install-recommends -y cpanminus
+        sudo apt-get install -q --no-install-recommends -y cpanminus
       if: "startsWith(matrix.os, 'ubuntu-')"
 
     - name: perl test
