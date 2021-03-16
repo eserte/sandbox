@@ -149,7 +149,7 @@ matrix:
 install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew uninstall --cask --force java || true; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install cpanminus; fi
-  - cpanm --quiet --notest Kwalify
+  - sudo cpanm --quiet --notest Kwalify
 
 #install:
 #  - cpan-install --deps       # installs prereqs, including recommends
