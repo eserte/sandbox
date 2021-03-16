@@ -18,6 +18,15 @@ jobs:
 #       os: [ubuntu-latest]
 
     steps:
+    - name: apt hacks
+      # the already installed libgd3 conflicts with libgd-dev to be installed
+      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
+      run: |
+        sudo apt-get remove -y libgd3
+        sudo rm -f /etc/apt/sources.list.d/*.list
+        sudo apt-get update -qq
+      if: "startsWith(matrix.os, 'ubuntu-')"
+
     - name: "perl installation (macos)"
       run: |
         brew install cpanminus
@@ -25,8 +34,13 @@ jobs:
 
     - name: "perl installation (windows)"
       run: |
-        cinst strawberryperl
+        if not exist "C:\strawberry" cinst strawberryperl
       if: "startsWith(matrix.os, 'windows-')"
+
+    - name: "perl installation (ubuntu)"
+      run: |
+        apt-get install -q --no-install-recommends -y cpanminus
+      if: "startsWith(matrix.os, 'ubuntu-')"
 
     - name: perl test
       run: |
@@ -37,15 +51,6 @@ jobs:
 #        sleep 10
 #        echo world
 
-#    steps:
-#    - name: apt hacks
-#      # the already installed libgd3 conflicts with libgd-dev to be installed
-#      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
-#      run: |
-#        sudo apt-get remove -y libgd3
-#        sudo rm -f /etc/apt/sources.list.d/*.list
-#        sudo apt-get update -qq
-#      if: "startsWith(matrix.os, 'ubuntu-')"
 #
 #    - name: enable travis-helper-cpan-pm
 #      run: |
