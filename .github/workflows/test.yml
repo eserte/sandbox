@@ -9,45 +9,46 @@ on:
   pull_request:
 
 jobs:
-  test_on_host:
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-     matrix:
-       os: [ubuntu-latest, windows-latest, macos-latest]
-#       os: [ubuntu-latest]
+#  test_on_host:
+#    name: Test on ${{ matrix.os }}
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#     matrix:
+#       os: [ubuntu-latest, windows-latest, macos-latest]
+##       os: [ubuntu-latest]
+#
+#    steps:
+#    - name: apt hacks
+#      # the already installed libgd3 conflicts with libgd-dev to be installed
+#      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
+#      run: |
+#        sudo rm -f /etc/apt/sources.list.d/*.list
+#        sudo apt-get update -qq
+#        sudo apt-get remove -y libgd3 nginx
+#      if: "startsWith(matrix.os, 'ubuntu-')"
+#
+#    - name: "perl installation (macos)"
+#      run: |
+#        brew install cpanminus
+#      if: "startsWith(matrix.os, 'macos-')"
+#
+#    - name: "perl installation (windows)"
+#      run: |
+#        if (!(Test-Path -Path "C:\strawberry")) {
+#          cinst strawberryperl
+#        }
+#      if: "startsWith(matrix.os, 'windows-')"
+#
+#    - name: "perl installation (ubuntu)"
+#      run: |
+#        sudo apt-get install -q --no-install-recommends -y cpanminus
+#      if: "startsWith(matrix.os, 'ubuntu-')"
+#
+#    - name: perl test
+#      run: |
+#        perl -V
+#        which cpanm
 
-    steps:
-    - name: apt hacks
-      # the already installed libgd3 conflicts with libgd-dev to be installed
-      # also, /etc/apt/sources.list should be sufficient; all the other repositories are possibly problematic
-      run: |
-        sudo rm -f /etc/apt/sources.list.d/*.list
-        sudo apt-get update -qq
-        sudo apt-get remove -y libgd3 nginx
-      if: "startsWith(matrix.os, 'ubuntu-')"
-
-    - name: "perl installation (macos)"
-      run: |
-        brew install cpanminus
-      if: "startsWith(matrix.os, 'macos-')"
-
-    - name: "perl installation (windows)"
-      run: |
-        if (!(Test-Path -Path "C:\strawberry")) {
-          cinst strawberryperl
-        }
-      if: "startsWith(matrix.os, 'windows-')"
-
-    - name: "perl installation (ubuntu)"
-      run: |
-        sudo apt-get install -q --no-install-recommends -y cpanminus
-      if: "startsWith(matrix.os, 'ubuntu-')"
-
-    - name: perl test
-      run: |
-        perl -V
-        which cpanm
 #        sleep 10
 #        echo hello
 #        sleep 10
@@ -119,25 +120,24 @@ jobs:
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
 
-#  test_in_container:
-#    name: Container tests with ${{ matrix.container }}
-#    runs-on: ubuntu-16.04
-#    container: ${{ matrix.container }}
-#    strategy:
-#      matrix:
-#        include:
-#          - container:    ubuntu:14.04
+  test_in_container:
+    name: Container tests with ${{ matrix.container }}
+    runs-on: ubuntu-20.04
+    container: ${{ matrix.container }}
+    strategy:
+      matrix:
+        include:
+          - container:    ubuntu:20.04
 #          - container:    debian:jessie
 #          - container:    ~
-#
-#    steps:
-#    - name: sleep
-#      run: |
-#        true
-#        sleep 10
-#        echo hello
-#        sleep 10
-#        echo world
+
+    steps:
+    - name: install Inline::C
+      run: |
+        apt update
+        apt install -y perl-modules make gcc
+        cpan Inline::C
+        perl -e 'use Inline C => q{void test(){printf("Hello, world\n");}}; test();'
 
 #    steps:
 #    - uses: actions/checkout@v2
