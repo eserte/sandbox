@@ -86,14 +86,14 @@
 #### for XML::LibXML::SAX
 ###      - libxml2-dev
 
-#before_install:
+before_install:
 ##  - date
 ##  - which sudo
-##  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
-#  - sudo ls -al /etc/apt/sources.list.d
+  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
+  - sudo grep . /etc/apt/sources.list.d/*.list
 #  - sudo rm -f /etc/apt/sources.list.d/*.list
 #  - sudo ls -al /etc/apt/sources.list.d
-#  - sudo apt-get update
+  - sudo apt-get update
 ####  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
 language: perl
@@ -115,11 +115,11 @@ matrix:
 #    - perl: "5.10"
 #      dist: precise
 #      sudo: true
-    - perl: "5.8"
-      dist: trusty
-    - os: osx
-      osx_image: xcode12.2
-      language: ruby
+#    - perl: "5.8"
+#      dist: trusty
+#    - os: osx
+#      osx_image: xcode12.2
+#      language: ruby
 #    - perl: "5.24"
 #      dist: trusty
 ##    - perl: "5.24"
@@ -135,8 +135,8 @@ matrix:
 ##    - perl: "5.14"
 #    - perl: "5.20-shrplib"
 ##    - perl: "5.6.2"
-##    - perl: "5.20"
-##      dist: trusty
+    - perl: "5.20"
+      dist: trusty
 
 #before_install:
 #  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
@@ -146,10 +146,10 @@ matrix:
 #  - build-dist
 #  - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 
-install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew uninstall --cask --force java || true; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install cpanminus; fi
-  - sudo cpanm --quiet --notest Kwalify
+#install:
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew uninstall --cask --force java || true; fi
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install cpanminus; fi
+#  - sudo cpanm --quiet --notest Kwalify
 
 #install:
 #  - cpan-install --deps       # installs prereqs, including recommends
@@ -192,7 +192,10 @@ install:
 # - cpanm https://github.com/dk/Prima.git@eeceef6ba4faf2a8842d4215aba2a8cf1c5abeef
 
 script:
-  - perl -MKwalify -E 'say $Kwalify::VERSION'
+  - true
+
+#script:
+#  - perl -MKwalify -E 'say $Kwalify::VERSION'
 
 #script:
 # - perl Makefile.PL && make test HARNESS_OPTIONS=j4
