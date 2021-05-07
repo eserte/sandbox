@@ -89,7 +89,7 @@
 before_install:
 ##  - date
 ##  - which sudo
-  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list)
+  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list pgdg.list)
   - sudo grep . /etc/apt/sources.list.d/*.list
 #  - sudo rm -f /etc/apt/sources.list.d/*.list
 #  - sudo ls -al /etc/apt/sources.list.d
