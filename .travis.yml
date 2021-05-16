@@ -99,60 +99,87 @@ before_install:
 language: perl
 matrix:
   include:
-    - perl: '5.8'
-      dist: precise
-    - perl: '5.10'
-      dist: precise
-    - perl: '5.12'
-      dist: precise
-    - perl: '5.14'
-      dist: precise
-    - perl: '5.16'
-      dist: precise
-    - perl: '5.18'
-      dist: precise
-    - perl: '5.20'
-      dist: precise
-    - perl: '5.22'
-      dist: precise
-    - perl: '5.24'
-      dist: precise
-    - perl: '5.8'
-      dist: trusty
-    - perl: '5.10'
-      dist: trusty
-    - perl: '5.12'
-      dist: trusty
-    - perl: '5.14'
-      dist: trusty
-    - perl: '5.16'
-      dist: trusty
-    - perl: '5.18'
-      dist: trusty
-    - perl: '5.20'
-      dist: trusty
-    - perl: '5.22'
-      dist: trusty
-    - perl: '5.24'
-      dist: trusty
-    - perl: '5.8'
-      dist: xenial
-    - perl: '5.10'
-      dist: xenial
-    - perl: '5.12'
-      dist: xenial
-    - perl: '5.14'
-      dist: xenial
-    - perl: '5.16'
-      dist: xenial
-    - perl: '5.18'
-      dist: xenial
-    - perl: '5.20'
-      dist: xenial
-    - perl: '5.22'
-      dist: xenial
-    - perl: '5.24'
-      dist: xenial
+#    - perl: '5.8'
+#      dist: precise
+#    - perl: '5.10'
+#      dist: precise
+#    - perl: '5.12'
+#      dist: precise
+#    - perl: '5.14'
+#      dist: precise
+#    - perl: '5.16'
+#      dist: precise
+#    - perl: '5.18'
+#      dist: precise
+#    - perl: '5.20'
+#      dist: precise
+#    - perl: '5.22'
+#      dist: precise
+#    - perl: '5.24'
+#      dist: precise
+
+#    - perl: '5.8'
+#      dist: trusty
+#    - perl: '5.10'
+#      dist: trusty
+#    - perl: '5.12'
+#      dist: trusty
+#    - perl: '5.14'
+#      dist: trusty
+#    - perl: '5.16'
+#      dist: trusty
+#    - perl: '5.18'
+#      dist: trusty
+#    - perl: '5.20'
+#      dist: trusty
+#    - perl: '5.22'
+#      dist: trusty
+#    - perl: '5.24'
+#      dist: trusty
+
+#    - perl: '5.8'
+#      dist: xenial
+#    - perl: '5.10'
+#      dist: xenial
+#    - perl: '5.12'
+#      dist: xenial
+#    - perl: '5.14'
+#      dist: xenial
+#    - perl: '5.16'
+#      dist: xenial
+#    - perl: '5.18'
+#      dist: xenial
+#    - perl: '5.20'
+#      dist: xenial
+#    - perl: '5.22'
+#      dist: xenial
+#    - perl: '5.24'
+#      dist: xenial
+
+     - perl: '5.32'
+       dist: focal
+     - perl: '5.30'
+       dist: focal
+     - perl: '5.28'
+       dist: focal
+     - perl: '5.26'
+       dist: focal
+     - perl: '5.24'
+       dist: focal
+     - perl: '5.22'
+       dist: focal
+     - perl: '5.20'
+       dist: focal
+     - perl: '5.18'
+       dist: focal
+     - perl: '5.16'
+       dist: focal
+     - perl: '5.14'
+       dist: focal
+     - perl: '5.12'
+       dist: focal
+
+
 #    - perl: '5.32'
 #      dist: bionic
 #    - perl: '5.30'
