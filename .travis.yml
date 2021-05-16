@@ -89,16 +89,70 @@
 before_install:
 ##  - date
 ##  - which sudo
-  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list pgdg.list)
-  - sudo grep . /etc/apt/sources.list.d/*.list
+#  - (cd /etc/apt/sources.list.d && sudo rm -f mongodb.list google-chrome.list cassandra.list github_git-lfs.list couchdb.list pgdg.list)
+#  - sudo grep . /etc/apt/sources.list.d/*.list
 #  - sudo rm -f /etc/apt/sources.list.d/*.list
 #  - sudo ls -al /etc/apt/sources.list.d
-  - sudo apt-get update
+#  - sudo apt-get update
 ####  - sudo -E apt-get install freebsd-buildutils libproj-dev proj-bin libdb-dev agrep tre-agrep libgd2-xpm-dev ttf-bitstream-vera ttf-dejavu gpsbabel xvfb fvwm rhino imagemagick libpango1.0-dev libxml2-utils libzbar-dev pdftk poppler-utils tzdata
 
 language: perl
 matrix:
   include:
+    - perl: '5.8'
+      dist: precise
+    - perl: '5.10'
+      dist: precise
+    - perl: '5.12'
+      dist: precise
+    - perl: '5.14'
+      dist: precise
+    - perl: '5.16'
+      dist: precise
+    - perl: '5.18'
+      dist: precise
+    - perl: '5.20'
+      dist: precise
+    - perl: '5.22'
+      dist: precise
+    - perl: '5.24'
+      dist: precise
+    - perl: '5.8'
+      dist: trusty
+    - perl: '5.10'
+      dist: trusty
+    - perl: '5.12'
+      dist: trusty
+    - perl: '5.14'
+      dist: trusty
+    - perl: '5.16'
+      dist: trusty
+    - perl: '5.18'
+      dist: trusty
+    - perl: '5.20'
+      dist: trusty
+    - perl: '5.22'
+      dist: trusty
+    - perl: '5.24'
+      dist: trusty
+    - perl: '5.8'
+      dist: xenial
+    - perl: '5.10'
+      dist: xenial
+    - perl: '5.12'
+      dist: xenial
+    - perl: '5.14'
+      dist: xenial
+    - perl: '5.16'
+      dist: xenial
+    - perl: '5.18'
+      dist: xenial
+    - perl: '5.20'
+      dist: xenial
+    - perl: '5.22'
+      dist: xenial
+    - perl: '5.24'
+      dist: xenial
 #    - perl: '5.32'
 #      dist: bionic
 #    - perl: '5.30'
@@ -135,8 +189,8 @@ matrix:
 ##    - perl: "5.14"
 #    - perl: "5.20-shrplib"
 ##    - perl: "5.6.2"
-    - perl: "5.20"
-      dist: trusty
+#    - perl: "5.20"
+#      dist: trusty
 
 #before_install:
 #  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
@@ -192,7 +246,7 @@ matrix:
 # - cpanm https://github.com/dk/Prima.git@eeceef6ba4faf2a8842d4215aba2a8cf1c5abeef
 
 script:
-  - true
+  - perl -v
 
 #script:
 #  - perl -MKwalify -E 'say $Kwalify::VERSION'
