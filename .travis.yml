@@ -156,29 +156,51 @@ matrix:
 #    - perl: '5.24'
 #      dist: xenial
 
+#     - perl: '5.32'
+#       dist: focal
+#     - perl: '5.30'
+#       dist: focal
+#     - perl: '5.28'
+#       dist: focal
+#     - perl: '5.26'
+#       dist: focal
+#     - perl: '5.24'
+#       dist: focal
+#     - perl: '5.22'
+#       dist: focal
+#     - perl: '5.20'
+#       dist: focal
+#     - perl: '5.18'
+#       dist: focal
+#     - perl: '5.16'
+#       dist: focal
+#     - perl: '5.14'
+#       dist: focal
+#     - perl: '5.12'
+#       dist: focal
+#
      - perl: '5.32'
-       dist: focal
+       dist: bionic
      - perl: '5.30'
-       dist: focal
+       dist: bionic
      - perl: '5.28'
-       dist: focal
+       dist: bionic
      - perl: '5.26'
-       dist: focal
+       dist: bionic
      - perl: '5.24'
-       dist: focal
+       dist: bionic
      - perl: '5.22'
-       dist: focal
+       dist: bionic
      - perl: '5.20'
-       dist: focal
+       dist: bionic
      - perl: '5.18'
-       dist: focal
+       dist: bionic
      - perl: '5.16'
-       dist: focal
+       dist: bionic
      - perl: '5.14'
-       dist: focal
+       dist: bionic
      - perl: '5.12'
-       dist: focal
-
+       dist: bionic
 
 #    - perl: '5.32'
 #      dist: bionic
