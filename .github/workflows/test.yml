@@ -9,14 +9,26 @@ on:
   pull_request:
 
 jobs:
-#  test_on_host:
-#    name: Test on ${{ matrix.os }}
-#    runs-on: ${{ matrix.os }}
-#    strategy:
-#     matrix:
+  test_on_host:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
 #       os: [ubuntu-latest, windows-latest, macos-latest]
-##       os: [ubuntu-latest]
-#
+        os: [ubuntu-18.04]
+
+    steps:
+    - name: install perl
+      run: |
+        wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/18.04/x86_64/perl-5.30.tar.bz2
+        sudo tar xf /tmp/perl-5.30.tar.bz2 --directory /
+        ln -s /home/travis/perl5 ~/perl5
+    - name: test perl
+      run: |
+        eval $(/home/travis/perl5/perlbrew/bin/perlbrew env 5.30)
+        PATH=$PERLBREW_PATH:$PATH
+        perl -v
+
 #    steps:
 #    - name: apt hacks
 #      # the already installed libgd3 conflicts with libgd-dev to be installed
@@ -120,24 +132,24 @@ jobs:
 #        gmake all test
 #      if: "startsWith(matrix.os, 'windows-')"
 
-  test_in_container:
-    name: Container tests with ${{ matrix.container }}
-    runs-on: ubuntu-20.04
-    container: ${{ matrix.container }}
-    strategy:
-      matrix:
-        include:
-          - container:    ubuntu:20.04
-#          - container:    debian:jessie
-#          - container:    ~
-
-    steps:
-    - name: install Inline::C
-      run: |
-        apt update
-        apt install -y perl-modules make gcc
-        cpan Inline::C
-        perl -e 'use Inline C => q{void test(){printf("Hello, world\n");}}; test();'
+#  test_in_container:
+#    name: Container tests with ${{ matrix.container }}
+#    runs-on: ubuntu-20.04
+#    container: ${{ matrix.container }}
+#    strategy:
+#      matrix:
+#        include:
+#          - container:    ubuntu:20.04
+##          - container:    debian:jessie
+##          - container:    ~
+#
+#    steps:
+#    - name: install Inline::C
+#      run: |
+#        apt update
+#        apt install -y perl-modules make gcc
+#        cpan Inline::C
+#        perl -e 'use Inline C => q{void test(){printf("Hello, world\n");}}; test();'
 
 #    steps:
 #    - uses: actions/checkout@v2
