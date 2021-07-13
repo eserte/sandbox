@@ -179,6 +179,8 @@ matrix:
 #     - perl: '5.12'
 #       dist: focal
 #
+     - perl: '5.34'
+       dist: bionic
      - perl: '5.32'
        dist: bionic
      - perl: '5.30'
