@@ -203,6 +203,8 @@ matrix:
        dist: bionic
      - perl: '5.12'
        dist: bionic
+     - perl: '5.10'
+       dist: bionic
 
 #    - perl: '5.32'
 #      dist: bionic
