@@ -1,8 +1,8 @@
 os: linux
 arch:
   - arm64
-  - ppc64le
-  - s390x
+#  - ppc64le
+#  - s390x
 
 #os:
 #  - linux
@@ -162,55 +162,56 @@ matrix:
 #    - perl: '5.24'
 #      dist: xenial
 
-#     - perl: '5.32'
-#       dist: focal
-#     - perl: '5.30'
-#       dist: focal
-#     - perl: '5.28'
-#       dist: focal
-#     - perl: '5.26'
-#       dist: focal
-#     - perl: '5.24'
-#       dist: focal
-#     - perl: '5.22'
-#       dist: focal
-#     - perl: '5.20'
-#       dist: focal
-#     - perl: '5.18'
-#       dist: focal
-#     - perl: '5.16'
-#       dist: focal
-#     - perl: '5.14'
-#       dist: focal
-#     - perl: '5.12'
-#       dist: focal
-#
-     - perl: '5.34'
-       dist: bionic
      - perl: '5.32'
-       dist: bionic
+       dist: focal
      - perl: '5.30'
-       dist: bionic
+       dist: focal
      - perl: '5.28'
-       dist: bionic
+       dist: focal
      - perl: '5.26'
-       dist: bionic
+       dist: focal
      - perl: '5.24'
-       dist: bionic
+       dist: focal
      - perl: '5.22'
-       dist: bionic
+       dist: focal
      - perl: '5.20'
-       dist: bionic
+       dist: focal
      - perl: '5.18'
-       dist: bionic
+       dist: focal
      - perl: '5.16'
-       dist: bionic
+       dist: focal
      - perl: '5.14'
-       dist: bionic
+       dist: focal
      - perl: '5.12'
-       dist: bionic
-     - perl: '5.10'
-       dist: bionic
+       dist: focal
+
+
+#     - perl: '5.34'
+#       dist: bionic
+#     - perl: '5.32'
+#       dist: bionic
+#     - perl: '5.30'
+#       dist: bionic
+#     - perl: '5.28'
+#       dist: bionic
+#     - perl: '5.26'
+#       dist: bionic
+#     - perl: '5.24'
+#       dist: bionic
+#     - perl: '5.22'
+#       dist: bionic
+#     - perl: '5.20'
+#       dist: bionic
+#     - perl: '5.18'
+#       dist: bionic
+#     - perl: '5.16'
+#       dist: bionic
+#     - perl: '5.14'
+#       dist: bionic
+#     - perl: '5.12'
+#       dist: bionic
+#     - perl: '5.10'
+#       dist: bionic
 
 #    - perl: '5.32'
 #      dist: bionic
