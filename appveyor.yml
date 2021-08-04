@@ -12,21 +12,21 @@ shallow_clone: true
 
 environment:
   matrix:
-#    - perl: cygwinperl
+    - perl: cygwinperl
 #    - perl: activeperl
-    - perl: strawberryperl
+#    - perl: strawberryperl
 
 ## Try the pause hack
 #init:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
-  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
-  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
-  - if not %perl%==cygwinperl perl -v
+#  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
+#  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
+#  - if not %perl%==cygwinperl perl -v
   - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
-#  - if %perl%==cygwinperl       C:\cygwin\setup-x86.exe -q --packages=libcrypt-devel,openssl-devel
-#  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
+  - if %perl%==cygwinperl       C:\cygwin\setup-x86.exe -q --packages=libcrypt-devel,openssl-devel
+  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
 
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
 #  - if not exist "C:\strawberry" cinst strawberryperl
@@ -77,11 +77,12 @@ build_script:
 #  - "%USE_MAKE% test"
 #  - echo "hurra"
 #  - prove -v t\locale.t
-  - lwp-download http://eserte.bbbike.de/tmp/Msg-1.13.tar.gz
-  - tar xfvz Msg-1.13.tar.gz
-  - cd Msg-1.13
-  - perl Makefile.PL
-  - gmake all test
+#  - lwp-download http://eserte.bbbike.de/tmp/Msg-1.13.tar.gz
+#  - tar xfvz Msg-1.13.tar.gz
+#  - cd Msg-1.13
+#  - perl Makefile.PL
+#  - gmake all test
+  - if     %perl%==cygwinperl   c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
