@@ -82,7 +82,7 @@ build_script:
 #  - cd Msg-1.13
 #  - perl Makefile.PL
 #  - gmake all test
-  - if     %perl%==cygwinperl   c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
+  - perl -V
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
