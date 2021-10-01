@@ -315,6 +315,8 @@ matrix:
 script:
   - sudo apt install -y wget
   - ldd $(which wget) | egrep '(ssl|tls)'
+  - apt-cache policy ca-certificates
+  - apt-cache policy libssl1.0.0
   - cd /tmp && wget https://download.bbbike.org
 
 #script:
