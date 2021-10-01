@@ -124,24 +124,24 @@ matrix:
 #    - perl: '5.24'
 #      dist: precise
 
-    - perl: '5.8'
-      dist: trusty
-    - perl: '5.10'
-      dist: trusty
-    - perl: '5.12'
-      dist: trusty
-    - perl: '5.14'
-      dist: trusty
-    - perl: '5.16'
-      dist: trusty
-    - perl: '5.18'
-      dist: trusty
-    - perl: '5.20'
-      dist: trusty
-    - perl: '5.22'
-      dist: trusty
-    - perl: '5.24'
-      dist: trusty
+#    - perl: '5.8'
+#      dist: trusty
+#    - perl: '5.10'
+#      dist: trusty
+#    - perl: '5.12'
+#      dist: trusty
+#    - perl: '5.14'
+#      dist: trusty
+#    - perl: '5.16'
+#      dist: trusty
+#    - perl: '5.18'
+#      dist: trusty
+#    - perl: '5.20'
+#      dist: trusty
+#    - perl: '5.22'
+#      dist: trusty
+#    - perl: '5.24'
+#      dist: trusty
 
 #    - perl: '5.8'
 #      dist: xenial
@@ -212,6 +212,9 @@ matrix:
 #       dist: bionic
 #     - perl: '5.10'
 #       dist: bionic
+
+    - dist: xenial
+      perl: 5.24
 
 #    - perl: '5.32'
 #      dist: bionic
@@ -306,7 +309,8 @@ matrix:
 # - cpanm https://github.com/dk/Prima.git@eeceef6ba4faf2a8842d4215aba2a8cf1c5abeef
 
 script:
-  - perl -v
+  - perl "-MNet::SSLeay 999999" -e1 || true
+  - perl -MLWP -e 'warn LWP::UserAgent->new->head("https://download.bbbike.org")->dump'
 
 #script:
 #  - perl -MKwalify -E 'say $Kwalify::VERSION'
