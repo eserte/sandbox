@@ -308,9 +308,13 @@ matrix:
 #install:
 # - cpanm https://github.com/dk/Prima.git@eeceef6ba4faf2a8842d4215aba2a8cf1c5abeef
 
+#script:
+#  - perl "-MNet::SSLeay 999999" -e1 || true
+#  - perl -MLWP -e 'warn LWP::UserAgent->new->head("https://download.bbbike.org")->dump'
+
 script:
-  - perl "-MNet::SSLeay 999999" -e1 || true
-  - perl -MLWP -e 'warn LWP::UserAgent->new->head("https://download.bbbike.org")->dump'
+  - sudo apt install -y wget
+  - ldd $(which wget) | egrep '(ssl|tls)'
 
 #script:
 #  - perl -MKwalify -E 'say $Kwalify::VERSION'
