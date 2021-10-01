@@ -313,7 +313,8 @@ matrix:
 #  - perl -MLWP -e 'warn LWP::UserAgent->new->head("https://download.bbbike.org")->dump'
 
 script:
-  - sudo apt install -y wget
+  - sudo apt update -y
+  - sudo apt install -y wget libssl1.0.0
   - ldd $(which wget) | egrep '(ssl|tls)'
   - apt-cache policy ca-certificates
   - apt-cache policy libssl1.0.0
