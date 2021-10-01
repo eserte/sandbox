@@ -315,6 +315,7 @@ matrix:
 script:
   - sudo apt install -y wget
   - ldd $(which wget) | egrep '(ssl|tls)'
+  - cd /tmp && wget https://download.bbbike.org
 
 #script:
 #  - perl -MKwalify -E 'say $Kwalify::VERSION'
