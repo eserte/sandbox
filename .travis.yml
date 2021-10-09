@@ -312,22 +312,22 @@ matrix:
 #  - perl "-MNet::SSLeay 999999" -e1 || true
 #  - perl -MLWP -e 'warn LWP::UserAgent->new->head("https://download.bbbike.org")->dump'
 
-script:
-  - sudo apt update -y
-  - sudo apt install -y wget libssl1.0.0
-  - ldd $(which wget) | egrep '(ssl|tls)'
-  - apt-cache policy ca-certificates
-  - apt-cache policy libssl1.0.0
-  - cd /tmp && wget https://download.bbbike.org
+#script:
+#  - sudo apt update -y
+#  - sudo apt install -y wget libssl1.0.0
+#  - ldd $(which wget) | egrep '(ssl|tls)'
+#  - apt-cache policy ca-certificates
+#  - apt-cache policy libssl1.0.0
+#  - cd /tmp && wget https://download.bbbike.org
 
 #script:
 #  - perl -MKwalify -E 'say $Kwalify::VERSION'
 
-#script:
+script:
 # - perl Makefile.PL && make test HARNESS_OPTIONS=j4
 # - make test HARNESS_OPTIONS=j4
 # - apt-file update
-# - grep --with-filename . /etc/apt/sources.list /etc/apt/sources.list.d/*
+ - grep --with-filename . /etc/apt/sources.list /etc/apt/sources.list.d/*
 # - apt-file search /Moose.pm
 # - git clone https://github.com/eserte/srezic-misc.git
 # - ./srezic-misc/scripts/pm-to-deb -v Moose
