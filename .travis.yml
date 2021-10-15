@@ -1,7 +1,7 @@
 os: linux
 arch:
-  - arm64
-#  - ppc64le
+#  - arm64
+  - ppc64le
 #  - s390x
 
 #os:
@@ -387,17 +387,17 @@ matrix:
 #  - sudo rm -f /etc/apt/apt.conf.d/99-travis-apt-proxy
 #  - sudo apt-file update
 
-#script:
-#  - perl -e 'print $], "\n"'
+script:
+  - perl -e 'print $], "\n"'
 
 #before_script:
 #  - perlbrew off
 
-script:
-  - perlbrew off
-  - sudo add-apt-repository ppa:eserte/bbbike
-  - sudo apt-get install -y libarray-heap-perl
-  - perl -MArray::Heap -E 'say $Array::Heap::VERSION'
+#script:
+#  - perlbrew off
+#  - sudo add-apt-repository ppa:eserte/bbbike
+#  - sudo apt-get install -y libarray-heap-perl
+#  - perl -MArray::Heap -E 'say $Array::Heap::VERSION'
 
 branches:
   except:
