@@ -1,7 +1,7 @@
 os: linux
 arch:
-#  - arm64
-  - ppc64le
+  - arm64
+#  - ppc64le
 #  - s390x
 
 #os:
@@ -105,6 +105,12 @@ before_install:
 language: perl
 matrix:
   include:
+    - language: minimal
+      dist: focal
+
+#    - perl: '5.32'
+#      dist: focal
+
 #    - perl: '5.8'
 #      dist: precise
 #    - perl: '5.10'
@@ -162,29 +168,26 @@ matrix:
 #    - perl: '5.24'
 #      dist: xenial
 
-#     - perl: '5.32'
+#     - perl: '5.30'
 #       dist: focal
-
-     - perl: '5.30'
-       dist: focal
-     - perl: '5.28'
-       dist: focal
-     - perl: '5.26'
-       dist: focal
-     - perl: '5.24'
-       dist: focal
-     - perl: '5.22'
-       dist: focal
-     - perl: '5.20'
-       dist: focal
-     - perl: '5.18'
-       dist: focal
-     - perl: '5.16'
-       dist: focal
-     - perl: '5.14'
-       dist: focal
-     - perl: '5.12'
-       dist: focal
+#     - perl: '5.28'
+#       dist: focal
+#     - perl: '5.26'
+#       dist: focal
+#     - perl: '5.24'
+#       dist: focal
+#     - perl: '5.22'
+#       dist: focal
+#     - perl: '5.20'
+#       dist: focal
+#     - perl: '5.18'
+#       dist: focal
+#     - perl: '5.16'
+#       dist: focal
+#     - perl: '5.14'
+#       dist: focal
+#     - perl: '5.12'
+#       dist: focal
 
 
 #     - perl: '5.34'
@@ -357,6 +360,12 @@ matrix:
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 
+script:
+ - sudo apt-get update && sudo apt-get install libipc-run-perl
+ - git clone --depth=1 https://github.com/eserte/bbbike.git
+ - cd bbbike
+ - /usr/bin/perl ./miscsrc/docker-bbbike ci --dist ubuntu --distver focal --src local
+
 #after_script:
 # - true
 
@@ -387,8 +396,8 @@ matrix:
 #  - sudo rm -f /etc/apt/apt.conf.d/99-travis-apt-proxy
 #  - sudo apt-file update
 
-script:
-  - perl -e 'print $], "\n"'
+#script:
+#  - perl -e 'print $], "\n"'
 
 #before_script:
 #  - perlbrew off
