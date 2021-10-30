@@ -360,14 +360,14 @@ matrix:
 # - perl -e 'sleep(rand(30))'
 # - perl -e 'exit(rand(2) < 1 ? 1 : 0)'
 
-script:
- - sudo apt-get update && sudo apt-get install libipc-run-perl
- - git clone --depth=1 https://github.com/eserte/bbbike.git
- - cd bbbike
- - /usr/bin/perl ./miscsrc/docker-bbbike ci --dist ubuntu --distver focal --src local --env USE_BBBIKE_PPA=1
+#script:
+# - sudo apt-get update && sudo apt-get install libipc-run-perl
+# - git clone --depth=1 https://github.com/eserte/bbbike.git
+# - cd bbbike
+# - /usr/bin/perl ./miscsrc/docker-bbbike ci --dist ubuntu --distver focal --src local --env USE_BBBIKE_PPA=1
 
-#after_script:
-# - true
+script:
+ - true
 
 ## Just download something
 #script:
