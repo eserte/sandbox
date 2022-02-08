@@ -367,7 +367,7 @@ matrix:
 # - /usr/bin/perl ./miscsrc/docker-bbbike ci --dist ubuntu --distver focal --src local --env USE_BBBIKE_PPA=1
 
 script:
- - true
+ - ls -al /usr/lib/sendmail /usr/sbin/sendmail
 
 ## Just download something
 #script:
