@@ -7,6 +7,7 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: just testing
+        run: |
           echo "Hello world"
           date
