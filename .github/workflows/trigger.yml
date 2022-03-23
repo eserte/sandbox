@@ -2,6 +2,16 @@ name: Trigger
 
 on:
   workflow_dispatch:
+    inputs:
+      test:
+        description: 'Test options'
+        required: true
+        default: two
+        type: choice
+        options:
+          - one
+          - two
+          - three
 
 jobs:
   trigger:
@@ -10,4 +20,5 @@ jobs:
       - name: just testing
         run: |
           echo "Hello world"
+          echo "You selected ${{ github.event.inputs.test }}"
           date
