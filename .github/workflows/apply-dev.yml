@@ -1,0 +1,11 @@
+name: Run something on dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-template:
+    uses: ./.github/workflows/trigger-template.yml
+    with:
+      action: run
+      stage: dev

@@ -1,0 +1,32 @@
+name: Do something template
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - prod
+      action:
+        required: true
+        default: plan
+        type: choice
+        options:
+          - plan
+          - run
+
+jobs:
+  plan-or-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Plan or run
+        run: |
+          set -ex
+          echo Action: ${{ github.event.inputs.action }}
+          echo Stage:  ${{ github.event.inputs.stage }}
+          perl -MTerm::ANSIColor=colored -E 'say colored(["red on_black"], "this is red")'
