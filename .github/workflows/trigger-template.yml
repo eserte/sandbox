@@ -6,17 +6,11 @@ on:
       stage:
         required: true
         default: dev
-        type: choice
-        options:
-          - dev
-          - prod
+        type: string
       action:
         required: true
         default: plan
-        type: choice
-        options:
-          - plan
-          - run
+        type: string
 
 jobs:
   plan-or-run:
@@ -27,6 +21,6 @@ jobs:
       - name: Plan or run
         run: |
           set -ex
-          echo Action: ${{ github.event.inputs.action }}
-          echo Stage:  ${{ github.event.inputs.stage }}
+          echo Action: ${{ inputs.action }}
+          echo Stage:  ${{ inputs.stage }}
           perl -MTerm::ANSIColor=colored -E 'say colored(["red on_black"], "this is red")'
