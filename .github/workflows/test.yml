@@ -1,4 +1,4 @@
-name: CI
+name: My Test CI Workflow
 
 on:
   push:
@@ -18,16 +18,20 @@ jobs:
         os: [ubuntu-18.04]
 
     steps:
-    - name: install perl
+    - name: show env
       run: |
-        wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/18.04/x86_64/perl-5.30.tar.bz2
-        sudo tar xf /tmp/perl-5.30.tar.bz2 --directory /
-        ln -s /home/travis/perl5 ~/perl5
-    - name: test perl
-      run: |
-        eval $(/home/travis/perl5/perlbrew/bin/perlbrew env 5.30)
-        PATH=$PERLBREW_PATH:$PATH
-        perl -v
+        env | sort
+
+#    - name: install perl
+#      run: |
+#        wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/18.04/x86_64/perl-5.30.tar.bz2
+#        sudo tar xf /tmp/perl-5.30.tar.bz2 --directory /
+#        ln -s /home/travis/perl5 ~/perl5
+#    - name: test perl
+#      run: |
+#        eval $(/home/travis/perl5/perlbrew/bin/perlbrew env 5.30)
+#        PATH=$PERLBREW_PATH:$PATH
+#        perl -v
 
 #    steps:
 #    - name: apt hacks
