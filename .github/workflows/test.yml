@@ -19,6 +19,7 @@ jobs:
 
     steps:
     - name: test step without run
+      run: echo "does not work, every step needs a run/uses field"
     - name: install perl
       run: |
         wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/18.04/x86_64/perl-5.30.tar.bz2
