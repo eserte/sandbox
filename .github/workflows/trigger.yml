@@ -13,6 +13,8 @@ on:
           - two
           - three
 
+concurrency: trigger
+
 jobs:
   trigger:
     runs-on: ubuntu-latest
