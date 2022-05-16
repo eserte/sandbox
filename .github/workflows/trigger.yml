@@ -21,3 +21,5 @@ jobs:
     steps:
       - name: "info environment=${{github.event.inputs.test}}"
         run: "echo environment=${{github.event.inputs.test}}"
+      - name: Checkout
+        uses: actions/checkout@v3
