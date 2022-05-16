@@ -19,8 +19,5 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: just testing with input test=${{github.event.inputs.test}}
-        run: |
-          echo "Hello world"
-          echo "You selected ${{ github.event.inputs.test }}"
-          date
+      - name: "info environment=${{github.event.inputs.test}}"
+        run: "echo environment=${{github.event.inputs.test}}"
