@@ -1,1 +1,4 @@
 name: Minimal nop workflow
+
+on:
+  workflow_dispatch:
