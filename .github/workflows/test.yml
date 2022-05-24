@@ -15,19 +15,26 @@ jobs:
     strategy:
       matrix:
 #       os: [ubuntu-latest, windows-latest, macos-latest]
-        os: [ubuntu-18.04]
+#        os: [ubuntu-18.04]
+       os: [ubuntu-latest]
 
     steps:
     - name: dummy run
       run: echo "Every job needs at least one step"
 
-    - name: shell for
+    - uses: hashicorp/setup-terraform@v1
+    - name: or true
       run: |
-        for i in 1 2 3; do
-          for j in a b c; do
-            echo "iteration i=$i j=$j"
-          done
-        done
+        terraform-bin import || true
+        echo "Should not appear as exit code 1"
+
+#    - name: shell for
+#      run: |
+#        for i in 1 2 3; do
+#          for j in a b c; do
+#            echo "iteration i=$i j=$j"
+#          done
+#        done
 
 #    - name: install perl
 #      run: |
