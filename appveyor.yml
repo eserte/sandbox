@@ -20,6 +20,12 @@ environment:
 #init:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
+init:
+  ps: |
+    if($env:perl -eq "cygwinperl"){
+      (New-Object Net.WebClient).DownloadFile('https://cygwin.com/setup-x86.exe', 'C:\cygwin\setup-x86.exe')
+    }
+
 install:
 #  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
 #  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
