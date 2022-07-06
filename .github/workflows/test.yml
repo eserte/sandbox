@@ -9,8 +9,21 @@ on:
   pull_request:
 
 jobs:
-  network_check:
+  debugging-with-ssh:
     if: true
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        echo "My IP address: $(curl -s ipinfo.io/ip)"; true
+        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+      with:
+        limit-access-to-actor: true
+
+  network_check:
+    if: false
     runs-on: ubuntu-22.04
     steps:
     - run: |
