@@ -11,7 +11,7 @@ on:
 jobs:
   network_check:
     if: true
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - run: |
         echo "My IP address: $(curl -s ipinfo.io/ip)"; true
