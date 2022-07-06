@@ -15,8 +15,8 @@ jobs:
     steps:
     - run: |
         echo "My IP address: $(curl -s ipinfo.io/ip)"; true
-        curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
-        curl --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
+        #curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
+        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
 
   test_on_host:
     if: false
