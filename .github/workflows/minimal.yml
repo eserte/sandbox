@@ -1,0 +1,10 @@
+name: Minimal nop workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  minimal-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
