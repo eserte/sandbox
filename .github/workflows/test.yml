@@ -11,7 +11,7 @@ on:
 
 jobs:
   debugging-with-ssh:
-    if: true
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,12 +24,13 @@ jobs:
         limit-access-to-actor: true
 
   network_check:
-    if: false
-    runs-on: ubuntu-22.04
+    if: true
+    runs-on: ubuntu-latest
     steps:
     - run: |
         echo "My IP address: $(curl -s ipinfo.io/ip)"; true
         #curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
+        HEAD -t 5 http://bbbike.de/robots.txt > /dev/null
         curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
 
   test_on_host:
