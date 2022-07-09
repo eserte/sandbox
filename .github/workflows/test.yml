@@ -30,8 +30,14 @@ jobs:
     - run: |
         echo "My IP address: $(curl -s ipinfo.io/ip)"; true
         #curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
+        echo Run again non-80 port using libwww-perl
         lwp-request -t 1 http://bbbike.de:8443/ || true
+        sleep 1
+        echo Run again non-80 port using curl
+        timeout 5 curl -v --connect-timeout 5 http://bbbike.de:8443 > /dev/null || true
+        echo Run again 80 port using libwww-perl
         HEAD -t 5 http://bbbike.de/robots.txt
+        echo Run again 80 port using curl
         curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
 
   test_on_host:
