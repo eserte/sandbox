@@ -1,12 +1,13 @@
 #name: My Test CI Workflow
 
 on:
-  push:
-    branches-ignore:
-      - '*travis*'
-      - '*appveyor*'
-      - '*doozer*'
+#  push:
+#    branches-ignore:
+#      - '*travis*'
+#      - '*appveyor*'
+#      - '*doozer*'
   pull_request:
+  workflow_dispatch:
 
 jobs:
   debugging-with-ssh:
