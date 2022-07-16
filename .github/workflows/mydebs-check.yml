@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     container: debian:jessie
     steps:
-      - run: |
+      - name: install prereqs
+        run: |
+          set -ex
+          apt-get update -qq && apt-get install -y curl
+      - name: network check
+        run: |
           echo "My IP address: $(curl -s ipinfo.io/ip)"; true
           curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
