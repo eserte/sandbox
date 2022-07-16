@@ -9,12 +9,12 @@ jobs:
   mydebs-check:
     if: true
     runs-on: ubuntu-latest
-    container: debian:jessie
+#    container: debian:jessie
     steps:
       - name: install prereqs
         run: |
           set -ex
-          apt-get update -qq && apt-get install -y curl
+          which curl >/dev/null || { apt-get update -qq && apt-get install -y curl; }
       - name: network check
         shell: bash
         run: |
