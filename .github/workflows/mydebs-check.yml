@@ -3,7 +3,7 @@ name: Check for mydebs connection problems
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 9 * * *'
+    - cron: '37 9,21 * * *'
 
 jobs:
   mydebs-check:
