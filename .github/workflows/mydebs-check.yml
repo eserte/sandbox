@@ -22,3 +22,4 @@ jobs:
           echo "My IP address: $(curl -s ipinfo.io/ip)"; true
           { set -o pipefail; curl -s -I http://bbbike.de/robots.txt | head -1; } || { echo "::warning::network check on port 80 failed"; }
           { set -o pipefail; curl -s -I http://mydebs.bbbike.de:8000/dists/jessie/InRelease | head -1; true; } || { echo "::warning::network check on port 8000 failed"; }
+          { set -o pipefail; curl -s -I https://download.bbbike.org/robots.txt | head -1; } || { echo "::warning::network check for download.bbbike.org failed"; }
