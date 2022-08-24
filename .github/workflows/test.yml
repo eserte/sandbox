@@ -1,4 +1,4 @@
-#name: My Test CI Workflow
+name: My Test CI Workflow
 
 on:
 #  push:
@@ -6,63 +6,80 @@ on:
 #      - '*travis*'
 #      - '*appveyor*'
 #      - '*doozer*'
-  pull_request:
+#  pull_request:
   workflow_dispatch:
 
 jobs:
-  debugging-with-ssh:
-    if: false
-    runs-on: ubuntu-latest
+  doit-windows:
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        echo "My IP address: $(curl -s ipinfo.io/ip)"; true
-        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null || true
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-      with:
-        limit-access-to-actor: true
+      - uses: actions/checkout@v3
+      - run: |
+          cpanm --quiet --notest Config::IniFiles Config::IOD::INI
+      - run: |
+          git clone https://github.com/eserte/Doit.git
+          cd Doit
+          git checkout XXX-github-actions
+          perl Build.PL
+          perl Build
+      - run: |
+          cd Doit
+          perl -Mblib -MDoit -MDoit::Log -e "my $d=Doit->init; my $f = q{test.unix}; info $d->write_binary($f, qq{first line\nsecond line\n}); info $d->change_file($f, { match => qr{^first line}, replace => qq{first line\n\n} }); $d->system(qq{type $f})"
+          prove -bv t\ini.t
 
-  network_check:
-    if: true
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo "My IP address: $(curl -s ipinfo.io/ip)"; true
-        #curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
-        echo Run again non-80 port using libwww-perl
-        lwp-request -t 1 http://bbbike.de:8443/ || true
-        sleep 1
-        echo Run again non-80 port using curl
-        timeout 5 curl -v --connect-timeout 5 http://bbbike.de:8443 > /dev/null || true
-        echo Run again 80 port using libwww-perl
-        HEAD -t 5 http://bbbike.de/robots.txt
-        echo Run again 80 port using curl
-        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
-
-  test_on_host:
-    if: false
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-#       os: [ubuntu-latest, windows-latest, macos-latest]
-#        os: [ubuntu-18.04]
-       os: [ubuntu-latest]
-
-    steps:
-    - name: show env
-      run: |
-        env | sort
-
-    - name: dummy run
-      run: echo "Every job needs at least one step"
-
-    - uses: hashicorp/setup-terraform@v1
-    - name: or true
-      run: |
-        terraform-bin import || true
-        echo "Should not appear as exit code 1"
+#  debugging-with-ssh:
+#    if: false
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - run: |
+#        echo "My IP address: $(curl -s ipinfo.io/ip)"; true
+#        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null || true
+#    - name: Setup upterm session
+#      uses: lhotari/action-upterm@v1
+#      with:
+#        limit-access-to-actor: true
+#
+#  network_check:
+#    if: true
+#    runs-on: ubuntu-latest
+#    steps:
+#    - run: |
+#        echo "My IP address: $(curl -s ipinfo.io/ip)"; true
+#        #curl --connect-timeout 5 https://www.bbbike.org/robots.txt > /dev/null
+#        echo Run again non-80 port using libwww-perl
+#        lwp-request -t 1 http://bbbike.de:8443/ || true
+#        sleep 1
+#        echo Run again non-80 port using curl
+#        timeout 5 curl -v --connect-timeout 5 http://bbbike.de:8443 > /dev/null || true
+#        echo Run again 80 port using libwww-perl
+#        HEAD -t 5 http://bbbike.de/robots.txt
+#        echo Run again 80 port using curl
+#        curl -v --connect-timeout 5 http://bbbike.de/robots.txt > /dev/null
+#
+#  test_on_host:
+#    if: false
+#    name: Test on ${{ matrix.os }}
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      matrix:
+##       os: [ubuntu-latest, windows-latest, macos-latest]
+##        os: [ubuntu-18.04]
+#       os: [ubuntu-latest]
+#
+#    steps:
+#    - name: show env
+#      run: |
+#        env | sort
+#
+#    - name: dummy run
+#      run: echo "Every job needs at least one step"
+#
+#    - uses: hashicorp/setup-terraform@v1
+#    - name: or true
+#      run: |
+#        terraform-bin import || true
+#        echo "Should not appear as exit code 1"
 
 #    - name: shell for
 #      run: |
