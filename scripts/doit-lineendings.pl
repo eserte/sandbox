@@ -25,12 +25,17 @@ show_file($f, "after write binary");
 #info "change_file returned: " . $d->change_file($f, { match => qr{^second line}, replace => qq{\nsecond line} });
 open my $fh, $f or die $!;
 binmode $fh;
+open my $ofh, ">", "$f~" or die $!;
+binmode $ofh;
 while(<$fh>) {
-    print;
+    print $ofh $_;
     if (/^first line/) {
-	print "\n";
+	print $ofh "\n";
     }
 }
+close $ofh or die $!;
+$d->unlink($f);
+$d->rename("$f~", $f);
 show_file($f, "after change file");
 
 __END__
