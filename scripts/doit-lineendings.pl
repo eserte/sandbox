@@ -34,6 +34,7 @@ while(<$fh>) {
     }
 }
 close $ofh or die $!;
+close $fh;
 $d->unlink($f);
 $d->rename("$f~", $f);
 show_file($f, "after change file");
