@@ -1,11 +1,11 @@
 name: My Test CI Workflow
 
 on:
-#  push:
-#    branches-ignore:
-#      - '*travis*'
-#      - '*appveyor*'
-#      - '*doozer*'
+  push:
+    branches-ignore:
+      - '*travis*'
+      - '*appveyor*'
+      - '*doozer*'
 #  pull_request:
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
           perl Build
       - run: |
           cd Doit
-          perl -Mblib -MDoit -MDoit::Log -e "my $d=Doit->init; my $f = q{test.unix}; info $d->write_binary($f, qq{first line\nsecond line\n}); info $d->change_file($f, { match => qr{^first line}, replace => qq{first line\n\n} }); $d->system(qq{type $f})"
+          perl -Mblib ..\scripts\doit-lineendings.pl
           prove -bv t\ini.t
 
 #  debugging-with-ssh:
