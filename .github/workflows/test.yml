@@ -22,12 +22,16 @@ jobs:
           git checkout XXX-github-actions
           perl Build.PL
           perl Build
-      - run: |
-          perl -Mblib=Doit scripts\open3.pl
+#      - run: |
+#          perl -Mblib=Doit scripts\open3.pl
 #      - run: |
 #          cd Doit
 #          perl -Mblib ..\scripts\doit-lineendings.pl
 #          prove -bv t\ini.t
+      - run: |
+          perl -Mblib=Doit -MDoit -e 'my$d=Doit->init;$d->change_file(q{Doit/t/open2.t}, {match=>qr{todo_skip},delete=>1});'
+      - run: |
+          cd Doit && prove -bv t\open2.t
 
 #  debugging-with-ssh:
 #    if: false
