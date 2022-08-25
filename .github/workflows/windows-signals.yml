@@ -2,6 +2,15 @@ name: Test windows signals
 
 on:
   workflow_dispatch:
+    inputs:
+      signal:
+        type: choice
+        options:
+          - KILL
+          - INT
+          - BREAK
+          - TERM
+        default: KILL
 
 jobs:
   test-windows-signals:
@@ -9,4 +18,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          perl scripts\windows-signals.pl
+          perl scripts\windows-signals.pl ${{ inputs.signal }}

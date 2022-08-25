@@ -14,6 +14,8 @@ use autodie;
 #EOF
 #$script->close;
 
+my $signal = shift // "KILL";
+
 my $child_pid = fork;
 if ($child_pid == 0) {
     #my @cmd = ($^X, '-e', 'warn "sub process started...\n"; while(){ sleep 1 }');
@@ -27,7 +29,7 @@ if ($child_pid == 0) {
 
 sleep 2;
 warn "about to kill sub process in parent...\n";
-kill KILL => $child_pid;
+kill $signal => $child_pid;
 waitpid $child_pid, 0;
 my $signalnum = $? & 127;
 my $coredump = ($? & 128) ? 'with' : 'without';
