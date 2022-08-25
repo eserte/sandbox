@@ -29,7 +29,8 @@ jobs:
 #          perl -Mblib ..\scripts\doit-lineendings.pl
 #          prove -bv t\ini.t
       - run: |
-          perl -Mblib=Doit -MDoit -e 'my$d=Doit->init;$d->change_file(q{Doit/t/open2.t}, {match=>qr{todo_skip},delete=>1});'
+          #perl -Mblib=Doit -MDoit -e 'my$d=Doit->init;$d->change_file(q{Doit/t/open2.t}, {match=>qr{todo_skip},delete=>1});'
+          perl -i -nle 'next if /todo_skip/; print' Doit\t\open2.t
       - run: |
           cd Doit && prove -bv t\open2.t
 
