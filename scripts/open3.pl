@@ -13,11 +13,13 @@ use File::Temp;
 my $doit = Doit->init;
 
 my $tmp1 = File::Temp->new;
-$tmp1->print("x"x1024 . " old content");
+$tmp1->print(#"x"x1024 . " " .
+    "old content");
 $tmp1->close;
 
 my $tmp2 = File::Temp->new;
-$tmp2->print("x"x1024 . " new content");
+$tmp2->print(#"x"x1024 . " " .
+    "new content");
 $tmp2->close;
 
 info "diff is_in_path: " . is_in_path("diff");
