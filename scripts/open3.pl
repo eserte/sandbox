@@ -22,9 +22,23 @@ $tmp2->print(#"x"x1024 . " " .
     "new content");
 $tmp2->close;
 
-info "diff is_in_path: " . is_in_path("diff");
+my $script = File::Temp->new;
+$script->print(<<'EOF');
+#!/usr/bin/env perl
+use strict;
+print STDERR "to stderr: sent large buf:\n" . ("x" x 8192) . "\ndone\n";
+print STDERR "sleep for three seconds\n";
+sleep 3;
+print STDOUT "to stdout: sent large buf:\n" . ("x" x 8192) . "\ndone\n";
+print STDOUT "sleep for three seconds\n";
+sleep 3;
+EOF
+$script->close;
+chmod(0755, "$script");
 
-my($diff, $diff_stderr) = _open3(undef, "diff", "-u", "$tmp1", "$tmp2");
+#info "diff is_in_path: " . is_in_path("diff");
+#my($diff, $diff_stderr) = _open3(undef, "diff", "-u", "$tmp1", "$tmp2");
+my($diff, $diff_stderr) = _open3(undef, "perl", "$script");
 info "diff: $diff";
 info "diff_stderr: $diff_stderr";
 
@@ -78,7 +92,7 @@ info "append " . length($buf) . " bytes to buf";
                     }
 		}
 	    }
-	} else {
+	} elsif (1) {
 	    while(<$chld_out>) {
 info "append " . length($_) . " bytes to buf (stdout)";
                 $buf{$chld_out} .= $_;
@@ -86,6 +100,14 @@ info "append " . length($_) . " bytes to buf (stdout)";
 	    while(<$chld_err>) {
 info "append " . length($_) . " bytes to buf (stderr)";
                 $buf{$chld_err} .= $_;
+	    }
+	} else {
+info "entering while loop";
+	    while() {
+info "while loop iteration";
+		warn sysread($chld_out, $buf{$chld_out}, 1024, length($buf{$chld_out})); warn $!;
+		warn sysread($chld_err, $buf{$chld_err}, 1024, length($buf{$chld_err})); warn $!;
+		sleep 1;
 	    }
 	}
 
