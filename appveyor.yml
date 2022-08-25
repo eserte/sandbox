@@ -95,8 +95,7 @@ build_script:
 #  - if not %perl%==cygwinperl perl -V
 #  - if not %perl%==cygwinperl perl "-MIPC::Run 99999999"
 
-  - git clone https://github.com/eserte/Doit.git
-  - cd Doit && perl Build.PL && perl Build
+  - git clone https://github.com/eserte/Doit.git && cd Doit && git checkout XXX-github-actions && perl Build.PL && perl Build
 #  - cd .. && perl -Mblib=Doit scripts\fc.pl
   - cd .. && perl -Mblib=Doit scripts\open2.pl
 
