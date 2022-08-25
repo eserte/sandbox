@@ -10,6 +10,35 @@ use Test::More;
 plan 'no_plan';
 
 use Doit;
+use Doit::Log;
+
+    sub Doit::_open2 {
+	my($instr, @args) = @_;
+	info "args before: @args";
+	@args = Doit::Win32Util::win32_quote_list(@args) if Doit::IS_WIN;
+	info "args after: @args";
+
+	require IPC::Open2;
+
+	my($chld_out, $chld_in);
+	info "before calling open2";
+	my $pid = IPC::Open2::open2($chld_out, $chld_in, @args);
+	info "pid is $pid";
+	print $chld_in $instr;
+	info "after providing instr";
+	close $chld_in;
+	info "after closing STDIN";
+	local $/;
+	info "before slurping STDOUT";
+	my $buf = <$chld_out>;
+	info "read ". length($buf) . " bytes";
+	close $chld_out;
+	info "closing STDOUT";
+	waitpid $pid, 0;
+	info "waitpid was successful --- exitcode is $?";
+
+	$buf;
+    }
 
 my $KILL = 9;
 my $KILLrx = qr{$KILL};
