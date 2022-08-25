@@ -6,20 +6,23 @@
 #
 
 use Doit;
+use Doit::Extcmd qw(is_in_path);
 use Doit::Log;
 use File::Temp;
 
 my $doit = Doit->init;
 
 my $tmp1 = File::Temp->new;
-$tmp1->print("old content");
+$tmp1->print("x"x1024 . " old content");
 $tmp1->close;
 
 my $tmp2 = File::Temp->new;
-$tmp2->print("new content");
+$tmp2->print("x"x1024 . " new content");
 $tmp2->close;
 
-my($diff, $diff_stderr) = _open3("", "diff", "-u", "$tmp1", "$tmp2");
+info "diff is_in_path: " . is_in_path("diff");
+
+my($diff, $diff_stderr) = _open3(undef, "diff", "-u", "$tmp1", "$tmp2");
 info "diff: $diff";
 info "diff_stderr: $diff_stderr";
 
@@ -57,14 +60,16 @@ info "can_read: @ready_fhs";
 	    for my $ready_fh (@ready_fhs) {
 		my $buf = '';
 info "about to read $ready_fh";
-		while (sysread $ready_fh, $buf, 1024, length $buf) { }
+		while (sysread $ready_fh, $buf, 1024, length $buf) {
+info "in while-sysread loop, length of buf=" . length($buf);
+		}
 		if ($buf eq '') { # eof
 info "found eof";
 		    $sel->remove($ready_fh);
 		    $ready_fh->close;
 		    last if $sel->count == 0;
 		} else {
-info "append <$buf>";
+info "append " . length($buf) . " bytes to buf";
 		    $buf{$ready_fh} .= $buf;
 		}
 	    }
