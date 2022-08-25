@@ -68,9 +68,12 @@ my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
     }
 
     eval { $r->open2($^X, '-e', 'kill KILL => $$') };
-    like $@, qr{^Command died with signal $KILLrx, without coredump};
-    is $@->{signalnum}, $KILL;
-    is $@->{coredump}, 'without';
+    {
+	local $TODO; $TODO = "signal/exit code handling different on Windows" if $^O eq 'MSWin32';
+	like $@, qr{^Command died with signal $KILLrx, without coredump};
+	is $@->{signalnum}, $KILL;
+	is $@->{coredump}, 'without';
+    }
 
     is $r->open2({quiet=>1}, $^X, '-e', '#nothing'), '', 'nothing returned; command is also quiet';
 
