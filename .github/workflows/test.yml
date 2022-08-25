@@ -14,8 +14,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          cpanm --quiet --notest Config::IniFiles Config::IOD::INI
+#      - run: |
+#          cpanm --quiet --notest Config::IniFiles Config::IOD::INI
       - run: |
           git clone https://github.com/eserte/Doit.git
           cd Doit
@@ -23,9 +23,11 @@ jobs:
           perl Build.PL
           perl Build
       - run: |
-          cd Doit
-          perl -Mblib ..\scripts\doit-lineendings.pl
-          prove -bv t\ini.t
+          perl -Mblib=Doit scripts\open3.pl
+#      - run: |
+#          cd Doit
+#          perl -Mblib ..\scripts\doit-lineendings.pl
+#          prove -bv t\ini.t
 
 #  debugging-with-ssh:
 #    if: false
