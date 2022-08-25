@@ -27,11 +27,12 @@ init:
     }
 
 install:
-#  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
-#  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
-#  - if not %perl%==cygwinperl perl -v
-#  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
-#  - if %perl%==cygwinperl       C:\cygwin\setup-x86.exe -q --packages=libcrypt-devel,openssl-devel,perl
+  - if not %perl%==cygwinperl perl -v
+  - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
+  - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
+  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
+  - if %perl%==cygwinperl c:\cygwin\setup-x86.exe -q --packages=perl,perl-IPC-Run
+  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
 #  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
 
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
@@ -88,8 +89,10 @@ build_script:
 #  - cd Msg-1.13
 #  - perl Makefile.PL
 #  - gmake all test
-  - perl -V
-  - perl "-MIPC::Run 99999999"
+  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl -V"
+  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl '-MIPC::Run 99999999'"
+  - if not %perl%==cygwinperl perl -V
+  - if not %perl%==cygwinperl perl "-MIPC::Run 99999999"
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
