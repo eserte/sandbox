@@ -17,14 +17,16 @@ my $KILLrx = qr{$KILL};
 TODO: {
 #    todo_skip "Hangs on Windows, need to check why", 1 if $^O eq 'MSWin32';
 
+my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
+
 {
     my $r = Doit->init;
 
 #    is $r->open2($^X, '-e', 'print scalar <STDIN>'), "", 'no instr -> empty input';
 
-    is $r->open2({instr=>"some input\n"}, $^X, '-e', 'print scalar <STDIN>'), "some input\n", 'expected single-line result';
+    is $r->open2({instr=>"some input$EOL"}, $^X, '-e', 'print scalar <STDIN>'), "some input$EOL", 'expected single-line result';
 
-    is $r->open2({instr=>"first line\nsecond line\n"}, $^X, '-e', 'print join "", <STDIN>'), "first line\nsecond line\n", 'expected multi-line result';
+    is $r->open2({instr=>"first line${EOL}second line${EOL}"}, $^X, '-e', 'print join "", <STDIN>'), "first line${EOL}second line${EOL}", 'expected multi-line result';
 
     eval { $r->open2($^X, '-e', 'kill TERM => $$') };
     like $@, qr{^Command died with signal 15, without coredump};
