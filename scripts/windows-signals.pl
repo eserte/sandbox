@@ -6,10 +6,11 @@ use autodie;
 
 my $child_pid = fork;
 if ($child_pid == 0) {
-    exec($^X, '-e', 'while(){ sleep 1 }');
+    exec($^X, '-e', 'warn "sub process started...\n"; while(){ sleep 1 }');
 }
 
-sleep 1;
+sleep 2;
+warn "about to kill sub process in parent...\n";
 kill KILL => $child_pid;
 waitpid $child_pid, 0;
 my $signalnum = $? & 127;
