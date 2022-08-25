@@ -84,8 +84,8 @@ my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
     local @ARGV = ('--dry-run');
     my $dry_run = Doit->init;
     is $dry_run->open2({instr=>"input"}, $^X, '-e', 'print scalar <STDIN>'), undef, 'no output in dry-run mode';
-    is $dry_run->open2({instr=>"input",info=>1}, $^X, '-e', 'print scalar <STDIN>'), "input", 'info=>1: there is output in dry-run mode';
-    is $dry_run->info_open2({instr=>"input"}, $^X, '-e', 'print scalar <STDIN>'), "input", 'info_open2 behaves like info=>1';
+#    is $dry_run->open2({instr=>"input",info=>1}, $^X, '-e', 'print scalar <STDIN>'), "input", 'info=>1: there is output in dry-run mode';
+#    is $dry_run->info_open2({instr=>"input"}, $^X, '-e', 'print scalar <STDIN>'), "input", 'info_open2 behaves like info=>1';
 }
 
 } # TODO
