@@ -16,6 +16,6 @@ waitpid $child_pid, 0;
 my $signalnum = $? & 127;
 my $coredump = ($? & 128) ? 'with' : 'without';
 my $exitcode = $?>>8;
-warn "exitcode: $exitcode, $coredump coredump, signal: $signalnum\n";
+warn "raw \$?: $? (" . sprintf("%016b", $?) . "), exitcode: $exitcode, $coredump coredump, signal: $signalnum\n";
 
 __END__
