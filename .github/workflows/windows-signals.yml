@@ -1,0 +1,12 @@
+name: Test windows signals
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-windows-signals:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          perl scripts\windows-signals.pl
