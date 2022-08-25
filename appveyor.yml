@@ -95,9 +95,11 @@ build_script:
 #  - if not %perl%==cygwinperl perl -V
 #  - if not %perl%==cygwinperl perl "-MIPC::Run 99999999"
 
-  - git clone https://github.com/eserte/Doit.git && cd Doit && git checkout XXX-github-actions && perl Build.PL && perl Build
-#  - cd .. && perl -Mblib=Doit scripts\fc.pl
-  - cd .. && perl -Mblib=Doit scripts\open2.pl
+#  - git clone https://github.com/eserte/Doit.git && cd Doit && git checkout XXX-github-actions && perl Build.PL && perl Build
+##  - cd .. && perl -Mblib=Doit scripts\fc.pl
+#  - cd .. && perl -Mblib=Doit scripts\open2.pl
+
+  - perl scripts\windows-signals.pl
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
