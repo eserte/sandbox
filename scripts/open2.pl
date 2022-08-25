@@ -53,7 +53,9 @@ my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
 
 #    is $r->open2($^X, '-e', 'print scalar <STDIN>'), "", 'no instr -> empty input';
 
-    is $r->open2({instr=>"some input$EOL"}, $^X, '-e', 'print scalar <STDIN>'), "some input$EOL", 'expected single-line result';
+    is $r->open2({instr=>"some input${EOL}"}, $^X, '-e', 'print scalar <STDIN>'), "some input${EOL}", 'expected single-line result';
+
+    is $r->open2({instr=>"first line${EOL}second line${EOL}"}, $^X, '-e', 'print scalar <STDIN>'), "first line${EOL}", 'multi-line input, single-line read';
 
     is $r->open2({instr=>"first line${EOL}second line${EOL}"}, $^X, '-e', 'print join "", <STDIN>'), "first line${EOL}second line${EOL}", 'expected multi-line result';
 
