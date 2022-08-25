@@ -89,7 +89,7 @@ build_script:
 #  - perl Makefile.PL
 #  - gmake all test
   - perl -V
-  - perl -MIPC::Run\ 99999999
+  - perl "-MIPC::Run 99999999"
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
