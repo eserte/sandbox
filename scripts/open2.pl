@@ -59,9 +59,10 @@ my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
 
 #    is $r->open2({instr=>"first line${EOL}second line${EOL}"}, $^X, '-e', 'print join "", <STDIN>'), "first line${EOL}second line${EOL}", 'expected multi-line result';
 
-    eval { $r->open2($^X, '-e', 'kill TERM => $$') };
-    like $@, qr{^Command died with signal 15, without coredump};
-    is $@->{signalnum}, 15;
+#    eval { $r->open2($^X, '-e', 'kill TERM => $$') };
+    eval { $r->open2($^X, '-e', 'kill INT => $$') };
+    like $@, qr{^Command died with signal 2, without coredump};
+    is $@->{signalnum}, 2;
     is $@->{coredump}, 'without';
 
     eval { $r->open2($^X, '-e', 'kill KILL => $$') };
