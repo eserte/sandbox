@@ -26,10 +26,12 @@ my $script = File::Temp->new;
 $script->print(<<'EOF');
 #!/usr/bin/env perl
 use strict;
-print STDERR "to stderr: sent large buf:\n" . ("x" x 8192) . "\ndone\n";
+print STDERR "to stderr: sent large buf:\n" #. ("x" x 8192)
+  . "\ndone\n";
 print STDERR "sleep for three seconds\n";
 sleep 3;
-print STDOUT "to stdout: sent large buf:\n" . ("x" x 8192) . "\ndone\n";
+print STDOUT "to stdout: sent large buf:\n" #. ("x" x 8192)
+  . "\ndone\n";
 print STDOUT "sleep for three seconds\n";
 sleep 3;
 EOF
