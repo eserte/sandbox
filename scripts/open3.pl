@@ -7,12 +7,19 @@
 
 use Doit;
 use Doit::Log;
+use File::Temp;
 
 my $doit = Doit->init;
-$doit->write_binary("/tmp/1", "old content");
-$doit->write_binary("/tmp/2", "new content");
 
-my($diff, $diff_stderr) = _open3("", "diff", "-u", "/tmp/1", "/tmp/2");
+my $tmp1 = File::Temp->new;
+$tmp1->print("old content");
+$tmp1->close;
+
+my $tmp2 = File::Temp->new;
+$tmp2->print("new content");
+$tmp2->close;
+
+my($diff, $diff_stderr) = _open3("", "diff", "-u", "$tmp1", "$tmp2");
 info "diff: $diff";
 info "diff_stderr: $diff_stderr";
 
