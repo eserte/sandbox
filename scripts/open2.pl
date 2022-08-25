@@ -51,6 +51,10 @@ my $EOL = $^O eq 'MSWin32' ? "\r\n" : "\n";
 {
     my $r = Doit->init;
 
+    is $r->open2("cat", "-n"), "", 'cat with no instr -> empty input';
+    is $r->open2({instr=>"bla"}, "cat", "-n"), "     1\tbla", 'cat with non-newline terminated content';
+    is $r->open2({instr=>"bla${EOL}foo${EOL}"}, "cat", "-n"), "     1\tbla${EOL}     2\tfoo${EOL}", 'cat with two lines';
+
 #    is $r->open2($^X, '-e', 'print scalar <STDIN>'), "", 'no instr -> empty input';
 
     is $r->open2({instr=>"some input${EOL}"}, $^X, '-e', 'print scalar <STDIN>'), "some input${EOL}", 'expected single-line result';
