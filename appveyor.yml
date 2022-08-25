@@ -6,13 +6,13 @@ branches:
 skip_tags: true
 shallow_clone: true
 
-#cache:
-#  - C:\strawberry
+cache:
+  - C:\strawberry
 #  - C:\Perl
 
 environment:
   matrix:
-    - perl: cygwinperl
+#    - perl: cygwinperl
     - perl: activeperl
     - perl: strawberryperl
 
@@ -89,10 +89,15 @@ build_script:
 #  - cd Msg-1.13
 #  - perl Makefile.PL
 #  - gmake all test
-  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl -V"
-  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl '-MIPC::Run 99999999'"
-  - if not %perl%==cygwinperl perl -V
-  - if not %perl%==cygwinperl perl "-MIPC::Run 99999999"
+
+#  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl -V"
+#  - if     %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl '-MIPC::Run 99999999'"
+#  - if not %perl%==cygwinperl perl -V
+#  - if not %perl%==cygwinperl perl "-MIPC::Run 99999999"
+
+  - git clone https://github.com/eserte/Doit.git
+  - cd Doit && perl Build.PL && perl Build
+  - cd .. && perl -Mblib=Doit scripts\fc.pl
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
