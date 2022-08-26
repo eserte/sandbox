@@ -9,13 +9,21 @@ use File::Spec;
 
 open(NULL, ">", File::Spec->devnull);
 
-{
+if (0) {
     no warnings 'once'; # why?
     my $in = \*CHLD_IN;
     my $pid = open3($in, \*PH, ">&NULL", $^X, '-e', 'print scalar(<STDIN>), "\n"');
     print CHLD_IN "non-empty";
     close CHLD_IN;
     while( <PH> ) { warn "got <$_>" }
+    waitpid($pid, 0);
+    warn $?;
+}
+
+{
+    my $in = '';
+    my $pid = open3($in, \*PH, ">&NULL", $^X, '-e', 'print "to stdout\n"; print STDERR "to stderr\n";');
+    while( <PH> ) { warn "got from stdout <$_>" }
     waitpid($pid, 0);
     warn $?;
 }
