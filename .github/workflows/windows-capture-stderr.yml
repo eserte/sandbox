@@ -1,0 +1,12 @@
+name: Test capturing stderr on windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-windows-capture-stderr:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          perl scripts\perlfaq8-capture-stderr.pl
