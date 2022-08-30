@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          set
+          cmd /c set
