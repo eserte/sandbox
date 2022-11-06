@@ -73,7 +73,7 @@ jobs:
 #    strategy:
 #      matrix:
 ##       os: [ubuntu-latest, windows-latest, macos-latest]
-##        os: [ubuntu-18.04]
+##        os: [ubuntu-22.04]
 #       os: [ubuntu-latest]
 #
 #    steps:
@@ -100,7 +100,7 @@ jobs:
 
 #    - name: install perl
 #      run: |
-#        wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/18.04/x86_64/perl-5.30.tar.bz2
+#        wget --quiet -O/tmp/perl-5.30.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/perl/binaries/ubuntu/22.04/x86_64/perl-5.36.tar.bz2
 #        sudo tar xf /tmp/perl-5.30.tar.bz2 --directory /
 #        ln -s /home/travis/perl5 ~/perl5
 #    - name: test perl
