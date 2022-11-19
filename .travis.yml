@@ -382,6 +382,10 @@ matrix:
 # - traceroute download.bbbike.org
 # - ping -c 1 download.bbbike.org
 
+script:
+  - which udiskctl
+  - udisksctl status
+
 #before_install:
 # - . travis-functions.sh
 # - init_travis
@@ -396,8 +400,8 @@ matrix:
 #  - sudo rm -f /etc/apt/apt.conf.d/99-travis-apt-proxy
 #  - sudo apt-file update
 
-script:
-  - perl -e 'print $], "\n"'
+#script:
+#  - perl -e 'print $], "\n"'
 
 #before_script:
 #  - perlbrew off
