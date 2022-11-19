@@ -12,4 +12,4 @@ jobs:
           repository: eserte/bbbike
           ref: XXX-appveyor
       - run: |
-          prove -j2 t\miscsrc.t t\gpx2gpx.t
+          prove -v t\miscsrc.t t\gpx2gpx.t
