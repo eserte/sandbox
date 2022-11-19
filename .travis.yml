@@ -105,8 +105,11 @@ before_install:
 language: perl
 matrix:
   include:
-    - language: minimal
-      dist: focal
+#    - language: minimal
+#      dist: focal
+
+    - dist: focal
+      perl: 5.32
 
 #    - perl: '5.32'
 #      dist: focal
