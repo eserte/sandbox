@@ -389,6 +389,7 @@ matrix:
 script:
   - which udisksctl
   - udisksctl status
+  - df -T
 
 #before_install:
 # - . travis-functions.sh
