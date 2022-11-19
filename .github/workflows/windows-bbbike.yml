@@ -1,0 +1,15 @@
+name: Limited BBBike tests on Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-bbbike-on-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: eserte/bbbike
+          ref: XXX-appveyor
+      - run: |
+          prove -j2 t\miscsrc.t t\gpx2gpx.t
