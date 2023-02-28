@@ -12,9 +12,9 @@ cache:
 
 environment:
   matrix:
-#    - perl: cygwinperl
-    - perl: activeperl
-    - perl: strawberryperl
+    - perl: cygwinperl
+#    - perl: activeperl
+#    - perl: strawberryperl
 
 ## Try the pause hack
 #init:
@@ -66,6 +66,7 @@ install:
 ##  - how to fail on windows?
 
 build_script:
+  - uname -m
 #  - set HARNESS_OPTIONS=j4:c
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; cpan LWP::Protocol::https && lwp-download https://raw.github.com/Perl/perl5/blead/dist/PathTools/t/cwd_enoent.t cwd_enoent.t"
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl t/cygwin_mkdir.t"
@@ -99,7 +100,7 @@ build_script:
 ##  - cd .. && perl -Mblib=Doit scripts\fc.pl
 #  - cd .. && perl -Mblib=Doit scripts\open2.pl
 
-  - perl scripts\windows-signals.pl
+#  - perl scripts\windows-signals.pl
 
 #on_failure:
 #  - type C:\ProgramData\chocolatey\logs\chocolatey.log
