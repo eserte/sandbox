@@ -10,31 +10,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  doit-windows:
-    runs-on: windows-latest
+
+  conditional-cpan-build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+      with:
+        repository: eserte/travis-helper-cpan-pm
+        #ref: master
+        path: travis-helper-cpan-pm
+    - name: before_install
+      run: |
+        $GITHUB_WORKSPACE/travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps --sysdeps-branch=master
+    - name: check Prima version
+      run: |
+        if zgrep -q KARASIK/Prima-1.68001.tar.gz ~/.cpan/sources/modules/02packages.details.txt.gz; then echo "SKIP_PRIMA=true" >> $GITHUB_ENV; fi
+    - name: install Prima
+      run: |
+        cpan Prima
+      if: "!env.SKIP_PRIMA"
+
+#  doit-windows:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v3
+##      - run: |
+##          cpanm --quiet --notest Config::IniFiles Config::IOD::INI
 #      - run: |
-#          cpanm --quiet --notest Config::IniFiles Config::IOD::INI
-      - run: |
-          git clone https://github.com/eserte/Doit.git
-          cd Doit
-          git checkout XXX-github-actions
-          perl Build.PL
-          perl Build
-#      - run: |
-#          perl -Mblib=Doit scripts\open3.pl
-#      - run: |
+#          git clone https://github.com/eserte/Doit.git
 #          cd Doit
-#          perl -Mblib ..\scripts\doit-lineendings.pl
-#          prove -bv t\ini.t
+#          git checkout XXX-github-actions
+#          perl Build.PL
+#          perl Build
+##      - run: |
+##          perl -Mblib=Doit scripts\open3.pl
+##      - run: |
+##          cd Doit
+##          perl -Mblib ..\scripts\doit-lineendings.pl
+##          prove -bv t\ini.t
+##      - run: |
+##          #perl -Mblib=Doit -MDoit -e 'my$d=Doit->init;$d->change_file(q{Doit/t/open2.t}, {match=>qr{todo_skip},delete=>1});'
+##          perl -i -nle 'next if /todo_skip/; print' Doit\t\open2.t
 #      - run: |
-#          #perl -Mblib=Doit -MDoit -e 'my$d=Doit->init;$d->change_file(q{Doit/t/open2.t}, {match=>qr{todo_skip},delete=>1});'
-#          perl -i -nle 'next if /todo_skip/; print' Doit\t\open2.t
-      - run: |
-          cd Doit && prove -bv t\which.t
-#      - run: |
-#          perl -Mblib=Doit scripts\open2.pl
+#          cd Doit && prove -bv t\which.t
+##      - run: |
+##          perl -Mblib=Doit scripts\open2.pl
 
 #  debugging-with-ssh:
 #    if: false
