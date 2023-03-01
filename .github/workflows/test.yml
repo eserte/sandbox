@@ -12,7 +12,7 @@ on:
 jobs:
 
   github-env:
-    if: true
+    if: false
     runs-on: ubuntu-latest
     steps:
     - run: |
@@ -25,7 +25,7 @@ jobs:
       if: "!env.SKIP_PRIMA"
 
   conditional-cpan-build:
-    if: false
+    if: true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +38,9 @@ jobs:
         $GITHUB_WORKSPACE/travis-helper-cpan-pm/travis-helper-cpan-pm --distroprefs=https://github.com/eserte/srezic-cpan-distroprefs --enable-sysdeps --sysdeps-branch=master
     - name: check Prima version
       run: |
-        if zgrep -q KARASIK/Prima-1.68001.tar.gz ~/.cpan/sources/modules/02packages.details.txt.gz; then echo "SKIP_PRIMA=true" >> $GITHUB_ENV; fi
+        ls -al ~/.cpan/sources/modules
+        echo "<<$GITHUB_ENV>>"
+        if zgrep -l KARASIK/Prima-1.68001.tar.gz ~/.cpan/sources/modules/02packages.details.txt.gz >/dev/null; then echo "SKIP_PRIMA=true" >> $GITHUB_ENV; fi
     - name: install Prima
       run: |
         cpan Prima
