@@ -11,7 +11,21 @@ on:
 
 jobs:
 
+  github-env:
+    if: true
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        mkdir -p ~/.cpan/sources/modules/
+        echo "bla KARASIK/Prima-1.68001.tar.gz foo" | gzip > ~/.cpan/sources/modules/02packages.details.txt.gz
+        echo "<<$GITHUB_ENV>>"
+        if zgrep -q KARASIK/Prima-1.68001.tar.gz ~/.cpan/sources/modules/02packages.details.txt.gz; then echo "SKIP_PRIMA=true" >> $GITHUB_ENV; fi
+    - run: |
+        echo "This should not run!"
+      if: "!env.SKIP_PRIMA"
+
   conditional-cpan-build:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
