@@ -15,8 +15,9 @@ jobs:
     if: true
     runs-on: ubuntu-latest
     steps:
-    - shell: bash
-      run: |
+    - uses: actions/checkout@v3
+    - run: |
+        ./pipefail.sh
         wget -q https://www.cpan.org/modules/02packages.details.txt
         gzip 02packages.details.txt
         zgrep -q KARASIK/Prima-1.68001.tar.gz 02packages.details.txt.gz
