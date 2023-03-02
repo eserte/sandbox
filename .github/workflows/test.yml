@@ -11,8 +11,18 @@ on:
 
 jobs:
 
-  vm-info:
+  zgrep-pipe-error:
     if: true
+    runs-on: ubuntu-latest
+    steps:
+    - shell: bash
+      run: |
+        wget -q https://www.cpan.org/modules/02packages.details.txt
+        gzip 02packages.details.txt
+        zgrep -q KARASIK/Prima-1.68001.tar.gz 02packages.details.txt.gz
+
+  vm-info:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - run: |
