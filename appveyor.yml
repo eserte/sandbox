@@ -31,11 +31,13 @@ install:
   - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
-  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
-  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
-  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/cygcheck -c"
-  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=perl
+#  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
+#  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
+#  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=perl
 #,perl-IPC-Run
+#  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=wget
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "cd /tmp && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl_base/perl_base-5.32.1-2.tar.zst && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl-5.32.1-2.tar.zst && /usr/bin/zstd -dc perl_base-5.32.1-2.tar.zst | /usr/bin/tar -xv -C / && /usr/bin/zstd -dc perl-5.32.1-2.tar.zst | /usr/bin/tar -xv -C /"
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/cygcheck -c perl perl_base"
   - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -v"
   - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -V"
 #  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
