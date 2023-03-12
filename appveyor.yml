@@ -36,7 +36,8 @@ install:
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=perl
 #,perl-IPC-Run
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=wget
-  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "cd /tmp && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl_base/perl_base-5.32.1-2.tar.zst && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl-5.32.1-2.tar.zst && /usr/bin/zstd -dc perl_base-5.32.1-2.tar.zst | /usr/bin/tar -xv -C / && /usr/bin/zstd -dc perl-5.32.1-2.tar.zst | /usr/bin/tar -xv -C /"
+#  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "cd /tmp && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl_base/perl_base-5.32.1-2.tar.zst && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl-5.32.1-2.tar.zst && /usr/bin/zstd -dc perl_base-5.32.1-2.tar.zst | /usr/bin/tar -xv -C / && /usr/bin/zstd -dc perl-5.32.1-2.tar.zst | /usr/bin/tar -xv -C /"
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "cd /tmp && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl_base/perl_base-5.30.3-1.tar.xz && curl -O https://cygwin.mirror.constant.com/x86_64/release/perl/perl-5.30.3-1.tar.xz && /usr/bin/tar -xvf perl_base-5.30.3-1.tar.xz -C / && /usr/bin/tar -xvf perl-5.30.3-1.tar.xz -C /"
   - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/cygcheck -c perl perl_base"
   - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -v"
   - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -V"
