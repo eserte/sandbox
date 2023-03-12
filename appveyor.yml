@@ -6,8 +6,8 @@ branches:
 skip_tags: true
 shallow_clone: true
 
-cache:
-  - C:\strawberry
+#cache:
+#  - C:\strawberry
 #  - C:\Perl
 
 environment:
@@ -23,16 +23,21 @@ environment:
 init:
   ps: |
     if($env:perl -eq "cygwinperl"){
-      (New-Object Net.WebClient).DownloadFile('https://cygwin.com/setup-x86_64.exe', 'C:\cygwin\setup-x86_64.exe')
+      (New-Object Net.WebClient).DownloadFile('https://cygwin.com/setup-x86_64.exe', 'C:\cygwin64\setup-x86_64.exe')
     }
 
 install:
   - if not %perl%==cygwinperl perl -v
   - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
-  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
-  - if %perl%==cygwinperl c:\cygwin\setup-x86_64.exe -q --packages=perl,perl-IPC-Run
-  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
+#  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
+  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
+  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/cygcheck -c"
+  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --packages=perl
+#,perl-IPC-Run
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -v"
+  - if %perl%==cygwinperl c:\cygwin64\bin\sh -c "/usr/bin/perl -V"
 #  - if %perl%==cygwinperl       c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; (cd /tmp && git clone https://github.com/eserte/travis-helper-cpan-pm.git && ./travis-helper-cpan-pm/travis-helper-cpan-pm --no-sudo)"
 
 # $env:PATH="C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%env:PATH"
@@ -67,6 +72,7 @@ install:
 
 build_script:
   - uname -m
+  - "dir C:\\"
 #  - set HARNESS_OPTIONS=j4:c
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; cpan LWP::Protocol::https && lwp-download https://raw.github.com/Perl/perl5/blead/dist/PathTools/t/cwd_enoent.t cwd_enoent.t"
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "PATH=/usr/bin:/bin; perl t/cygwin_mkdir.t"
