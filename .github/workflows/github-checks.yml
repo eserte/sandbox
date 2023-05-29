@@ -1,0 +1,26 @@
+name: Check for various GitHub problems
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: '37 9,21 * * *'
+
+jobs:
+  codeload-check:
+    if: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: eserte/bbbike
+          path: bbbike
+      - name: force bbbike-snapshots from github
+        run: |
+          set -ex
+          perl -i -pe 's/(DEFAULT_SNAPSHOT_IS_LOCAL =>)\s*\d+/$1 0/' bbbike/cgi/bbbike-snapshot.cgi
+          grep "use constant DEFAULT_SNAPSHOT_IS_LOCAL" bbbike/cgi/bbbike-snapshot.cgi
+      - name: run test
+        run: |
+          set -ex
+          cd bbbike
+          prove -v t/cgi-download.t
