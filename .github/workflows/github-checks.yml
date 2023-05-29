@@ -3,7 +3,7 @@ name: Check for various GitHub problems
 on:
   workflow_dispatch:
   schedule:
-    - cron: '37 10,22 * * *'
+    - cron: '45 8,20 * * *'
 
 jobs:
   codeload-check:
@@ -18,14 +18,18 @@ jobs:
         run: |
           set -e
           sudo apt-get update -qq
-          sudo apt-get install -q --no-install-recommends -y libarchive-zip-perl libtest-simple-perl libwww-perl
+          sudo apt-get install -q --no-install-recommends -y libarchive-zip-perl libtest-simple-perl libwww-perl curl
       - name: force bbbike-snapshots from github
         run: |
           set -ex
           perl -i -pe 's/(DEFAULT_SNAPSHOT_IS_LOCAL =>)\s*\d+/$1 0/' bbbike/cgi/bbbike-snapshot.cgi
           grep "use constant DEFAULT_SNAPSHOT_IS_LOCAL" bbbike/cgi/bbbike-snapshot.cgi
-      - name: run test
+      - name: run cgihead test
         run: |
           set -ex
           cd bbbike
           BBBIKE_SIMULATE_FQDN=dummy.rezic.de prove -v t/cgihead2.t
+      - name: run curl test
+        run: |
+          set -ex
+          curl -vsL 'http://bbbike.de/cgi-bin/bbbike-snapshot.cgi?local=0' > /dev/null
