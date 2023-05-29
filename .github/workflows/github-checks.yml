@@ -28,4 +28,4 @@ jobs:
         run: |
           set -ex
           cd bbbike
-          prove -v t/cgi-download.t
+          BBBIKE_SIMULATE_FQDN=dummy.rezic.de prove -v t/cgihead2.t
