@@ -14,6 +14,11 @@ jobs:
         with:
           repository: eserte/bbbike
           path: bbbike
+      - name: install prereqs
+        run: |
+          set -e
+          sudo apt-get update -qq
+          sudo apt-get install -q --no-install-recommends -y libarchive-zip-perl libtest-simple-perl libwww-perl
       - name: force bbbike-snapshots from github
         run: |
           set -ex
