@@ -2,8 +2,8 @@ name: Check for various GitHub problems
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '45 8,20 * * *'
+#  schedule:
+#    - cron: '45 8,20 * * *'
 
 jobs:
   codeload-check:
