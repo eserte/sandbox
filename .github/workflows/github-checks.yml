@@ -1,4 +1,5 @@
 name: Check for various GitHub problems
+run-name: Computed run name ${{ inputs.something || 'default' }}
 
 on:
   workflow_dispatch:
@@ -10,6 +11,9 @@ jobs:
     if: true
     runs-on: ubuntu-latest
     steps:
+      - name: set run-name
+        run: |
+          echo "RUN_NAME=My custom run name generated on $(date)" >> $GITHUB_ENV
       - uses: actions/checkout@v3
         with:
           repository: eserte/bbbike
