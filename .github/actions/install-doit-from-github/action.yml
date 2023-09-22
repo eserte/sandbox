@@ -31,4 +31,4 @@ runs:
       shell: perl {0}
       run: |
         use Doit;
-        say $Doit::VERSION;
+        print $Doit::VERSION, "\n";
