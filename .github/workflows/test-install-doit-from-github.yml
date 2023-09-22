@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
       - run: |
-          perl -MDoit -MDoit::Log -E 'info "hello world"'
+          perl -MDoit -MDoit::Log -E "info 'hello world'"
