@@ -14,3 +14,21 @@ jobs:
       - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
       - run: |
           perl -MDoit -MDoit::Log -E "info 'hello world'"
+
+  test-install-doit-from-github-containers:
+    name: Test Doit.pm installation on ${{ matrix.image }}
+    runs-on: ubuntu-latest
+    container: ${{ matrix.image }}
+    strategy:
+      matrix:
+        include:
+          - image: perl:5.8.9-threaded-stretch
+          - image: perl:5.38.0-slim-bookworm
+          - image: alpine:latest
+          - image: fedora:38
+          - image: debian:bookworm
+          - image: centos:7
+    steps:
+      - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
+      - run: |
+          perl -MDoit -MDoit::Log -E "info 'hello world'"
