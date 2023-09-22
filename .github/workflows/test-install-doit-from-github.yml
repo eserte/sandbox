@@ -22,13 +22,24 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: perl:5.8.9-threaded-stretch
+          ## actions/checkout@v4 not compatible with stretch
+          #- image: perl:5.8.9-threaded-stretch
           - image: perl:5.38.0-slim-bookworm
           - image: alpine:latest
           - image: fedora:38
           - image: debian:bookworm
-          - image: centos:7
+          ## actions/checkout@v4 not compatible with centos:7
+          #- image: centos:7
     steps:
+      - run: |
+          apk update -q && apk add -q perl
+        if: startsWith(matrix.image, 'alpine:')
+      - run: |
+          apt-get update -q && apt-get install -qy perl
+        if: startsWith(matrix.image, 'debian:')
+      - run: |
+          dnf update --quiet -y && dnf install --quiet -y perl
+        if: startsWith(matrix.image, 'fedora:')
       - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
       - run: |
           perl -MDoit -MDoit::Log -E "info 'hello world'"
