@@ -5,7 +5,11 @@ on:
 
 jobs:
   test-install-doit-from-github:
-    runs-on: ubuntu-latest
+    name: Test Doit.pm installation on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04, macos-latest, windows-latest]
     steps:
       - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
       - run: |
