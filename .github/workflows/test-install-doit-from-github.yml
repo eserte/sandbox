@@ -1,6 +1,10 @@
 name: Test install-doit-from-github action
 
 on:
+  push:
+    paths:
+      - '.github/workflows/*install-doit-from-github*'
+      - '.github/actions/install-doit-from-github/**'
   workflow_dispatch:
 
 jobs:
