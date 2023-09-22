@@ -1,0 +1,12 @@
+name: Test install-doit-from-github action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-install-doit-from-github:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: eserte/sandbox/.github/actions/install-doit-from-github@master
+      - run: |
+          perl -MDoit -MDoit::Log -E 'info "hello world"'
