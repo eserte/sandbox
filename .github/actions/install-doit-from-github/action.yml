@@ -20,6 +20,7 @@ runs:
         clean: false
         show-progress: false
     - name: Extend PERL5LIB for Doit.pm
+      shell: sh {0}
       run: |
         if [ -z "$PERL5LIB" ]; then
           echo "PERL5LIB=$GITHUB_WORKSPACE/Doit/lib" >> $GITHUB_ENV
@@ -27,5 +28,7 @@ runs:
           echo "PERL5LIB=$GITHUB_WORKSPACE/Doit/lib:$PERL5LIB" >> $GITHUB_ENV
         fi
     - name: Test Doit.pm
+      shell: perl {0}
       run: |
-        perl -MDoit -E 'say $Doit::VERSION'
+        use Doit;
+        say $Doit::VERSION;
