@@ -11,12 +11,12 @@ on:
 
 jobs:
 
-  checkout-v4:
-    runs-on: ubuntu-latest
-    container: perl:5.22.4-stretch
-    steps:
-      # still fails (2023-10-24)
-      - uses: actions/checkout@v4
+#  checkout-v4:
+#    runs-on: ubuntu-latest
+#    container: perl:5.22.4-stretch
+#    steps:
+#      # still fails (2023-10-24)
+#      - uses: actions/checkout@v4
 
 #  zgrep-pipe-error:
 #    if: true
@@ -70,6 +70,21 @@ jobs:
 #      run: |
 #        cpan Prima
 #      if: "!env.SKIP_PRIMA"
+
+  doit-single-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libbsd-resource-perl
+          git clone https://github.com/eserte/Doit.git
+          cd Doit
+          perl Build.PL
+          perl Build
+          set -x
+          ulimit -a
+          cat /proc/sys/kernel/core_pattern
+          prove -vb t/system.t
 
 #  doit-windows:
 #    runs-on: windows-latest
