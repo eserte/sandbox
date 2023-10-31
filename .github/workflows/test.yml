@@ -83,6 +83,8 @@ jobs:
           perl Build
           set -x
           ulimit -a
+          ulimit -c 4
+          ulimit -a
           cat /proc/sys/kernel/core_pattern
           prove -vb t/system.t
 
