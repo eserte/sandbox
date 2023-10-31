@@ -76,9 +76,10 @@ jobs:
     steps:
       - run: |
           sudo apt-get update -qq
-          sudo apt-get install -y libbsd-resource-perl
+          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
           git clone https://github.com/eserte/Doit.git
           cd Doit
+          git checkout XXX-github-actions
           perl Build.PL
           perl Build
           set -x
@@ -86,7 +87,7 @@ jobs:
           ulimit -c 4
           ulimit -a
           cat /proc/sys/kernel/core_pattern
-          prove -vb t/system.t
+          prove -vb t/system.t t/run.t
 
 #  doit-windows:
 #    runs-on: windows-latest
