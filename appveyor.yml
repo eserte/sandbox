@@ -30,6 +30,7 @@ install:
   - if not %perl%==cygwinperl perl -v
   - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
+  - if %perl%==strawberryperl cpanm --verbose Tk
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
