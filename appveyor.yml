@@ -31,7 +31,7 @@ install:
   - if %perl%==strawberryperl ( if not exist "C:\strawberry" cinst strawberryperl )
   - if %perl%==strawberryperl set PATH=C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\strawberry\c\bin;%PATH%
 #  - if %perl%==strawberryperl dir "C:\strawberry" /s
-  - if %perl%==strawberryperl cpanm --verbose https://github.com/eserte/perl-tk.git@gh-87
+  - if %perl%==strawberryperl cpanm --verbose https://github.com/eserte/perl-tk.git@XXX-appveyor
 #  - if %perl%==cygwinperl c:\cygwin\bin\sh -c "/usr/bin/perl -v"
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
 #  - if %perl%==cygwinperl c:\cygwin64\setup-x86_64.exe -q --remove-packages=perl,perl_base,perl-XML-Parser,perl-WWW-RobotRules,perl-Unicode-Normalize,perl-TermReadKey,perl-LWP-MediaTypes,perl-HTTP-Negotiate,perl-HTTP-Date,perl-Encode-Locale
@@ -78,7 +78,7 @@ install:
 
 build_script:
   - perl -E "say q{hello, world}"
-  - perl -Mblib -wE "use Tk::X qw(ControlMask None); say ControlMask(); say None()"
+  - perl -wE "use Tk::X qw(ControlMask None); say ControlMask(); say None()"
 #  - uname -m
 #  - "dir C:\\"
 #  - set HARNESS_OPTIONS=j4:c
