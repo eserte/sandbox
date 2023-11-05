@@ -78,6 +78,7 @@ install:
 
 build_script:
   - perl -E "say q{hello, world}"
+  - perl -Mblib -wE "use Tk::X qw(ControlMask None); say ControlMask(); say None()"
 #  - uname -m
 #  - "dir C:\\"
 #  - set HARNESS_OPTIONS=j4:c
