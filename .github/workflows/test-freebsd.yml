@@ -16,7 +16,8 @@ jobs:
       with:
         operating_system: freebsd
         version: '13.2'
+        shell: sh
         run: |
-          echo "Hello, world!"
+          echo "Hello, world! (using shell $SHELL)"
           which killall
           which pkill
