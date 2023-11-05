@@ -19,5 +19,9 @@ jobs:
         shell: sh
         run: |
           echo "Hello, world! (using shell $SHELL)"
-          which killall
-          which pkill
+          sudo pkg update
+          sudo pkg install -y xorg-vfbserver
+          nohup Xvfb :123 > /dev/null 2>&1 &
+          sleep 5
+          ps auxgww
+          # pkill Xvfb
