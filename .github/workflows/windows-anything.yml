@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          cmd /c set
+          prove -v t\inc_hook.t
