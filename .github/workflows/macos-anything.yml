@@ -1,0 +1,23 @@
+name: Test anything on macos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-macos-install-and-use-tk:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          brew install --cask xquartz
+          brew install perl libpng jpeg-turbo cpanminus
+          cpanm --quiet --notest Tk
+          /opt/X11/bin/Xvfb :123 &
+      - run: |
+          (sleep 10; twm) &
+        env:
+          DISPLAY=:123
+      - run: |
+          perl -MTk -e '$mw=tkinit; $mw->Label->pack; $mw->update'
+        env:
+          DISPLAY=:123
