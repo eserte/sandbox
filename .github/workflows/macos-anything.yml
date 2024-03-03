@@ -16,8 +16,8 @@ jobs:
       - run: |
           (sleep 10; twm) &
         env:
-          DISPLAY=:123
+          DISPLAY: ":123"
       - run: |
           perl -MTk -e '$mw=tkinit; $mw->Label->pack; $mw->update'
         env:
-          DISPLAY=:123
+          DISPLAY: ":123"
