@@ -8,3 +8,19 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: eserte/perl-tk
+      - name: Install system prereqs
+        run: |
+          brew install --cask xquartz
+          brew install perl libpng jpeg-turbo cpanminus
+          /opt/X11/bin/Xvfb :123 &
+          echo "DISPLAY=:123" >> $GITHUB_ENV
+      - name: Start window manager
+        run: |
+          (sleep 10; twm) &
+      - name: Build and test
+        run: |
+          perl Makefile.PL
+          make -j4 all
+          make test
