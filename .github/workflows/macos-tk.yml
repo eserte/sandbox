@@ -1,0 +1,10 @@
+name: Test Tk on macos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-macos-tk:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v4
