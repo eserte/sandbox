@@ -8,17 +8,21 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        includes:
-          - strawberry_version: default
+        include:
           - strawberry_version: 5.32.1.1
+          - strawberry_version: default
     steps:
       - uses: actions/checkout@v4
         with:
           repository: eserte/perl-tk
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
-          if     %strawberry_version% == default cinst strawberryperl
-          if not %strawberry_version% == default cinst strawberryperl --version ${{ matrix.strawberry_version }}
+          if ("${{ matrix.strawberry_version }}" -eq "default") {
+            choco install strawberryperl
+          }
+          elseif ("${{ matrix.strawberry_version }}" -ne "default") {
+            choco install strawberryperl --version ${{ matrix.strawberry_version }}
+          }
       - name: Build and test
         run: |
           perl Makefile.PL
