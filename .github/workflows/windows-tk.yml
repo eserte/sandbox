@@ -1,0 +1,26 @@
+name: Tk on Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-tk-on-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        includes:
+          - strawberry_version: default
+          - strawberry_version: 5.32.1.1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: eserte/perl-tk
+      - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
+        run: |
+          if     %strawberry_version% == default cinst strawberryperl
+          if not %strawberry_version% == default cinst strawberryperl --version ${{ matrix.strawberry_version }}
+      - name: Build and test
+        run: |
+          perl Makefile.PL
+          gmake -j4 all
+          gmake test
