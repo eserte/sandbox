@@ -11,6 +11,24 @@ on:
 
 jobs:
 
+  mixed-vm-container:
+    name: Test on ${{ matrix.os }} and container ${{ matrix.container || '<none>' }}
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            container: ~
+          - os: ubuntu-latest
+            container: fedora:39
+          - os: ubuntu-latest
+            container: alpine:latest
+    steps:
+      - name: What system
+        run: |
+          cat /etc/os-release
+
 #  checkout-v4:
 #    runs-on: ubuntu-latest
 #    container: perl:5.22.4-stretch
@@ -71,23 +89,23 @@ jobs:
 #        cpan Prima
 #      if: "!env.SKIP_PRIMA"
 
-  doit-single-test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
-          git clone https://github.com/eserte/Doit.git
-          cd Doit
-          git checkout XXX-github-actions
-          perl Build.PL
-          perl Build
-          set -x
-          ulimit -a
-          ulimit -c 4
-          ulimit -a
-          cat /proc/sys/kernel/core_pattern
-          prove -vb t/system.t t/run.t
+#  doit-single-test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: |
+#          sudo apt-get update -qq
+#          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
+#          git clone https://github.com/eserte/Doit.git
+#          cd Doit
+#          git checkout XXX-github-actions
+#          perl Build.PL
+#          perl Build
+#          set -x
+#          ulimit -a
+#          ulimit -c 4
+#          ulimit -a
+#          cat /proc/sys/kernel/core_pattern
+#          prove -vb t/system.t t/run.t
 
 #  doit-windows:
 #    runs-on: windows-latest
