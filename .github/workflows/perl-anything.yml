@@ -20,7 +20,7 @@ jobs:
           - image: perl:5.36.0-slim-bullseye
           - image: perl:5.38.0-slim-bookworm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - run: |
           cpanm Digest@1.17
           perl  -MDigest::file -e 'warn "Digest::file $Digest::file::VERSION"; warn "Digest $Digest::VERSION"; eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; warn $@'
