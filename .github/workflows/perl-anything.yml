@@ -30,4 +30,4 @@ jobs:
           perl  -MDigest::file -e 'eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; print "::notice::Digest::file $Digest::file::VERSION - Digest $Digest::VERSION - error message is: $@\n"'
           which git || (apt-get -qqy update && apt-get -qqy install git)
           git clone -b XXX-github-actions https://github.com/eserte/Doit
-          cd Doit && perl Build.PL && ./Build test
+          cd Doit && perl Build.PL && HARNESS_VERBOSE=1 ./Build test
