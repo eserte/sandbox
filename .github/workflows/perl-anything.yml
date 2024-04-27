@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ${{ matrix.image }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - image: perl:5.8.9-threaded-stretch
@@ -26,4 +27,4 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cpanm ${{ inputs.preinstall }}
-          perl  -MDigest::file -e 'warn "Digest::file $Digest::file::VERSION"; warn "Digest $Digest::VERSION"; eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; print "::notice::error message is: $@\n"'
+          perl  -MDigest::file -e 'eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; print "::notice::Digest::file $Digest::file::VERSION - Digest $Digest::VERSION - error message is: $@\n"'
