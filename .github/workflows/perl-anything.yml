@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       preinstall:
-        default: 'Digest@v1.17'
+        default: 'Digest@1.17'
 
 jobs:
   test-perl-anything:
