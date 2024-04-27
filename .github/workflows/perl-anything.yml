@@ -23,4 +23,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           cpanm Digest@1.17
-          perl  -MDigest::file -e 'warn "Digest::file $Digest::file::VERSION"; warn "Digest $Digest::VERSION"; eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; warn $@
+          perl  -MDigest::file -e 'warn "Digest::file $Digest::file::VERSION"; warn "Digest $Digest::VERSION"; eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; warn $@'
