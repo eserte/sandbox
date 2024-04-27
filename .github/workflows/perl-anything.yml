@@ -28,3 +28,5 @@ jobs:
       - run: |
           cpanm ${{ inputs.preinstall }}
           perl  -MDigest::file -e 'eval { Digest::file::digest_file_hex($^X, "This_Dies_Doest_Not_Exist_0.12345") }; print "::notice::Digest::file $Digest::file::VERSION - Digest $Digest::VERSION - error message is: $@\n"'
+          git clone https://github.com/eserte/Doit
+          cd Doit && perl Build.PL && ./Build test
