@@ -31,4 +31,6 @@ jobs:
           sudo pkg update
           sudo pkg install -y perl5 p5-App-cpanminus db5
           env BERKELEYDB_INCLUDE=/usr/local/include/db5 BERKELEYDB_LIB=/usr/local/lib/db5 cpanm --verbose --sudo BerkeleyDB
-          cpanm --verbose https://cpan.metacpan.org/authors/id/S/SI/SIDNEY/Mail-SpamAssassin-4.0.1-rc1zj-TRIAL.tar.gz
+          # speed up installation, use packages for dependencies
+          sudo pkg install -y p5-HTML-Parser p5-Net-DNS p5-NetAddr-IP p5-Perl-Critic p5-Test-FailWarnings p5-Test-Fatal p5-Capture-Tiny p5-Digest-HMAC p5-Mail-DKIM
+          cpanm --verbose --sudo https://cpan.metacpan.org/authors/id/S/SI/SIDNEY/Mail-SpamAssassin-4.0.1-rc1zj-TRIAL.tar.gz
