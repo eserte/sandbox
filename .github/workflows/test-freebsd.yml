@@ -5,23 +5,30 @@ on:
 
 jobs:
   test:
-    name: Test on FreeBSD
+    name: Test on FreeBSD ${{matrix.osvers}} ${{matrix.architecture}}
     runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - osvers: '14.0'
+            architecture: 'x86-64'
+          - osvers: '14.0'
+            architecture: 'arm64'
     steps:
     - uses: actions/checkout@v4
       with:
         clean: false
         show-progress: false
-    - uses: cross-platform-actions/action@v0.21.1
+    - uses: cross-platform-actions/action@v0.24.0
       with:
         operating_system: freebsd
-        version: '13.2'
+        version: ${{matrix.osvers}}
+        architecture: ${{matrix.architecture}}
+        hypervisor: qemu
         shell: sh
         run: |
-          echo "Hello, world! (using shell $SHELL)"
           sudo pkg update
-          sudo pkg install -y xorg-vfbserver
-          nohup Xvfb :123 > /dev/null 2>&1 &
-          sleep 5
-          ps auxgww
-          # pkill Xvfb
+          sudo pkg install -y perl5 p5-App-cpanminus db5
+          env BERKELEYDB_INCLUDE=/usr/local/include/db5 BERKELEYDB_LIB=/usr/local/lib/db5 cpanm --verbose --sudo BerkeleyDB
+          cpanm --verbose https://cpan.metacpan.org/authors/id/S/SI/SIDNEY/Mail-SpamAssassin-4.0.1-rc1zj-TRIAL.tar.gz
