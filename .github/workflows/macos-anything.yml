@@ -4,7 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
+  test-macos-brew-package:
+    if: true
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          env | sort
+          brew config
+          brew list
+          brew list --cask
+          ls -al /opt/homebrew || true
+          ls -al /usr/local/Cellar || true
+          which hello || true
+      - uses: eserte/Doit/.github/actions/install-doit-from-github@master
+      - run: |
+          perl -MDoit -MDoit::Log -MData::Dumper -E 'my $d = Doit->init; $d->add_component("brew"); warn Dumper($d->brew_missing_packages("hello"))'
+
   test-macos-install-and-use-tk:
+    if: false
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
