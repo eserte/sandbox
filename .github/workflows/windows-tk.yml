@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - strawberry_version: 5.32.1.1
-          - strawberry_version: default
+          - strawberry_version: 5.38.2.2
     steps:
       - uses: actions/checkout@v4
         with:
