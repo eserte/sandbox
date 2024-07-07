@@ -27,6 +27,16 @@ jobs:
 #        run: |
 #          Remove-Item -Path "C:\Strawberry" -Recurse -Force -ErrorAction SilentlyContinue
 
+      - name: Uninstall existing StrawberryPerl
+        run: |
+          $uninstallString = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "*Strawberry Perl*" } | Select-Object -ExpandProperty UninstallString
+          if ($uninstallString) {
+            $uninstallArgs = ($uninstallString -split " ", 2)[1]
+            Start-Process "msiexec.exe" -ArgumentList "/x $uninstallArgs /qn" -Wait
+          } else {
+            Write-Host "No existing StrawberryPerl installation found."
+          }
+
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
           if ("${{ matrix.strawberry_version }}" -eq "default") {
