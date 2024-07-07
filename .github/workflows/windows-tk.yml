@@ -22,6 +22,11 @@ jobs:
         with:
           repository: eserte/perl-tk
           ref: ${{ inputs.perl-tk-branch }}
+
+      - name: Remove pre-installed StrawberryPerl
+        run: |
+          Remove-Item -Path "C:\Strawberry" -Recurse -Force -ErrorAction SilentlyContinue
+
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
           if ("${{ matrix.strawberry_version }}" -eq "default") {
@@ -30,6 +35,7 @@ jobs:
           elseif ("${{ matrix.strawberry_version }}" -ne "default") {
             choco install strawberryperl --version ${{ matrix.strawberry_version }}
           }
+
       - name: Build and test
         run: |
           perl Makefile.PL
