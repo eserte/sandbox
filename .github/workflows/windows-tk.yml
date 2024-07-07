@@ -1,4 +1,5 @@
 name: Tk on Windows
+run-name: Tk on Windows (branch ${{ inputs.perl-tk-branch }})
 
 on:
   workflow_dispatch:
