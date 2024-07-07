@@ -27,29 +27,39 @@ jobs:
 #        run: |
 #          Remove-Item -Path "C:\Strawberry" -Recurse -Force -ErrorAction SilentlyContinue
 
-      - name: Uninstall existing StrawberryPerl
-        run: |
-          $uninstallString = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "*Strawberry Perl*" } | Select-Object -ExpandProperty UninstallString
-          if ($uninstallString) {
-            $uninstallArgs = ($uninstallString -split " ", 2)[1]
-            Start-Process "msiexec.exe" -ArgumentList "/x $uninstallArgs /qn" -Wait
-          } else {
-            Write-Host "No existing StrawberryPerl installation found."
-          }
+#      - name: Uninstall existing StrawberryPerl
+#        run: |
+#          $uninstallString = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "*Strawberry Perl*" } | Select-Object -ExpandProperty UninstallString
+#          if ($uninstallString) {
+#            $uninstallArgs = ($uninstallString -split " ", 2)[1]
+#            Start-Process "msiexec.exe" -ArgumentList "/x $uninstallArgs /qn" -Wait
+#          } else {
+#            Write-Host "No existing StrawberryPerl installation found."
+#          }
+#
+#      - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
+#        run: |
+#          if ("${{ matrix.strawberry_version }}" -eq "default") {
+#            choco install strawberryperl
+#          }
+#          elseif ("${{ matrix.strawberry_version }}" -ne "default") {
+#            choco install strawberryperl --version ${{ matrix.strawberry_version }} --force --allow-downgrade --install-arguments="'/l*v c:\StrawberryPerl_msi_install.log'"
+#          }
+#
+#      - name: Display installation log
+#        if: failure()
+#        run: |
+#          type c:\StrawberryPerl_msi_install.log
 
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
-          if ("${{ matrix.strawberry_version }}" -eq "default") {
-            choco install strawberryperl
-          }
-          elseif ("${{ matrix.strawberry_version }}" -ne "default") {
-            choco install strawberryperl --version ${{ matrix.strawberry_version }} --force --allow-downgrade --install-arguments="'/l*v c:\StrawberryPerl_msi_install.log'"
-          }
+          Invoke-WebRequest -Uri "https://strawberryperl.com/download/${{ matrix.strawberry_version }}/strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi" -OutFile "strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi"
+          Start-Process msiexec.exe -Wait -ArgumentList '/force /i strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi /qn /l*v install_log.txt'
 
       - name: Display installation log
-        if: failure()
         run: |
-          type c:\StrawberryPerl_msi_install.log
+          Get-Content install_log.txt
+        if: always()
 
       - name: Build and test
         run: |
