@@ -36,6 +36,11 @@ jobs:
             choco install strawberryperl --version ${{ matrix.strawberry_version }} --force --allow-downgrade --install-arguments="'/l*v c:\StrawberryPerl_msi_install.log'"
           }
 
+      - name: Display installation log
+        if: failure()
+        run: |
+          type c:\StrawberryPerl_msi_install.log
+
       - name: Build and test
         run: |
           perl Makefile.PL
