@@ -55,7 +55,7 @@ jobs:
         run: |
           # Invoke-WebRequest -Uri "https://strawberryperl.com/download/${{ matrix.strawberry_version }}/strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi" -OutFile "strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi"
           Invoke-WebRequest -Uri "https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases/download/SP_53822_64bit/strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi" -OutFile "strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi"
-          Start-Process msiexec.exe -Wait -ArgumentList '/force /i strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi /qn /l*v install_log.txt'
+          Start-Process msiexec.exe -Wait -ArgumentList '/i strawberry-perl-${{ matrix.strawberry_version }}-64bit.msi /qn /l*v install_log.txt'
 
       - name: Display installation log
         run: |
