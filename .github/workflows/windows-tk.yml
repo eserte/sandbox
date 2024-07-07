@@ -2,6 +2,10 @@ name: Tk on Windows
 
 on:
   workflow_dispatch:
+    inputs:
+      perl-tk-branch:
+        type: string
+        default: master
 
 jobs:
   test-tk-on-windows:
@@ -16,6 +20,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: eserte/perl-tk
+          ref: ${{ inputs.perl-tk-branch }}
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
           if ("${{ matrix.strawberry_version }}" -eq "default") {
