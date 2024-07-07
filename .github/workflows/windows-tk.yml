@@ -23,9 +23,9 @@ jobs:
           repository: eserte/perl-tk
           ref: ${{ inputs.perl-tk-branch }}
 
-      - name: Remove pre-installed StrawberryPerl
-        run: |
-          Remove-Item -Path "C:\Strawberry" -Recurse -Force -ErrorAction SilentlyContinue
+#      - name: Remove pre-installed StrawberryPerl
+#        run: |
+#          Remove-Item -Path "C:\Strawberry" -Recurse -Force -ErrorAction SilentlyContinue
 
       - name: Install StrawberryPerl ${{ matrix.strawberry_version }}
         run: |
@@ -33,7 +33,7 @@ jobs:
             choco install strawberryperl
           }
           elseif ("${{ matrix.strawberry_version }}" -ne "default") {
-            choco install strawberryperl --version ${{ matrix.strawberry_version }}
+            choco install strawberryperl --version ${{ matrix.strawberry_version }} --force --allow-downgrade --install-arguments="'/l*v c:\StrawberryPerl_msi_install.log'"
           }
 
       - name: Build and test
