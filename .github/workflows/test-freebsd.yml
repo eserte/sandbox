@@ -11,16 +11,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - osvers: '14.0'
+          - osvers: '14.2'
             architecture: 'x86-64'
-          - osvers: '14.0'
+          - osvers: '14.2'
             architecture: 'arm64'
     steps:
     - uses: actions/checkout@v4
       with:
         clean: false
         show-progress: false
-    - uses: cross-platform-actions/action@v0.24.0
+    - uses: cross-platform-actions/action@v0.26.0
       with:
         operating_system: freebsd
         version: ${{matrix.osvers}}
