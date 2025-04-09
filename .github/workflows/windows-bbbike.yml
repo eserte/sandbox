@@ -7,9 +7,9 @@ jobs:
   test-bbbike-on-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: eserte/bbbike
           ref: XXX-appveyor
       - run: |
-          prove -v t\miscsrc.t t\gpx2gpx.t
+          prove -v t\bbbikebuildutil.t
