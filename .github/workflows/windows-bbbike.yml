@@ -12,4 +12,5 @@ jobs:
           repository: eserte/bbbike
           ref: XXX-appveyor
       - run: |
-          prove -v t\bbbikebuildutil.t
+          cd t && perl -w -I.. -I..\lib bbbikebuildutil.t
+#          prove -v t\bbbikebuildutil.t
