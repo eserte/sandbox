@@ -22,7 +22,8 @@ jobs:
 
       - name: ${{ inputs.test-only && 'test' || 'install' }}
         run: |
-          echo 1: ${{ inputs.test-only && 'test' || 'install' }}
+          echo "echo $GITHUB_WORKSPACE/ci-helper-cpan-pm/gh-mod-check --test-only=${{ inputs.test-only }}"
+          #echo 1: ${{ inputs.test-only && 'test' || 'install' }}
           #echo 2.1: ${{ inputs.test-only == 'true' }}
           #echo 2.2: ${{ inputs.test-only == true }}
           #echo 3: ${{ inputs.test-only }}
