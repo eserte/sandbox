@@ -8,26 +8,39 @@ on:
 #      - '*doozer*'
 #  pull_request:
   workflow_dispatch:
+    inputs:
+      test-only:
+        type: boolean
+        default: false
 
 jobs:
-
-  mixed-vm-container:
-    name: Test on ${{ matrix.os }} and container ${{ matrix.container || '<none>' }}
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-22.04
-            container: ~
-          - os: ubuntu-latest
-            container: fedora:39
-          - os: ubuntu-latest
-            container: alpine:latest
+  test-expressions:
+    runs-on: ubuntu-latest
     steps:
-      - name: What system
+      - name: ${{ inputs.test-only == 'true' && 'test' || 'install' }}
         run: |
-          cat /etc/os-release
+          echo 1: ${{ inputs.test-only == 'true' && 'test' || 'install' }}
+          echo 2.1: ${{ inputs.test-only == 'true' }}
+          echo 2.2: ${{ inputs.test-only == true }}
+          echo 3: ${{ inputs.test-only }}
+
+#  mixed-vm-container:
+#    name: Test on ${{ matrix.os }} and container ${{ matrix.container || '<none>' }}
+#    runs-on: ${{ matrix.os }}
+#    container: ${{ matrix.container }}
+#    strategy:
+#      matrix:
+#        include:
+#          - os: ubuntu-22.04
+#            container: ~
+#          - os: ubuntu-latest
+#            container: fedora:39
+#          - os: ubuntu-latest
+#            container: alpine:latest
+#    steps:
+#      - name: What system
+#        run: |
+#          cat /etc/os-release
 
 #  checkout-v4:
 #    runs-on: ubuntu-latest
