@@ -17,12 +17,15 @@ jobs:
   test-expressions:
     runs-on: ubuntu-latest
     steps:
-      - name: ${{ inputs.test-only == 'true' && 'test' || 'install' }}
+      - name: Debug inputs
+        run: echo "${{ toJSON(github.event.inputs) }}"
+
+      - name: ${{ inputs.test-only && 'test' || 'install' }}
         run: |
-          echo 1: ${{ inputs.test-only == 'true' && 'test' || 'install' }}
-          echo 2.1: ${{ inputs.test-only == 'true' }}
-          echo 2.2: ${{ inputs.test-only == true }}
-          echo 3: ${{ inputs.test-only }}
+          echo 1: ${{ inputs.test-only && 'test' || 'install' }}
+          #echo 2.1: ${{ inputs.test-only == 'true' }}
+          #echo 2.2: ${{ inputs.test-only == true }}
+          #echo 3: ${{ inputs.test-only }}
 
 #  mixed-vm-container:
 #    name: Test on ${{ matrix.os }} and container ${{ matrix.container || '<none>' }}
