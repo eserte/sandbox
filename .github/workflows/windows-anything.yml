@@ -15,4 +15,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows-upload-test
-          path: ${{ env.USERPROFILE }}\\*.rpt
+          ## XXX does not work
+          #path: ${{ env.USERPROFILE }}\\*.rpt
+          path: C:\\Users\\runneradmin\\*.rpt
