@@ -10,3 +10,9 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           prove -v t\inc_hook.t
+      - run: |
+          New-Item -Path "$env:USERPROFILE\test.rpt" -ItemType File
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-upload-test
+          path: ${{ env.USERPROFILE }}\\*.rpt
