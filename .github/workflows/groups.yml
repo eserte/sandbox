@@ -1,0 +1,18 @@
+jobs:
+  bash-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Group of log lines
+        run: |
+            echo "Outside group"
+            echo "::group::My title"
+            echo "Inside group"
+            echo "::endgroup::"
+            echo "::group::Another group"
+            echo "Inside group 2"
+            echo "::endgroup::"
+            echo "Outside group"
+            echo "::group::Group without end"
+            echo "Inside group 3"
+            echo "::group::Another group without end"
+            echo "Inside group 4"
