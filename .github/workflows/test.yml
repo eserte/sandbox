@@ -150,7 +150,7 @@ jobs:
           #echo "::endgroup::"
           pid=$$; (sleep 20; pstree -pa $pid) &
           #(sleep 21; ps auxgww) &
-          DOIT_TRACE=1 DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
+          echo "DOIT_TRACE=1 DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t"
       - name: Setup upterm session
         uses: owenthereal/action-upterm@v1
         with:
