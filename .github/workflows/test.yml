@@ -152,10 +152,9 @@ jobs:
           #(sleep 21; ps auxgww) &
           DOIT_TRACE=1 DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
       - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-## XXX does not work: https://github.com/lhotari/action-upterm/issues/29
-#        with:
-#          limit-access-to-actor: true
+        uses: owenthereal/action-upterm@v1
+        with:
+          limit-access-to-actor: true
 
 #  doit-windows:
 #    runs-on: windows-latest
