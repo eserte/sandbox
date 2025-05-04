@@ -118,9 +118,7 @@ jobs:
           #git checkout XXX-github-actions
           perl Build.PL
           perl Build
-          stty -a
-          DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
-          stty -a
+          script -q -e -c 'echo "before test"; stty -a; DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t; echo "after test"; stty -a' /dev/null
 
 #  doit-windows:
 #    runs-on: windows-latest
