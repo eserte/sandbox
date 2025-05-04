@@ -14,19 +14,20 @@ on:
         default: false
 
 jobs:
-  test-expressions:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug inputs
-        run: echo "${{ toJSON(github.event.inputs) }}"
-
-      - name: ${{ inputs.test-only && 'test' || 'install' }}
-        run: |
-          echo "echo $GITHUB_WORKSPACE/ci-helper-cpan-pm/gh-mod-check --test-only=${{ inputs.test-only }}"
-          #echo 1: ${{ inputs.test-only && 'test' || 'install' }}
-          #echo 2.1: ${{ inputs.test-only == 'true' }}
-          #echo 2.2: ${{ inputs.test-only == true }}
-          #echo 3: ${{ inputs.test-only }}
+     
+#  test-expressions:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Debug inputs
+#        run: echo "${{ toJSON(github.event.inputs) }}"
+#
+#      - name: ${{ inputs.test-only && 'test' || 'install' }}
+#        run: |
+#          echo "echo $GITHUB_WORKSPACE/ci-helper-cpan-pm/gh-mod-check --test-only=${{ inputs.test-only }}"
+#          #echo 1: ${{ inputs.test-only && 'test' || 'install' }}
+#          #echo 2.1: ${{ inputs.test-only == 'true' }}
+#          #echo 2.2: ${{ inputs.test-only == true }}
+#          #echo 3: ${{ inputs.test-only }}
 
 #  mixed-vm-container:
 #    name: Test on ${{ matrix.os }} and container ${{ matrix.container || '<none>' }}
@@ -106,23 +107,20 @@ jobs:
 #        cpan Prima
 #      if: "!env.SKIP_PRIMA"
 
-#  doit-single-test:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: |
-#          sudo apt-get update -qq
-#          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
-#          git clone https://github.com/eserte/Doit.git
-#          cd Doit
-#          git checkout XXX-github-actions
-#          perl Build.PL
-#          perl Build
-#          set -x
-#          ulimit -a
-#          ulimit -c 4
-#          ulimit -a
-#          cat /proc/sys/kernel/core_pattern
-#          prove -vb t/system.t t/run.t
+  doit-single-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
+          git clone https://github.com/eserte/Doit.git
+          cd Doit
+          #git checkout XXX-github-actions
+          perl Build.PL
+          perl Build
+          stty -a
+          DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
+          stty -a
 
 #  doit-windows:
 #    runs-on: windows-latest
