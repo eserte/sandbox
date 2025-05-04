@@ -118,7 +118,8 @@ jobs:
           #git checkout XXX-github-actions
           perl Build.PL
           perl Build
-          script -q -e -c 'echo "before test"; stty -a; DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t; echo "after test"; stty -a' /dev/null
+          #script -q -e -c 'echo "before test"; stty -a; DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t; echo "after test"; stty -a' /dev/null
+          script -q -e -c 'echo "before test"; stty -a; perl -Mblib -MDoit -e '\''my$sudo=Doit->init->do_sudo;$sudo->system("id");$sudo->system("id")'\''; echo "after test"; stty -a' /dev/null
 
 #  doit-windows:
 #    runs-on: windows-latest
