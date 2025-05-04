@@ -140,13 +140,13 @@ jobs:
           echo "::group::install"
           git clone https://github.com/eserte/Doit.git
           cd Doit
-          git checkout sudo-fixing
+          git checkout XXX-github-actions
           perl Build.PL
           perl Build
-          echo "::group::all locales"
-          locale -a | sort
-          echo "::endgroup::"
-          DOIT_TEST_WITH_SUDO=1 prove -vb t/locale.t
+          #echo "::group::all locales"
+          #locale -a | sort
+          #echo "::endgroup::"
+          DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
 
 #  doit-windows:
 #    runs-on: windows-latest
