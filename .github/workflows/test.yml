@@ -107,23 +107,43 @@ jobs:
 #        cpan Prima
 #      if: "!env.SKIP_PRIMA"
 
-  doit-single-test:
-    runs-on: ubuntu-latest
+#  doit-single-test-ubuntu:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: |
+#          echo "::group::install"
+#          sudo apt-get update -qq
+#          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
+#          git clone https://github.com/eserte/Doit.git
+#          cd Doit
+#          #git checkout XXX-github-actions
+#          perl Build.PL
+#          perl Build
+#          echo "::endgroup::"
+#          #script -q -e -c 'echo "before test"; stty -a; DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t; echo "after test"; stty -a' /dev/null
+#          #script -q -e -c 'echo "before test"; stty -a; perl -Mblib -MDoit -e '\''my$sudo=Doit->init->do_sudo;$sudo->system("id");$sudo->system("id")'\''; echo "after test"; stty -a' /dev/null
+#          #sudo apt-get install -y expect
+#          #unbuffer sh -c 'echo "before test"; stty -a; perl -Mblib -MDoit -e '\''my$sudo=Doit->init->do_sudo;$sudo->system("id");$sudo->system("id")'\''; echo "after test"; stty -a'
+
+  doit-single-test-mac:
+    name: doit-single-test-mac on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-13
+          - os: macos-14
+          - os: macos-15
     steps:
       - run: |
           echo "::group::install"
-          sudo apt-get update -qq
-          sudo apt-get install -y libbsd-resource-perl libipc-run-perl
           git clone https://github.com/eserte/Doit.git
           cd Doit
           #git checkout XXX-github-actions
           perl Build.PL
           perl Build
           echo "::endgroup::"
-          #script -q -e -c 'echo "before test"; stty -a; DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t; echo "after test"; stty -a' /dev/null
-          #script -q -e -c 'echo "before test"; stty -a; perl -Mblib -MDoit -e '\''my$sudo=Doit->init->do_sudo;$sudo->system("id");$sudo->system("id")'\''; echo "after test"; stty -a' /dev/null
-          sudo apt-get install -y expect
-          unbuffer sh -c 'echo "before test"; stty -a; perl -Mblib -MDoit -e '\''my$sudo=Doit->init->do_sudo;$sudo->system("id");$sudo->system("id")'\''; echo "after test"; stty -a'
+          DOIT_TEST_WITH_SUDO=1 prove -vb t/locale.t
 
 #  doit-windows:
 #    runs-on: windows-latest
