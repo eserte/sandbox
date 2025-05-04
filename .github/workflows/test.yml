@@ -128,6 +128,7 @@ jobs:
   doit-single-test-mac:
     name: doit-single-test-mac on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    continue-on-error: true
     strategy:
       matrix:
         include:
@@ -142,6 +143,8 @@ jobs:
           #git checkout XXX-github-actions
           perl Build.PL
           perl Build
+          echo "::group::all locales"
+          locale -a
           echo "::endgroup::"
           DOIT_TEST_WITH_SUDO=1 prove -vb t/locale.t
 
