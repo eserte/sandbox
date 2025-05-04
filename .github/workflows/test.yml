@@ -143,6 +143,7 @@ jobs:
           git checkout XXX-github-actions
           perl Build.PL
           perl Build
+          echo "::endgroup::"
           #echo "::group::all locales"
           #locale -a | sort
           #echo "::endgroup::"
