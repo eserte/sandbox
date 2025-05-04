@@ -138,6 +138,7 @@ jobs:
     steps:
       - run: |
           echo "::group::install"
+          brew install pstree
           git clone https://github.com/eserte/Doit.git
           cd Doit
           git checkout XXX-github-actions
@@ -148,7 +149,7 @@ jobs:
           #locale -a | sort
           #echo "::endgroup::"
           (sleep 20; pstree -pal $$) &
-          (sleep 21; ps auxgww) &
+          #(sleep 21; ps auxgww) &
           DOIT_TRACE=1 DOIT_TEST_WITH_SUDO=1 prove -vb t/sudo.t
 
 #  doit-windows:
