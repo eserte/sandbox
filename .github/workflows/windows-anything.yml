@@ -7,20 +7,22 @@ jobs:
   test-windows-anything:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
-          prove -v t\inc_hook.t
-      - run: |
-          New-Item -Path "$env:USERPROFILE\test.rpt" -ItemType File
-      - name: Set output from env
-        id: set_output
-        run: |
-          echo "value=$env:USERPROFILE" >> $env:GITHUB_OUTPUT
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-upload-test
-          ## XXX does not work
-          #path: ${{ env.USERPROFILE }}\\*.rpt
-          #path: C:\\Users\\runneradmin\\*.rpt
-          path: ${{ steps.set_output.outputs.value }}\\*.rpt
+          perl scripts\windows-powershell.pl
+#      - run: |
+#          prove -v t\inc_hook.t
+#      - run: |
+#          New-Item -Path "$env:USERPROFILE\test.rpt" -ItemType File
+#      - name: Set output from env
+#        id: set_output
+#        run: |
+#          echo "value=$env:USERPROFILE" >> $env:GITHUB_OUTPUT
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: windows-upload-test
+#          ## XXX does not work
+#          #path: ${{ env.USERPROFILE }}\\*.rpt
+#          #path: C:\\Users\\runneradmin\\*.rpt
+#          path: ${{ steps.set_output.outputs.value }}\\*.rpt
 
