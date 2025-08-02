@@ -27,6 +27,10 @@ my $outfilename = $out_tmp->filename;
 my $errfilename = $err_tmp->filename;
 
 my $cmd = sprintf q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -RedirectStandardOutput '%s' -RedirectStandardError '%s' -Wait; Exit $process.ExitCode"), $outfilename, $errfilename;
+warn "Will run now:
+
+    $cmd
+";
 system $cmd;
 system qq(type "$outfilename" "$errfilename");
 
