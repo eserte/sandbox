@@ -35,7 +35,8 @@ if (Win32::IsAdminUser()) {
 }
 
 #my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -Wait; Exit $process.ExitCode");
-my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Wait; Exit $process.ExitCode");
+#my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Wait; Exit $process.ExitCode");
+my $cmd = 'choco install -y --debug --verbose --no-progress gd';
 
 warn "Will run now:
 
