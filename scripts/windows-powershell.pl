@@ -34,6 +34,11 @@ warn "Will run now:
     $cmd
 ";
 system $cmd;
+warn "exit code: $?\n";
+
 #system qq(type "$outfilename" "$errfilename");
+
+system "choco list --localonly --limit-output";
+
 
 __END__
