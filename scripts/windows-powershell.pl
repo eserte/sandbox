@@ -27,7 +27,15 @@ use warnings;
 #my $errfilename = $err_tmp->filename;
 #my $cmd = sprintf q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -RedirectStandardOutput '%s' -RedirectStandardError '%s' -Wait; Exit $process.ExitCode"), $outfilename, $errfilename;
 
-my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -Wait; Exit $process.ExitCode");
+use Win32;
+if (Win32::IsAdminUser()) {
+    print "Running as Administrator\n";
+} else {
+    print "Not running as Administrator\n";
+}
+
+#my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -Wait; Exit $process.ExitCode");
+my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Wait; Exit $process.ExitCode");
 
 warn "Will run now:
 
