@@ -16,22 +16,24 @@
 
 use strict;
 use warnings;
-use File::Temp;
+#use File::Temp;
+#
+## Create temporary files for stdout and stderr using the OO constructor interface
+#my $out_tmp = File::Temp->new(SUFFIX => '.log', UNLINK => 1);
+#my $err_tmp = File::Temp->new(SUFFIX => '.log', UNLINK => 1);
+#
+## Get file names
+#my $outfilename = $out_tmp->filename;
+#my $errfilename = $err_tmp->filename;
+#my $cmd = sprintf q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -RedirectStandardOutput '%s' -RedirectStandardError '%s' -Wait; Exit $process.ExitCode"), $outfilename, $errfilename;
 
-# Create temporary files for stdout and stderr using the OO constructor interface
-my $out_tmp = File::Temp->new(SUFFIX => '.log', UNLINK => 1);
-my $err_tmp = File::Temp->new(SUFFIX => '.log', UNLINK => 1);
+my $cmd = q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -Wait; Exit $process.ExitCode");
 
-# Get file names
-my $outfilename = $out_tmp->filename;
-my $errfilename = $err_tmp->filename;
-
-my $cmd = sprintf q(powershell -NonInteractive -NoProfile -Command "$process = Start-Process 'choco' -PassThru -ErrorAction Stop -ArgumentList 'install -y --debug --verbose --no-progress gd' -Verb RunAs -RedirectStandardOutput '%s' -RedirectStandardError '%s' -Wait; Exit $process.ExitCode"), $outfilename, $errfilename;
 warn "Will run now:
 
     $cmd
 ";
 system $cmd;
-system qq(type "$outfilename" "$errfilename");
+#system qq(type "$outfilename" "$errfilename");
 
 __END__
