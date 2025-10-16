@@ -19,6 +19,12 @@ jobs:
           sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer || true
           # Optionally, explicitly install CLI tools if needed
           xcode-select --install || true
+      - name: Test C compiler
+        run: |
+          echo '#include <stdio.h>' > test.c
+          echo 'int main() { puts("C compiler works!"); return 0; }' >> test.c
+          clang test.c -o testprog
+          ./testprog
 
 #  test-macos-brew-package:
 #    if: true
