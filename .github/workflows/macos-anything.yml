@@ -4,38 +4,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-macos-brew-package:
+  test-macos-c-compiler:
     if: true
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          env | sort
-          brew config
-          brew list
-          brew list --cask
-          ls -al /opt/homebrew || true
-          ls -al /usr/local/Cellar || true
-          which hello || true
-      - uses: eserte/Doit/.github/actions/install-doit-from-github@master
-      - run: |
-          perl -MDoit -MDoit::Log -MData::Dumper -E 'my $d = Doit->init; $d->add_component("brew"); warn Dumper($d->brew_missing_packages("hello"))'
+      - name: Check C compiler availability
+        run: |
+          clang --version
+          which clang
+          xcode-select -p
+          xcrun --find clang
+          # Fix potential Xcode path issues
+          sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer || true
+          # Optionally, explicitly install CLI tools if needed
+          xcode-select --install || true
 
-  test-macos-install-and-use-tk:
-    if: false
-    runs-on: macos-12
-    steps:
-      - uses: actions/checkout@v4
-      - run: |
-          brew install --cask xquartz
-          brew install perl libpng jpeg-turbo cpanminus
-          cpanm --quiet --notest Tk
-          /opt/X11/bin/Xvfb :123 &
-      - run: |
-          (sleep 10; twm) &
-        env:
-          DISPLAY: ":123"
-      - run: |
-          perl -MTk -e '$mw=tkinit; $mw->Label->pack; $mw->update'
-        env:
-          DISPLAY: ":123"
+#  test-macos-brew-package:
+#    if: true
+#    runs-on: macos-14
+#    steps:
+#      - uses: actions/checkout@v4
+#      - run: |
+#          env | sort
+#          brew config
+#          brew list
+#          brew list --cask
+#          ls -al /opt/homebrew || true
+#          ls -al /usr/local/Cellar || true
+#          which hello || true
+#      - uses: eserte/Doit/.github/actions/install-doit-from-github@master
+#      - run: |
+#          perl -MDoit -MDoit::Log -MData::Dumper -E 'my $d = Doit->init; $d->add_component("brew"); warn Dumper($d->brew_missing_packages("hello"))'
+
+#  test-macos-install-and-use-tk:
+#    if: false
+#    runs-on: macos-12
+#    steps:
+#      - uses: actions/checkout@v4
+#      - run: |
+#          brew install --cask xquartz
+#          brew install perl libpng jpeg-turbo cpanminus
+#          cpanm --quiet --notest Tk
+#          /opt/X11/bin/Xvfb :123 &
+#      - run: |
+#          (sleep 10; twm) &
+#        env:
+#          DISPLAY: ":123"
+#      - run: |
+#          perl -MTk -e '$mw=tkinit; $mw->Label->pack; $mw->update'
+#        env:
+#          DISPLAY: ":123"
