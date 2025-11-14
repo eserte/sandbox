@@ -23,6 +23,11 @@ jobs:
           brew install perl libpng jpeg-turbo cpanminus
           /opt/X11/bin/Xvfb :123 &
           echo "DISPLAY=:123" >> $GITHUB_ENV
+      - name: "Where are the includes?"
+        run: |
+          set -x
+          find /opt/homebrew/include -name jconfig.h
+          find /usr/local/include -name jconfig.h
       - name: Start window manager
         run: |
           (sleep 10; twm) &
