@@ -26,12 +26,15 @@ jobs:
       - name: "Where are the includes?"
         run: |
           set -x
-          find /opt/homebrew/include -name jconfig.h
-          find /usr/local/include -name jconfig.h
+          find /opt/homebrew/include -name jconfig.h || true
+          find /usr/local/include -name jconfig.h || true
       - name: Start window manager
         run: |
           (sleep 10; twm) &
       - name: Build and test
+        env:
+          CPATH: /opt/homebrew/include
+          LIBRARY_PATH: /opt/homebrew/lib
         run: |
           perl Makefile.PL VERBOSE=1
           make -j4 all
