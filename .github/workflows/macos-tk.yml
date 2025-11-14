@@ -28,6 +28,6 @@ jobs:
           (sleep 10; twm) &
       - name: Build and test
         run: |
-          perl Makefile.PL
+          perl Makefile.PL VERBOSE=1
           make -j4 all
           make test
