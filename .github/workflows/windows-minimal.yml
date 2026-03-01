@@ -1,0 +1,10 @@
+name: Minimal nop workflow for Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  minimal-job:
+    runs-on: windows-latest
+    steps:
+      - run: echo "Hello, world!"
