@@ -1,0 +1,12 @@
+name: Minimal nop workflow
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
