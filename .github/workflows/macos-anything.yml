@@ -6,7 +6,7 @@ on:
 jobs:
   test-macos-c-compiler:
     if: true
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Check C compiler availability
@@ -28,7 +28,7 @@ jobs:
 
 #  test-macos-brew-package:
 #    if: true
-#    runs-on: macos-14
+#    runs-on: macos-15
 #    steps:
 #      - uses: actions/checkout@v4
 #      - run: |
@@ -45,7 +45,7 @@ jobs:
 
 #  test-macos-install-and-use-tk:
 #    if: false
-#    runs-on: macos-12
+#    runs-on: macos-15
 #    steps:
 #      - uses: actions/checkout@v4
 #      - run: |
